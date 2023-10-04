@@ -15,7 +15,6 @@ hr {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: $margin-m-0;
-  align-items: center;
 }
 .tag-title {
   margin: $margin-m-1 0;
