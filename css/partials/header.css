@@ -1,5 +1,6 @@
 .header {
   border: $line-secondary solid $color-text-primary;
+  padding: 1rem;
 }
 .header-inner {
   display: flex;

@@ -4,9 +4,9 @@ div {
   margin: 0;
 }
 ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 *::before,
 *::after {
@@ -22,6 +22,10 @@ input {
 }
 body {
   background-color: $color-background;
+  font-family: 'Inter', 'Noto Sans SC', helvetica, arial !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5rem !important;
 }
 /* clears the 'X' from Internet Explorer */
 input[type=search]::-ms-clear {
@@ -40,4 +44,7 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
+}
+h6 {
+  font-size: x-small !important;
 }
