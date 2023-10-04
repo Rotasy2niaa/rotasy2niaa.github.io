@@ -48,3 +48,6 @@ input[type="search"]::-webkit-search-results-decoration {
 h6 {
   font-size: x-small !important;
 }
+.menu-item a {
+  font-size: 1rem !important;
+}
