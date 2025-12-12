@@ -1,31 +1,35 @@
 // src/components/WorkCard.jsx
 import { Link } from "react-router-dom";
 
-function WorkCard({ work }) {
+export default function WorkCard({ work }) {
+  if (!work) return null;
+  const cover = work.images?.[0];
+
   return (
     <Link
-      to={`/works/${work.id}`}
-      className="group block bg-paper/80 shadow-zine rounded-zine p-4 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.08),10px_10px_0_rgba(0,0,0,0.22)] transition-transform shadow-ink/10"
+      to={`/works/${work.slug}`}
+      className="group block"
     >
-      <div className="aspect-[4/3] overflow-hidden rounded-[0.9rem] border border-line bg-[#f0efee]">
-        <img
-          src={work.thumbnail}
-          alt={work.title}
-          className="h-full w-full object-cover mix-blend-multiply grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-500"
-        />
+      {/* 图片 */}
+      <div className="aspect-[4/3] overflow-hidden rounded-md bg-neutral-200">
+        {cover && (
+          <img
+            src={cover}
+            alt={work.title}
+            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+          />
+        )}
       </div>
 
-      <div className="mt-3 space-y-1">
-        <h3 className="font-display text-xl tracking-[0.08em] text-ink">
-          {work.title}
-        </h3>
-        <p className="text-[11px] uppercase tracking-[0.18em] text-ink/70">
-          {work.category} · {work.year}
-        </p>
-        <p className="text-xs text-ink/75 line-clamp-2">{work.description}</p>
-      </div>
+      {/* 标题 */}
+      <h3 className="text-base font-medium mt-3">
+        {work.title}
+      </h3>
+
+      {/* 分类 */}
+      <p className="text-sm text-gray-500">
+        {work.category}, {work.year}
+      </p>
     </Link>
   );
 }
-
-export default WorkCard;

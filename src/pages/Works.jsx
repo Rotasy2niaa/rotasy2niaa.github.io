@@ -1,50 +1,44 @@
-import { works } from "../data/works.js";
+import works from "../data/works";
 
 export default function Works() {
-  const allTags = Array.from(new Set(works.flatMap(w => w.tags)));
 
   return (
-    <div className="container">
-      {/* Title */}
-      <h1 className="h-title mb-6">All Works</h1>
+    <div className="max-w-6xl mx-auto px-6 py-16">
 
-      {/* Intro text */}
-      <p className="mb-10 text-sm opacity-75">
-        A growing index of pieces across different mediums. Use tags to filter by
-        mood, format, or structure.
+      {/* Title */}
+      <h1 className="text-3xl font-light mb-2 tracking-wide">All Works</h1>
+
+      {/* Intro */}
+      <p className="text-sm text-gray-600 max-w-2xl mb-12 leading-relaxed">
+        A comprehensive collection of my creative work spanning multiple disciplines and years.
+        Each project represents a unique exploration of aesthetic principles and design thinking.
       </p>
 
-      {/* Tag list */}
-      <div className="flex flex-wrap gap-2 mb-12">
-        {allTags.map(tag => (
-          <span key={tag} className="tag">{tag}</span>
-        ))}
-      </div>
-
-      {/* Works grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      {/* Gallery grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {works.map(work => (
-          <div key={work.id} className="zine-border texture">
-            {/* Cover image */}
-            <img 
-              src={work.images[0]} 
-              className="img-soft mb-4"
-              alt={work.title}
-            />
+          <div key={work.id} className="group">
+            
+            {/* Image */}
+            <div className="aspect-[4/3] overflow-hidden rounded-md bg-neutral-200">
+              <img
+                src={work.images[0]}
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
+                alt={work.title}
+              />
+            </div>
 
             {/* Title */}
-            <h2 className="h-title">{work.title}</h2>
+            <h2 className="text-base font-medium mt-3">{work.title}</h2>
 
             {/* Meta */}
-            <p className="text-sm mt-1 mb-4 opacity-70">
-              {work.category} / {work.year}
+            <p className="text-sm text-gray-500">
+              {work.category}, {work.year}
             </p>
-
-            {/* Description */}
-            <p className="text-sm">{work.description}</p>
           </div>
         ))}
       </div>
+
     </div>
   );
 }

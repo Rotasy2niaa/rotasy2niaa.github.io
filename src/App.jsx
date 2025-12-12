@@ -1,25 +1,25 @@
-// src/App.jsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar.jsx";
-import Home from "./pages/Home.jsx";
-import Works from "./pages/Works.jsx";
-import WorkDetail from "./pages/WorkDetail.jsx";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-function App() {
+import Home from "./pages/Home";
+import Works from "./pages/Works";
+import WorkDetail from "./pages/WorkDetail";
+
+export default function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-paper text-ink">
-        <Navbar />
-        <main className="max-w-5xl mx-auto px-4 pb-16 pt-24">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/works" element={<Works />} />
-            <Route path="/works/:id" element={<WorkDetail />} />
-          </Routes>
-        </main>
-      </div>
-    </BrowserRouter>
+    <div className="min-h-screen bg-paper text-ink">
+      <Header />
+
+      <main className="pt-24 pb-20 px-4 max-w-5xl mx-auto">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/works" element={<Works />} />
+          <Route path="/works/:slug" element={<WorkDetail />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
-
-export default App;

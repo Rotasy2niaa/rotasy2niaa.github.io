@@ -1,24 +1,32 @@
-@import "tailwindcss";
+/* src/index.css */
 
+/* 1. 字体 import 必须在最上面 */
 @import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:wght@400;500;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
-body {
-  background: #F7F6F6;
-  color: #2D2D2D;
-  font-family: "Sometype Mono", monospace;
+/* 2. Tailwind 指令 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3. 全局基础样式 */
+:root {
+  --paper: #f6f4f1;
+  --ink: #1c1c1c;
+  --line: rgba(0, 0, 0, 0.12);
+  --blush: #c28b7a;
 }
 
-/* grain texture */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .45;
-  mix-blend-mode: multiply;
-  background-image:
-    radial-gradient(circle at 0 0, rgba(0,0,0,0.08) 0, transparent 40%),
-    radial-gradient(circle at 100% 100%, rgba(0,0,0,0.07) 0, transparent 40%);
-  z-index: -1;
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: "Sometype Mono", monospace;
+  line-height: 1.6;
 }
+
+/* 4. 标题字体 */
+.font-display {
+  font-family: "VT323", monospace;
+}
+
+/* 5. 你之后所有自定义 class 都写在下面 */
