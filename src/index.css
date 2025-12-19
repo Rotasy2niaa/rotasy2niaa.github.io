@@ -1,20 +1,20 @@
 /* src/index.css */
 
-/* 1. 字体 import 必须在最上面 */
-@import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:wght@400;500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
-
-/* 2. Tailwind 指令 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 3. 全局基础样式 */
+/* 全局基础样式 */
 :root {
   --paper: #f6f4f1;
   --ink: #1c1c1c;
   --line: rgba(0, 0, 0, 0.12);
   --blush: #c28b7a;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -24,9 +24,9 @@ body {
   line-height: 1.6;
 }
 
-/* 4. 标题字体 */
+/* 标题字体 */
 .font-display {
   font-family: "VT323", monospace;
 }
 
-/* 5. 你之后所有自定义 class 都写在下面 */
+/* 你之后所有自定义 class 都写在下面 */
