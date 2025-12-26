@@ -9,12 +9,12 @@ window.WORKS = [
     year: 2025,
     blurb: "A non visual multisensory maze guided entirely by touch",
     tags: ["installation", "exhibition", "collaborative"],
-    cover: "res/bg.png",
+    cover: "res/insyncposter.jpg",
     selected: true,
 
     intro:
       "Designed and fabricated a 9×12 inch tactile maze installation exploring intuitive bodily perception of space and texture.",
-    gallery: ["res/bg.png", "res/bg.png"],
+    gallery: ["res/insync poster.png", "res/insync maze.png"],
     credits: [
       { label: "Role", value: "Maze and Experience Designer" }
     ]
@@ -45,12 +45,12 @@ window.WORKS = [
     year: 2023,
     blurb: "A narrative focused game experiment",
     tags: ["digital", "individual"],
-    cover: "res/bg.png",
+    cover: "res/NoahCover.png",
     selected: false,
 
     intro:
       "A small game project exploring mood, pacing, and storytelling through interaction.",
-    gallery: ["res/bg.png"],
+    gallery: ["res/ShanLinPortfolio-Final-27.png","res/Noah1.png","res/Noah2.png","res/Noah4.png","res/Noah5.png","res/Noah6.png","res/Noah7.png"],
     credits: [
       { label: "Role", value: "Designer" }
     ]
@@ -63,12 +63,12 @@ window.WORKS = [
     year: 2022,
     blurb: "A 3D puzzle game about rolling and transforming a dice to reach the goal face up",
     tags: ["digital", "individual"],
-    cover: "res/bg.png",
+    cover: "res/DiceValley2.png",
     selected: true,
 
     intro:
       "Made for GMTK Game Jam 2022. Players roll and transform a dice to land on the destination with the correct face up.",
-    gallery: ["res/bg.png", "res/bg.png"],
+    gallery: ["res/ShanLinPortfolio-Final-23.png"],
     credits: [
       { label: "Date", value: "July 2022" },
       { label: "Role", value: "Game Designer, Game Artist" },
