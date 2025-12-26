@@ -29,25 +29,33 @@
 
   <main class="container">
 
-    <section class="intro">
-      <h1>
-        Designer & Artist<br />
-        <span>Working with Games & Systems</span>
-      </h1>
+    <section class="intro intro-split">
+      <div class="intro-left">
+        <h1>
+          Designer & Artist<br />
+          Working with Games & Systems
+        </h1>
 
+        <p>
+          Shan is a game designer and developer creating thoughtful, aesthetic-driven work that
+          explores the intersection of art, design, and human experience. Based in Los Angeles,
+          working globally.
+        </p>
 
-      <p>
-        Shan is a game designer and developer creating thoughtful, aesthetic-driven work that explores the intersection
-        of art, design, and human experience. Based in Los Angeles, working globally.
-      </p>
+        <p>
+          Her practice spans multiple disciplines including interior design, photography, textile
+          design, and digital art. Each project is an exploration of form, texture, light, and
+          space, seeking beauty in simplicity and meaning in details.
+        </p>
+      </div>
 
-      <p>
-        Her practice spans multiple disciplines including interior design,
-        photography, textile design, and digital art.
-        Each project is an exploration of form, texture, light, and space,
-        seeking beauty in simplicity and meaning in details.
-      </p>
+      <div class="intro-right">
+        <div class="float-frame" id="floatFrame" aria-label="Floating portrait">
+          <img class="float-card" id="floatCard" src="res/PFP.jpg" alt="Portrait photo" draggable="false" />
+        </div>
+      </div>
     </section>
+
 
     <section class="works">
       <h2>Selected Works</h2>
@@ -64,6 +72,7 @@
     renderSelected("selectedGrid");
   </script>
 
+<script src="floaty.js"></script>
 </body>
 
 </html>
