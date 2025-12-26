@@ -70,7 +70,13 @@ function renderWorkDetail() {
     <p class="work-intro">${work.intro || ""}</p>
 
     <div class="tag-row">
-      ${work.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+      ${work.tags
+  .map(tag => `
+    <a class="tag tag-link" href="all.html?tag=${encodeURIComponent(tag)}">
+      ${tag}
+    </a>
+  `)
+  .join("")}
     </div>
 
     <div class="work-gallery">

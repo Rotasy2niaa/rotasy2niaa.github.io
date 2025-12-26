@@ -367,3 +367,5 @@ a {
 .work-credits div + div {
   margin-top: 8px;
 }
+
+.tag-link { text-decoration: none; }
