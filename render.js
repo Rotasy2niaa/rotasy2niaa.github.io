@@ -1,15 +1,12 @@
 // render.js
+// Responsible for rendering work cards and detail pages
 
-function getWorks() {
-  return (window.WORKS || []).slice();
-}
-
-function buildCard(work) {
+function buildWorkCard(work) {
   const a = document.createElement("a");
   a.className = "work-card";
   a.href = `work.html?slug=${encodeURIComponent(work.slug)}`;
-  a.setAttribute("data-tags", work.tags.join(" "));
   a.setAttribute("aria-label", work.title);
+  a.dataset.tags = work.tags.join(" ");
 
   a.innerHTML = `
     <div class="work-media">
@@ -20,78 +17,78 @@ function buildCard(work) {
       <div class="work-sub">${work.category}, ${work.year}</div>
     </div>
   `;
+
   return a;
 }
 
-function renderGrid(containerId, works) {
-  const grid = document.getElementById(containerId);
-  if (!grid) return;
-  grid.innerHTML = "";
-  works.forEach(w => grid.appendChild(buildCard(w)));
-}
+/* ---------- Home: Selected Works ---------- */
 
 function renderSelected(containerId) {
-  const works = getWorks().filter(w => w.selected);
-  renderGrid(containerId, works);
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const selectedWorks = window.WORKS.filter(w => w.selected);
+  selectedWorks.forEach(work => {
+    container.appendChild(buildWorkCard(work));
+  });
 }
+
+/* ---------- All Works ---------- */
 
 function renderAll(containerId) {
-  renderGrid(containerId, getWorks());
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  window.WORKS.forEach(work => {
+    container.appendChild(buildWorkCard(work));
+  });
 }
 
-function getQueryParam(name) {
-  const params = new URLSearchParams(window.location.search);
-  return params.get(name);
-}
+/* ---------- Work Detail ---------- */
 
 function renderWorkDetail() {
-  const slug = getQueryParam("slug");
-  const works = getWorks();
-  const work = works.find(w => w.slug === slug);
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
 
-  const root = document.getElementById("workDetail");
-  if (!root) return;
+  const container = document.getElementById("workDetail");
+  if (!container || !slug) return;
 
+  const work = window.WORKS.find(w => w.slug === slug);
   if (!work) {
-    root.innerHTML = `<p>Work not found.</p>`;
+    container.innerHTML = "<p>Work not found.</p>";
     return;
   }
 
-  const tagsHtml = (work.tags || [])
-    .map(t => `<span class="pill">${t}</span>`)
-    .join("");
+  container.innerHTML = `
+    <a href="all.html" class="back-link">← Back to All Works</a>
 
-  const galleryHtml = (work.gallery || [])
-    .map(src => `<img class="detail-img" src="${src}" alt="${work.title} image" loading="lazy" />`)
-    .join("");
+    <h1>${work.title}</h1>
+    <p class="work-meta-line">
+      ${work.category} · ${work.year}
+    </p>
 
-  const creditsHtml = (work.credits || [])
-    .map(item => `<div class="kv"><div class="k">${item.label}</div><div class="v">${item.value}</div></div>`)
-    .join("");
+    <p class="work-intro">${work.intro || ""}</p>
 
-  root.innerHTML = `
-    <a class="back-link" href="all.html">← Back to All Works</a>
+    <div class="tag-row">
+      ${work.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+    </div>
 
-    <div class="detail-head">
-      <h1 class="detail-title">${work.title}</h1>
+    <div class="work-gallery">
+      ${work.gallery
+        .map(src => `<img src="${src}" alt="${work.title}" />`)
+        .join("")}
+    </div>
 
-      <div class="detail-sub">
-        <span>${work.category}</span>
-        <span class="dot">•</span>
-        <span>${work.year}</span>
+    ${
+      work.credits
+        ? `
+      <div class="work-credits">
+        ${work.credits
+          .map(c => `<div><strong>${c.label}:</strong> ${c.value}</div>`)
+          .join("")}
       </div>
-
-      <p class="detail-blurb">${work.blurb || ""}</p>
-
-      <div class="pill-row">${tagsHtml}</div>
-    </div>
-
-    <div class="detail-gallery">
-      ${galleryHtml}
-    </div>
-
-    ${work.intro ? `<div class="detail-text">${work.intro}</div>` : ""}
-
-    ${creditsHtml ? `<div class="detail-credits">${creditsHtml}</div>` : ""}
+      `
+        : ""
+    }
   `;
 }
