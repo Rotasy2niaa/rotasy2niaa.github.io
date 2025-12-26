@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name | All Works</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-name">
+        <a class="brand" href="index.html">Your Name</a>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a class="is-active" href="all.html">All Works</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="page-head">
+      <h1>All Works</h1>
+      <p class="lede">
+        A comprehensive collection of my creative work spanning multiple
+        disciplines and years. Each project represents a unique exploration
+        of aesthetic principles and design thinking.
+      </p>
+    </section>
+
+    <section class="filters" aria-label="Work filters">
+      <div class="tag-row" id="tagRow">
+        <button class="tag is-active" data-tag="all">All</button>
+        <button class="tag" data-tag="analog">analog</button>
+        <button class="tag" data-tag="collaborative">collaborative</button>
+        <button class="tag" data-tag="commercial">commercial</button>
+        <button class="tag" data-tag="commission">commission</button>
+        <button class="tag" data-tag="digital">digital</button>
+        <button class="tag" data-tag="exhibition">exhibition</button>
+        <button class="tag" data-tag="handmade">handmade</button>
+        <button class="tag" data-tag="individual">individual</button>
+        <button class="tag" data-tag="installation">installation</button>
+        <button class="tag" data-tag="mixed-media">mixed-media</button>
+        <button class="tag" data-tag="nft">nft</button>
+        <button class="tag" data-tag="product">product</button>
+        <button class="tag" data-tag="published">published</button>
+        <button class="tag" data-tag="residential">residential</button>
+        <button class="tag" data-tag="series">series</button>
+      </div>
+    </section>
+
+    <section class="works">
+      <div class="work-grid" id="workGrid"></div>
+      <p class="no-results" id="noResults" hidden>No works match this tag.</p>
+    </section>
+
+  </main>
+
+  <script src="works.js"></script>
+  <script src="render.js"></script>
+  <script>
+    renderAll("workGrid");
+  </script>
+  <script src="all.js"></script>
+
+</body>
+</html>

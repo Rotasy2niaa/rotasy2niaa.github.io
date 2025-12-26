@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Your Name</title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="main.css" />
 </head>
+
 <body>
+
   <header class="site-header">
     <div class="header-inner">
-      <div class="site-name">Your Name</div>
+      <div class="site-name">
+        <a class="brand" href="index.html">Your Name</a>
+      </div>
       <nav class="nav">
-        <a href="#">Home</a>
-        <a href="#">All Works</a>
+        <a class="is-active" href="index.html">Home</a>
+        <a href="all.html">All Works</a>
       </nav>
     </div>
   </header>
@@ -22,9 +27,8 @@
       <h1>Designer & Visual Artist</h1>
 
       <p>
-        Creating thoughtful, aesthetic driven work that explores the
-        intersection of art, design, and human experience.
-        Based in Your City, working globally.
+        Creating thoughtful, aesthetic-driven work that explores the intersection
+        of art, design, and human experience. Based in Your City, working globally.
       </p>
 
       <p>
@@ -38,20 +42,17 @@
     <section class="works">
       <h2>Selected Works</h2>
 
-      <div class="work-grid">
-        <div class="work-item">
-          <img src="res/DiceValley2.png" alt="Dice Valley">
-        </div>
-        <div class="work-item">
-          <img src="res/NoahCover.png" alt="Noah Cover">
-        </div>
-        <div class="work-item">
-          <img src="res/DiceValley2.png" alt="Dice Valley">
-        </div>
-      </div>
+      <!-- Rendered dynamically -->
+      <div class="work-grid" id="selectedGrid"></div>
     </section>
 
   </main>
+
+  <script src="works.js"></script>
+  <script src="render.js"></script>
+  <script>
+    renderSelected("selectedGrid");
+  </script>
 
 </body>
 </html>
