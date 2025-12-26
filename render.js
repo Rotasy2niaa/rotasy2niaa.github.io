@@ -59,6 +59,79 @@ function renderWorkDetail() {
     return;
   }
 
+  // Links section (optional)
+  const linksHtml =
+    work.links && work.links.length
+      ? `
+    <div class="detail-section">
+      <h2 class="detail-h2">Links</h2>
+      <div class="detail-links">
+        ${work.links
+          .map(
+            l => `
+          <a class="detail-link"
+             href="${l.url}"
+             target="_blank"
+             rel="noopener">
+            ${l.label}
+          </a>
+        `
+          )
+          .join("")}
+      </div>
+    </div>
+  `
+      : "";
+
+  // Videos section (optional)
+  const videosHtml =
+    work.videos && work.videos.length
+      ? `
+    <div class="detail-section">
+      <h2 class="detail-h2">Video</h2>
+      <div class="video-grid">
+        ${work.videos
+          .map(v => {
+            if (v.type === "youtube") {
+              return `
+                <div class="video-card">
+                  <div class="video-embed">
+                    <iframe
+                      src="https://www.youtube-nocookie.com/embed/${v.id}"
+                      title="${v.label || work.title}"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen>
+                    </iframe>
+                  </div>
+                  ${v.label ? `<div class="video-caption">${v.label}</div>` : ""}
+                </div>
+              `;
+            }
+
+            if (v.type === "vimeo") {
+              return `
+                <div class="video-card">
+                  <div class="video-embed">
+                    <iframe
+                      src="https://player.vimeo.com/video/${v.id}"
+                      title="${v.label || work.title}"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowfullscreen>
+                    </iframe>
+                  </div>
+                  ${v.label ? `<div class="video-caption">${v.label}</div>` : ""}
+                </div>
+              `;
+            }
+
+            return "";
+          })
+          .join("")}
+      </div>
+    </div>
+  `
+      : "";
+
   container.innerHTML = `
     <a href="all.html" class="back-link">← Back to All Works</a>
 
@@ -70,23 +143,28 @@ function renderWorkDetail() {
     <p class="work-intro">${work.intro || ""}</p>
 
     <div class="tag-row">
-      ${work.tags
-  .map(tag => `
-    <a class="tag tag-link" href="all.html?tag=${encodeURIComponent(tag)}">
-      ${tag}
-    </a>
-  `)
-  .join("")}
-    </div>
-
-    <div class="work-gallery">
-      ${work.gallery
-        .map(src => `<img src="${src}" alt="${work.title}" />`)
+      ${(work.tags || [])
+        .map(
+          tag => `
+        <a class="tag tag-link" href="all.html?tag=${encodeURIComponent(tag)}">
+          ${tag}
+        </a>
+      `
+        )
         .join("")}
     </div>
 
+    <div class="work-gallery">
+      ${(work.gallery || [])
+        .map(src => `<img src="${src}" alt="${work.title}" loading="lazy" />`)
+        .join("")}
+    </div>
+
+    ${linksHtml}
+    ${videosHtml}
+
     ${
-      work.credits
+      work.credits && work.credits.length
         ? `
       <div class="work-credits">
         ${work.credits
