@@ -154,6 +154,27 @@ function renderWorkDetail() {
         .join("")}
     </div>
 
+
+    ${
+  work.sections
+    ? `
+  <div class="work-sections">
+    ${work.sections
+      .map(
+        section => `
+      <div class="work-section">
+        <h3>${section.heading}</h3>
+        <p>${section.text}</p>
+      </div>
+    `
+      )
+      .join("")}
+  </div>
+  `
+    : ""
+}
+
+
     <div class="work-gallery">
       ${(work.gallery || [])
         .map(src => `<img src="${src}" alt="${work.title}" loading="lazy" />`)

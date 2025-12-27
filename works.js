@@ -24,12 +24,15 @@ window.WORKS = [
     cover: "res/insyncposter.jpg",
     selected: true,
 
-    links: [],
+    links: [{ label: "See more at Da Chu Interactive", url: "https://www.dachu-interactive.com/insync" }],
     videos: [{ label: "Trailer", type: "youtube", id: "YOUR_ID" }],
 
     intro:
       "Designed and fabricated a 9×12 inch tactile maze installation exploring intuitive bodily perception of space and texture.",
-    gallery: ["res/insync poster.png", "res/insync maze.png"],
+    gallery: [
+      "res/insync poster.png",
+      "res/insync maze.png"
+    ],
     credits: [{ label: "Role", value: "Maze and Experience Designer" }]
   },
 
@@ -40,15 +43,15 @@ window.WORKS = [
     year: 2025,
     blurb: "A physical digital experience featuring a custom built controller",
     tags: ["installation", "exhibition", "arduino", "collaborative"],
-    cover: "res/bg.png",
+    cover: "res/HTPYC_logotransparent.png",
     selected: true,
 
-    links: [],
+    links: [{ label: "See more at Da Chu Interactive", url: "https://www.dachu-interactive.com/how-to-pet-your-cat" }],
     videos: [],
 
     intro:
       "A physical digital experience featuring a custom built controller, designed for live showcases and playful crowd flow.",
-    gallery: ["res/bg.png", "res/bg.png"],
+    gallery: ["res/HTPYCcover.png"],
     credits: [{ label: "Role", value: "Experience Designer and Installation Artist" }]
   },
 
@@ -112,27 +115,71 @@ window.WORKS = [
   },
 
   {
-    slug: "unspeakable",
-    title: "Unspeakable",
-    category: "Installation Series",
-    year: 2023,
-    blurb: "Arduino and Processing based installations exploring emotion beyond spoken language",
-    tags: ["installation", "arduino", "processing", "collaborative"],
-    cover: "res/bg.png",
-    selected: false,
+  slug: "unspeakable",
+  title: "Unspeakable",
+  category: "Installation Series",
+  year: 2023,
+  blurb:
+    "A series of interactive installations exploring how emotions can be expressed without spoken language.",
+  tags: [
+    "installation",
+    "mixed-media",
+    "arduino",
+    "processing",
+    "individual"
+  ],
+  cover: "res/SI04.jpg",
+  selected: false,
 
-    links: [{ label: "View project page", url: "https://rotasy2niaa.github.io/2023/03/08/Unspeakable/" }],
-    videos: [],
+  links: [],
 
-    intro:
-      "A series of artworks exploring how feelings and emotions can be expressed and communicated through aesthetics without spoken language. Built with electronics and creative coding.",
-    gallery: ["res/bg.png"],
-    credits: [
-      { label: "Date", value: "May 2023" },
-      { label: "Role", value: "Programmer, Designer, Artist" },
-      { label: "Tools", value: "Arduino, Processing" }
-    ]
-  },
+  videos: [],
+
+  intro:
+    "Unspeakable is a series of interactive installations exploring how feelings and emotions can be expressed and communicated through aesthetic and embodied interaction rather than spoken language.",
+
+  sections: [
+    {
+      heading: "Design Statement",
+      text:
+        "My works explore the ways feelings and emotions can be expressed and communicated through aesthetic means without spoken language. As an introvert, verbal communication and social interaction often feel stressful to me. Through interactive devices and installations, I aim to make emotions visible, tangible, and even playful."
+    },
+    {
+      heading: "Sustained Investigation",
+      text:
+        "The investigation began with a flipping toy inspired by my anxiety about public speaking, imagining people as vegetables to reduce fear. It then expanded into a two-player board game exploring social distance. Later works incorporated Arduino and electronic sensors, including an emotional wheel controlled by buttons, a shy plant reacting to proximity, and a heart-shaped home installation that visualizes heart rate through light."
+    },
+    {
+      heading: "Selected Works",
+      text:
+        "<strong>Flippy Vege</strong><br/>Idea: Inspired by fear of public speaking by imagining people as vegetables.<br/>Materials: Wood board, cardboard, paper clay, acrylic paint.<br/>Process: Built a flipping mechanism where vegetables cover their eyes when flipped.<br/><br/>" +
+
+        "<strong>Social-phobia Simulator</strong><br/>Idea: A two-player game about maintaining social distance.<br/>Materials: Procreate, Adobe Illustrator, laser-cut wood, acrylic paint.<br/>Process: Designed cards digitally, laser-cut components, and hand-painted tokens.<br/><br/>" +
+
+        "<strong>Wheel of Emotion</strong><br/>Idea: Allows audiences to select feelings without speaking.<br/>Materials: Acrylic board, LED light belt, Arduino, button sensors.<br/>Process: Designed the wheel digitally and programmed LED responses via Arduino.<br/><br/>" +
+
+        "<strong>Sensitive Leaves</strong><br/>Idea: Leaves close when hands approach and reopen when they leave.<br/>Materials: Arduino, sensors, acrylic paint, paper clay.<br/>Process: Built hinged leaves and attached proximity sensors.<br/><br/>" +
+
+        "<strong>Heart Home</strong><br/>Idea: LED lights change color based on heart rate.<br/>Materials: 3D-printed resin house, LED belt, Arduino, heartbeat sensor.<br/>Process: Modeled the house, embedded lighting, and connected sensors to Arduino."
+    }
+  ],
+
+  gallery: [
+    "res/SI15.jpg",
+    "res/SSprocess_5.png",
+    "res/SI6.jpg",
+    "res/IMG_2689.jpg",
+    "res/HeartHome7.png",
+  ],
+
+  credits: [
+    { label: "Date", value: "March 2023" },
+    { label: "Role", value: "Artist, Designer, Programmer" },
+    { label: "Tools", value: "Arduino, Processing, Physical Sensors" },
+    { label: "Context", value: "AP 3D Art and Design Portfolio 2023" }
+  ]
+},
+
 
   {
     slug: "noah-had-no-wings",
@@ -172,7 +219,7 @@ window.WORKS = [
     year: 2023,
     blurb: "A sci fi RTS about building survival structures via a grid based pipe system",
     tags: ["video-game", "collaborative"],
-    cover: "res/bg.png",
+    cover: "res/RootCover.png",
     selected: false,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/root-up" }],
@@ -180,7 +227,7 @@ window.WORKS = [
 
     intro:
       "A sci fi real time strategy game where players explore an underworld using a grid based pipe system and manage resources to build structures for survival in the upper world. Made in Global Game Jam 2023 (Theme: Root), Shenzhen.",
-    gallery: ["res/bg.png"],
+    gallery: ["res/ShanLinPortfolio-Final-25.png"],
     credits: [
       { label: "Date", value: "February 2023" },
       { label: "Role", value: "Game Artist" },
@@ -223,28 +270,28 @@ window.WORKS = [
     ]
   },
 
-  {
-    slug: "nightmare-yuanmeng",
-    title: "Nightmare 渊梦",
-    category: "Unity Game",
-    year: 2022,
-    blurb: "A 2D platformer about a girl fighting against her fear",
-    tags: ["video-game", "collaborative"],
-    cover: "res/bg.png",
-    selected: false,
+  // {
+  //   slug: "nightmare-yuanmeng",
+  //   title: "Nightmare 渊梦",
+  //   category: "Unity Game",
+  //   year: 2022,
+  //   blurb: "A 2D platformer about a girl fighting against her fear",
+  //   tags: ["video-game", "collaborative"],
+  //   cover: "res/bg.png",
+  //   selected: false,
 
-    links: [{ label: "Play on itch.io", url: "https://vappa.itch.io/yuanmeng" }],
-    videos: [],
+  //   links: [{ label: "Play on itch.io", url: "https://vappa.itch.io/yuanmeng" }],
+  //   videos: [],
 
-    intro:
-      "A 2D platform game about a girl fighting against her fear. Made in Yi-youweijin (益·游未尽) 72 hour Game Jam (Theme: Healing).",
-    gallery: ["res/bg.png"],
-    credits: [
-      { label: "Date", value: "August 2022" },
-      { label: "Role", value: "Game Designer, Pixel Artist" },
-      { label: "Engine", value: "Unity" }
-    ]
-  },
+  //   intro:
+  //     "A 2D platform game about a girl fighting against her fear. Made in Yi-youweijin (益·游未尽) 72 hour Game Jam (Theme: Healing).",
+  //   gallery: ["res/bg.png"],
+  //   credits: [
+  //     { label: "Date", value: "August 2022" },
+  //     { label: "Role", value: "Game Designer, Pixel Artist" },
+  //     { label: "Engine", value: "Unity" }
+  //   ]
+  // },
 
   {
     slug: "the-human-beings-museum",
@@ -253,7 +300,7 @@ window.WORKS = [
     year: 2022,
     blurb: "A VR museum where the player time travels through an extinct human beings archive",
     tags: ["video-game", "collaborative"],
-    cover: "res/bg.png",
+    cover: "res/ShanLinPortfolio-Final-30.png",
     selected: false,
 
     links: [{ label: "Watch video", url: "https://youtu.be/HbX2ajx4_Xo" }],
@@ -303,7 +350,7 @@ window.WORKS = [
     year: 2022,
     blurb: "An RPG about quarantine, hallucination, and searching for missing pills",
     tags: ["video-game", "collaborative"],
-    cover: "res/bg.png",
+    cover: "res/ShanLinPortfolio-Final-20.png",
     selected: false,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/tricky-life" }],
@@ -311,7 +358,10 @@ window.WORKS = [
 
     intro:
       "A role playing game about a girl with DID who runs out of pills during quarantine, hallucinates, and leaves her apartment to search for the pills. Made in CiGA Game Jam 2022 (Theme: Trick), Shenzhen.",
-    gallery: ["res/bg.png"],
+    gallery: [
+      "res/ShanLinPortfolio-Final-20.png",
+      "res/ShanLinPortfolio-Final-21.png",
+      "res/ShanLinPortfolio-Final-22.png"],
     credits: [
       { label: "Date", value: "June 2022" },
       { label: "Role", value: "Game Designer, Game Artist" },
@@ -337,7 +387,7 @@ window.WORKS = [
     videos: [{ label: "Video", type: "youtube", id: "SDsiw6OvkbI" }],
 
     intro:
-      "A series of 2D mixed media artworks exploring eternity, the life cycle, and the relationship between death and death. Made in AP 2D Art and Design.",
+      "A series of 2D mixed media artworks exploring eternity, the life cycle, and the relationship between death and death. Made in AP 2D Art and Design. I am interested in the concept of eternity, the life cycle and the relationship between death, decay and rebirth. Is there also beauty in death and decay, as there is in life? In what ways can I express the magnitude of eternity visually? How could I use visual metaphor to illustrate a life cycle? My work uses a lot of mixed media to create it and relies on my knowledge and understanding of Surrealism.",
     gallery: [
       "res/AP2D_WatercolorSkull.jpg",
       "res/AP2D_Planet.jpg",
@@ -356,11 +406,11 @@ window.WORKS = [
   {
     slug: "rain-collection",
     title: "Rain Collection",
-    category: "Installation / Experimental Work",
+    category: "UIUX Design",
     year: 2021,
     blurb: "An experimental collection exploring rain, sensing, and material presence",
-    tags: ["installation", "individual"],
-    cover: "res/bg.png",
+    tags: ["individual"],
+    cover: "res/RainCollectionPortfolio-1.png",
     selected: false,
 
     links: [],
@@ -368,7 +418,12 @@ window.WORKS = [
 
     intro:
       "An ongoing experimental collection exploring rain as a sensory and material phenomenon. Documentation and format are currently in progress.",
-    gallery: ["res/bg.png"],
-    credits: [{ label: "Role", value: "Artist / Designer" }]
+    gallery: [
+      "res/RainCollectionPortfolio-1.png",
+      "res/RainCollectionPortfolio-2.png",
+      "res/RainCollectionPortfolio-3.png",
+      "res/RainCollectionPortfolio-4.png",
+      "res/RainCollectionPortfolio-5.png"],
+    credits: [{ label: "Role", value: "Designer" }]
   }
 ];

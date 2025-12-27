@@ -17,21 +17,22 @@
   --pad-y: 64px;
 
   /* Core colors */
-  --c-bg: #ffffff;
-  --c-text: #111111;
-  --c-muted: #666666;
+  --c-bg: #F9F8F6;
+  --c-text: #43334C;
+  --c-muted: #819A91;
   --c-line: #e5e5e5;
 
   /* Accent palette */
-  --c-pink: #f2c6d6;
+  --c-pink: #F39EB6;
+  --c-pink-hover: #E83C91;
   --c-green: #9fd6b2;
   --c-gray: #f3f3f3;
 
-  /* UI helpers */
-  --pill: var(--c-gray);
-  --pill-hover: var(--c-green);
+  /* Links */
+  --c-link: var(--c-pink);
+  --c-link-hover: var(--c-pink-hover);
 
-  /* IMPORTANT: square cards */
+  /* Shape */
   --radius-none: 0px;
 }
 
@@ -47,17 +48,21 @@
 body {
   font-family: var(--font-body);
   color: var(--c-text);
-  background: #fafafa;
-  /* ← 改这里 */
+  background: var(--c-bg);
   line-height: 1.7;
 }
 
 a {
-  color: inherit;
+  color: var(--c-link);
   text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Headings: pixel / typewriter feel */
+a:hover {
+  color: var(--c-link-hover);
+}
+
+/* Headings */
 h1,
 h2,
 .site-name,
@@ -106,10 +111,12 @@ h2,
   margin-left: 24px;
   font-size: 13px;
   opacity: 0.7;
+  color: var(--c-text);
 }
 
 .nav a:hover {
   opacity: 1;
+  color: var(--c-link-hover);
 }
 
 .nav a.is-active {
@@ -131,9 +138,83 @@ h2,
 .intro p {
   max-width: 760px;
   margin-bottom: 16px;
-  color: #333;
   font-size: 14px;
+  color: #333;
 }
+
+/* =========================================================
+   Home: Intro Split
+   ========================================================= */
+.intro-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.intro-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+/* Floating frame (invisible boundary) */
+.float-frame {
+  position: relative;
+  width: min(360px, 100%);
+  height: 260px;
+  background: transparent;
+  border: none;
+  overflow: hidden;
+}
+
+.float-card {
+  position: absolute;
+  width: 230px;
+  max-width: 70%;
+  left: 18px;
+  top: 18px;
+  border: 1px solid #111;
+  background: #fff;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.06);
+  user-select: none;
+}
+
+/* Profile links under photo */
+.profile-links {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.profile-links a {
+  color: var(--c-link);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
+.profile-links a:hover {
+  color: var(--c-link-hover);
+  border-bottom-color: var(--c-link-hover);
+}
+
+/* =========================================================
+   Page Head (All Works, etc.)
+   ========================================================= */
+.page-head h1 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  margin-bottom: 18px;
+}
+
+.page-head p {
+  max-width: 760px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #333;
+}
+
 
 /* =========================================================
    Works Grid (Home + All Works)
@@ -143,8 +224,8 @@ h2,
 }
 
 .works h2 {
-  font-size: 18px;
-  margin-bottom: 28px;
+  font-size: 22px; /* ⬅️ Selected Works 更大 */
+  margin-bottom: 32px;
 }
 
 .work-grid {
@@ -162,17 +243,15 @@ h2,
   transform: translateY(-3px);
 }
 
-/* Media: square edges */
 .work-media {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  background: var(--pill);
+  background: var(--c-gray);
   overflow: hidden;
   border-radius: var(--radius-none);
 }
 
-/* collage-style overlay */
 .work-media::after {
   content: "";
   position: absolute;
@@ -211,34 +290,31 @@ h2,
    All Works: Filters
    ========================================================= */
 .filters {
-  margin: 44px 0 48px;
+  margin: 44px 0 56px;
 }
 
 .tag-row {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+  margin-top: 28px; /* ⬅️ description 与 tags 拉开 */
 }
 
 .tag {
   border: none;
   background: var(--c-gray);
-  color: var(--c-text);
   padding: 11px 16px;
   font-size: 13px;
   cursor: pointer;
   border-radius: 999px;
 }
 
-/* hover = 粉 */
 .tag:hover {
   background: var(--c-pink);
 }
 
-/* active = 绿 */
 .tag.is-active {
   background: var(--c-green);
-  color: #111;
 }
 
 /* =========================================================
@@ -252,11 +328,11 @@ h2,
   display: inline-block;
   margin-bottom: 32px;
   font-size: 13px;
-  color: #444;
+  color: var(--c-link);
 }
 
 .back-link:hover {
-  text-decoration: underline;
+  color: var(--c-link-hover);
 }
 
 #workDetail h1 {
@@ -273,15 +349,35 @@ h2,
 .work-intro {
   max-width: 680px;
   font-size: 14px;
-  margin-bottom: 34px;
-  color: #333;
+  margin-bottom: 40px; /* ⬅️ intro 和 tags 分开 */
 }
 
 #workDetail .tag-row {
   margin-bottom: 52px;
 }
 
-/* Gallery: full-width, responsive, square */
+/* Sections (Design statement etc.) */
+.work-sections {
+  max-width: 680px;
+  margin-bottom: 56px;
+}
+
+.work-section {
+  margin-bottom: 32px;
+}
+
+.work-section h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.work-section p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Gallery */
 .work-gallery {
   display: flex;
   flex-direction: column;
@@ -291,7 +387,7 @@ h2,
 .work-gallery img {
   width: 100%;
   height: auto;
-  background: var(--pill);
+  background: var(--c-gray);
   border-radius: var(--radius-none);
 }
 
@@ -309,7 +405,7 @@ h2,
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: var(--pill);
+  background: var(--c-gray);
   overflow: hidden;
 }
 
@@ -327,6 +423,15 @@ h2,
 @media (max-width: 980px) {
   .work-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .intro-split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .intro-right {
+    align-items: flex-start;
   }
 
   #workDetail h1 {
@@ -349,72 +454,5 @@ h2,
 
   .intro h1 {
     font-size: 34px;
-    color: #111;
-  }
-
-  .intro h1 span {
-    color: var(--c-green);
-  }
-
-}
-
-/* =========================================================
-   Home intro split with floating photo
-   ========================================================= */
-.intro-split {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
-  align-items: start;
-}
-
-.intro-left {
-  min-width: 0;
-}
-
-.intro-right {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* The square frame */
-.float-frame {
-  position: relative;
-  width: min(360px, 100%);
-  height: 320px;              /* 关键：固定高度，不要太长 */
-  border: 1px solid #e5e5e5;
-  background: #fff;
-  overflow: hidden;
-}
-
-
-/* The floating photo card */
-.float-card {
-  position: absolute;
-  width: 230px;               /* 固定卡片宽度，更像贴纸 */
-  max-width: 70%;
-  height: auto;
-  left: 18px;
-  top: 18px;
-  border: 1px solid #111;
-  background: #fff;
-  user-select: none;
-  box-shadow: 6px 6px 0 rgba(0,0,0,0.06);
-}
-
-
-/* Responsive: stack on small screens */
-@media (max-width: 980px) {
-  .intro-split {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .intro-right {
-    justify-content: flex-start;
-  }
-
-  .float-frame {
-    width: min(420px, 100%);
   }
 }
