@@ -8,30 +8,28 @@
 
   <!-- Favicon -->
   <link rel="icon" href="res/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16x16.png" />
 
   <link rel="stylesheet" href="main.css" />
 </head>
 
-<body>
+<body class="page-work">
 
   <header class="site-header">
     <div class="header-inner">
       <div class="site-name"><a class="brand" href="index.html">Shan Lin</a></div>
       <nav class="nav">
         <a href="index.html">Home</a>
-        <a href="all.html">All Works</a>
-        <a href="https://drive.google.com/file/d/1IiCNMD90t-xih-ladHy1YFBbOvMARCiX/view?usp=drive_link" target="_blank"
-          rel="noopener">
-          Resume
-        </a>
+        <a class="is-active" href="all.html">All Works</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <div id="workDetail"></div>
+  <main class="container work-main">
+    <div class="work-detail-shell" id="workDetail"></div>
   </main>
 
   <script src="works.js"></script>

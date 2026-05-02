@@ -1,125 +1,196 @@
-// render.js
-// Responsible for rendering work cards and detail pages
+const META_ONLY_TAGS = new Set(["individual", "collaborative"]);
+
+function normalizeTagValue(value) {
+  return (value || "").trim().toLowerCase();
+}
+
+function getFilterableTags(tags) {
+  return (tags || []).filter(tag => !META_ONLY_TAGS.has(normalizeTagValue(tag)));
+}
+
+function getProjectStatus(tags) {
+
+  return "";
+}
 
 function buildWorkCard(work) {
   const a = document.createElement("a");
+  const filterableTags = getFilterableTags(work.tags || []);
+  const projectStatus = getProjectStatus(work.tags || []);
+
   a.className = "work-card";
   a.href = `work.html?slug=${encodeURIComponent(work.slug)}`;
   a.setAttribute("aria-label", work.title);
-  a.dataset.tags = work.tags.join(" ");
+  a.dataset.tags = JSON.stringify(filterableTags);
 
   a.innerHTML = `
     <div class="work-media">
       <img src="${work.cover}" alt="${work.title} cover" loading="lazy" />
     </div>
-    <div class="work-meta">
+    <div class="work-copy">
       <div class="work-title">${work.title}</div>
-      <div class="work-sub">${work.category}, ${work.year}</div>
+      <div class="work-sub">
+        <span>${work.category}</span>
+        <span aria-hidden="true">/</span>
+        <span>${work.year}</span>
+      </div>
+      ${projectStatus ? `<div class="work-status">${projectStatus}</div>` : ""}
     </div>
   `;
 
   return a;
 }
 
-/* ---------- Home: Selected Works ---------- */
+function renderWorkList(containerId, works) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = "";
+  works.forEach(work => {
+    container.appendChild(buildWorkCard(work));
+  });
+}
 
 function renderSelected(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  const selectedWorks = window.WORKS.filter(w => w.selected);
-  selectedWorks.forEach(work => {
-    container.appendChild(buildWorkCard(work));
-  });
+  const selectedWorks = window.WORKS.filter(work => work.selected);
+  renderWorkList(containerId, selectedWorks);
 }
-
-/* ---------- All Works ---------- */
 
 function renderAll(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  window.WORKS.forEach(work => {
-    container.appendChild(buildWorkCard(work));
-  });
+  renderWorkList(containerId, window.WORKS);
 }
 
-/* ---------- Work Detail ---------- */
+function buildTagLinks(tags) {
+  const filterableTags = getFilterableTags(tags);
+  if (!filterableTags.length) return "";
 
-function renderWorkDetail() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get("slug");
-
-  const container = document.getElementById("workDetail");
-  if (!container || !slug) return;
-
-  const work = window.WORKS.find(w => w.slug === slug);
-  if (!work) {
-    container.innerHTML = "<p>Work not found.</p>";
-    return;
-  }
-
-  // Links section (optional)
-  const linksHtml =
-    work.links && work.links.length
-      ? `
-    <div class="detail-section">
-      <h2 class="detail-h2">Links</h2>
-      <div class="detail-links">
-        ${work.links
+  return `
+    <div class="detail-panel">
+      <div class="tag-row">
+        ${filterableTags
           .map(
-            l => `
-          <a class="detail-link"
-             href="${l.url}"
-             target="_blank"
-             rel="noopener">
-            ${l.label}
-          </a>
-        `
+            tag => `
+              <a class="tag-link" href="all.html?tag=${encodeURIComponent(tag)}">
+                ${tag}
+              </a>
+            `
           )
           .join("")}
       </div>
     </div>
-  `
-      : "";
+  `;
+}
 
-  // Videos section (optional)
-  const videosHtml =
-    work.videos && work.videos.length
-      ? `
+function buildLinksSection(links) {
+  if (!links || !links.length) return "";
+
+  return `
+    <div class="detail-panel detail-section">
+      <h2 class="detail-h2">Links</h2>
+      <div class="detail-links">
+        ${links
+          .map(
+            link => `
+              <a class="detail-link" href="${link.url}" target="_blank" rel="noopener">
+                ${link.label}
+              </a>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function buildCreditsSection(credits) {
+  if (!credits || !credits.length) return "";
+
+  return `
+    <div class="detail-panel">
+      <div class="work-credits">
+        ${credits
+          .map(
+            credit => `
+              <div class="credit-item">
+                <div class="credit-label">${credit.label}</div>
+                <div class="credit-value">${credit.value}</div>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function buildSections(sections) {
+  if (!sections || !sections.length) return "";
+
+  return `
+    <div class="work-sections">
+      ${sections
+        .map(
+          section => `
+            <section class="work-section">
+              <h2>${section.heading}</h2>
+              <div class="work-section-copy">${section.text}</div>
+            </section>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function buildGallery(work) {
+  if (!work.gallery || !work.gallery.length) return "";
+
+  return `
+    <div class="work-gallery">
+      ${work.gallery
+        .map(src => `<img src="${src}" alt="${work.title}" loading="lazy" />`)
+        .join("")}
+    </div>
+  `;
+}
+
+function buildVideosSection(work) {
+  if (!work.videos || !work.videos.length) return "";
+
+  return `
     <div class="detail-section">
       <h2 class="detail-h2">Video</h2>
       <div class="video-grid">
         ${work.videos
-          .map(v => {
-            if (v.type === "youtube") {
+          .map(video => {
+            if (video.type === "youtube") {
               return `
                 <div class="video-card">
                   <div class="video-embed">
                     <iframe
-                      src="https://www.youtube-nocookie.com/embed/${v.id}"
-                      title="${v.label || work.title}"
+                      src="https://www.youtube-nocookie.com/embed/${video.id}"
+                      title="${video.label || work.title}"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowfullscreen>
                     </iframe>
                   </div>
-                  ${v.label ? `<div class="video-caption">${v.label}</div>` : ""}
+                  ${video.label ? `<div class="video-caption">${video.label}</div>` : ""}
                 </div>
               `;
             }
 
-            if (v.type === "vimeo") {
+            if (video.type === "vimeo") {
               return `
                 <div class="video-card">
                   <div class="video-embed">
                     <iframe
-                      src="https://player.vimeo.com/video/${v.id}"
-                      title="${v.label || work.title}"
+                      src="https://player.vimeo.com/video/${video.id}"
+                      title="${video.label || work.title}"
                       allow="autoplay; fullscreen; picture-in-picture"
                       allowfullscreen>
                     </iframe>
                   </div>
-                  ${v.label ? `<div class="video-caption">${v.label}</div>` : ""}
+                  ${video.label ? `<div class="video-caption">${video.label}</div>` : ""}
                 </div>
               `;
             }
@@ -129,71 +200,55 @@ function renderWorkDetail() {
           .join("")}
       </div>
     </div>
-  `
-      : "";
-
-  container.innerHTML = `
-    <a href="all.html" class="back-link">← Back to All Works</a>
-
-    <h1>${work.title}</h1>
-    <p class="work-meta-line">
-      ${work.category} · ${work.year}
-    </p>
-
-    <p class="work-intro">${work.intro || ""}</p>
-
-    <div class="tag-row">
-      ${(work.tags || [])
-        .map(
-          tag => `
-        <a class="tag tag-link" href="all.html?tag=${encodeURIComponent(tag)}">
-          ${tag}
-        </a>
-      `
-        )
-        .join("")}
-    </div>
-
-
-    ${
-  work.sections
-    ? `
-  <div class="work-sections">
-    ${work.sections
-      .map(
-        section => `
-      <div class="work-section">
-        <h3>${section.heading}</h3>
-        <p>${section.text}</p>
-      </div>
-    `
-      )
-      .join("")}
-  </div>
-  `
-    : ""
+  `;
 }
 
+function renderWorkDetail() {
+  const container = document.getElementById("workDetail");
+  if (!container) return;
 
-    <div class="work-gallery">
-      ${(work.gallery || [])
-        .map(src => `<img src="${src}" alt="${work.title}" loading="lazy" />`)
-        .join("")}
-    </div>
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
 
-    ${linksHtml}
-    ${videosHtml}
+  if (!slug) {
+    container.innerHTML = `
+      <a href="all.html" class="back-link">Back to All Works</a>
+      <p class="missing-work">Work not found.</p>
+    `;
+    return;
+  }
 
-    ${
-      work.credits && work.credits.length
-        ? `
-      <div class="work-credits">
-        ${work.credits
-          .map(c => `<div><strong>${c.label}:</strong> ${c.value}</div>`)
-          .join("")}
-      </div>
-      `
-        : ""
-    }
+  const work = window.WORKS.find(item => item.slug === slug);
+  if (!work) {
+    container.innerHTML = `
+      <a href="all.html" class="back-link">Back to All Works</a>
+      <p class="missing-work">Work not found.</p>
+    `;
+    return;
+  }
+
+  const metaLine = `
+    <span class="work-meta-boxed">${work.category}</span>
+    <span class="work-meta-boxed">${work.year}</span>
+  `;
+
+  container.innerHTML = `
+    <article class="work-detail">
+      <a href="all.html" class="back-link">Back to All Works</a>
+
+      <header class="work-hero-main">
+        <p class="work-meta-line">${metaLine}</p>
+        <h1>${work.title}</h1>
+        ${work.intro ? `<p class="work-intro">${work.intro}</p>` : ""}
+      </header>
+
+      ${buildTagLinks(work.tags)}
+
+      ${work.sections && work.sections.length ? buildSections(work.sections) : ""}
+      ${buildGallery(work)}
+      ${buildLinksSection(work.links)}
+      ${buildVideosSection(work)}
+      ${buildCreditsSection(work.credits)}
+    </article>
   `;
 }

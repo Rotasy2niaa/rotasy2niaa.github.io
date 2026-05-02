@@ -8,13 +8,13 @@
   
    <!-- Favicon -->
   <link rel="icon" href="res/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16x16.png" />
 
   <link rel="stylesheet" href="main.css" />
 </head>
 
-<body>
+<body class="page-all">
 
   <header class="site-header">
     <div class="header-inner">
@@ -24,19 +24,17 @@
 
       <nav class="nav">
         <a href="index.html">Home</a>
-        <a href="all.html">All Works</a>
-        <a href="https://drive.google.com/file/d/1IiCNMD90t-xih-ladHy1YFBbOvMARCiX/view?usp=drive_link" target="_blank"
-          rel="noopener">
-          Resume
-        </a>
+        <a class="is-active" href="all.html" aria-current="page">All Works</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
       </nav>
 
     </div>
   </header>
 
-  <main class="container">
+  <main class="container all-main">
 
-    <section class="page-head">
+    <section class="page-head page-head-split">
       <h1>All Works</h1>
       <p class="lede">
         A comprehensive collection of my creative work spanning multiple
@@ -45,18 +43,15 @@
       </p>
     </section>
 
-    <section class="filters" aria-label="Work filters">
+    <section class="filters filters-shell" aria-label="Work filters">
       <div class="tag-row" id="tagRow">
         <button class="tag is-active" data-tag="all">All</button>
 
         <button class="tag" data-tag="video-game">video game</button>
         <button class="tag" data-tag="board-game">board game</button>
 
-        <button class="tag" data-tag="collaborative">collaborative</button>
-        <button class="tag" data-tag="individual">individual</button>
-
         <button class="tag" data-tag="installation">installation</button>
-        <button class="tag" data-tag="exhibition">exhibition</button>
+        <button class="tag" data-tag="alt-ctrl-experience">alt ctrl experience</button>
         <button class="tag" data-tag="mixed-media">mixed media</button>
 
         <button class="tag" data-tag="film">film</button>
@@ -71,9 +66,15 @@
       </div>
     </section>
 
-    <section class="works">
+    <section class="filters filters-shell" aria-label="Sort filters">
+      <div class="tag-row" id="yearRow">
+        <button class="tag is-active" data-year="all">All Years</button>
+      </div>
+    </section>
+
+    <section class="works works-all">
       <div class="work-grid" id="workGrid"></div>
-      <p class="no-results" id="noResults" hidden>No works match this tag.</p>
+      <p class="no-results" id="noResults" hidden aria-live="polite">No works match this selection.</p>
     </section>
 
   </main>

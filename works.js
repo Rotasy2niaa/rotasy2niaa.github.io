@@ -20,7 +20,7 @@ window.WORKS = [
     category: "Maze Installation",
     year: 2025,
     blurb: "A non visual multisensory tactile maze guided entirely by touch",
-    tags: ["installation", "exhibition", "collaborative"],
+    tags: ["installation", "collaborative"],
     cover: "res/insyncposter.jpg",
     selected: true,
 
@@ -42,7 +42,7 @@ window.WORKS = [
     category: "Alt Ctrl Experience",
     year: 2025,
     blurb: "A physical digital experience featuring a custom built controller",
-    tags: ["installation", "exhibition", "arduino", "collaborative"],
+    tags: ["installation", "alt-ctrl-experience", "arduino", "collaborative"],
     cover: "res/HTPYC_logotransparent.png",
     selected: true,
 
@@ -65,7 +65,7 @@ window.WORKS = [
     category: "Board Game",
     year: 2023,
     blurb: "A two player tabletop game about espionage on the internet",
-    tags: ["board-game", "individual"],
+    tags: ["board-game"],
     cover: "res/ShanLinPortfolio-Final-11.png",
     selected: true,
 
@@ -86,8 +86,7 @@ window.WORKS = [
     ],
     credits: [
       { label: "Date", value: "August 2023" },
-      { label: "Role", value: "Game Designer, Game Artist" },
-      { label: "Team", value: "Individual" }
+      { label: "Role", value: "Game Designer, Game Artist" }
     ]
   },
 

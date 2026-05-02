@@ -9,15 +9,15 @@
 
   <!-- Favicon -->
   <link rel="icon" href="res/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16x16.png" />
 
   <!-- Main styles -->
   <link rel="stylesheet" href="main.css" />
 </head>
 
 
-<body>
+<body class="page-home">
 
   <header class="site-header">
     <div class="header-inner">
@@ -25,39 +25,37 @@
         <a class="brand" href="index.html">Shan Lin</a>
       </div>
       <nav class="nav">
-        <a href="index.html">Home</a>
+        <a class="is-active" href="index.html" aria-current="page">Home</a>
         <a href="all.html">All Works</a>
-        <a href="https://drive.google.com/file/d/1IiCNMD90t-xih-ladHy1YFBbOvMARCiX/view?usp=drive_link" target="_blank"
-          rel="noopener">
-          Resume
-        </a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
       </nav>
 
     </div>
   </header>
 
-  <main class="container">
+  <main class="container home-main">
 
-    <section class="intro intro-split">
+    <section class="intro intro-split home-hero">
       <div class="intro-left">
         <h1>
           Game Designer & Creator
         </h1>
 
         <p>
-          Shan is a designer and artist working with games and interactive systems, 
-          with a particular interest in level design and spatial storytelling. 
-          Based in Los Angeles and open to working globally, 
-          her work explores how environments, pacing, and subtle interactions shape emotional experience.
+          Shan is a designer and artist working across <span class="text-keyword">games</span> and
+          <span class="text-keyword">interactive systems</span>, with a particular interest in
+          <span class="text-keyword">level design</span>, <span class="text-keyword">spatial storytelling</span>,
+          and the emotional texture of intimate play.
         </p>
 
-        <p>
-         She is drawn to private, intimate forms of media, 
-         where small-scale mechanics and carefully composed spaces invite attention 
-         and reflection. With growing interests in 3D modeling and environment design, 
-         she approaches games as aesthetic structures, 
-         treating space not just as a container for play, but as a medium in itself.
+        <p class="intro-note">
+          Based in <span class="text-keyword">Los Angeles</span> and open to working globally.
         </p>
+
+        <div class="intro-actions">
+          <a class="intro-action" href="about.html">About Me</a>
+        </div>
       </div>
 
      <div class="intro-right">
@@ -72,7 +70,7 @@
   </div>
 
   <div class="profile-links">
-    <a href="mailto:shanlin@usc.edu">email</a>
+    <a href="mailto:shanlin.play@gmail.com">email</a>
     <a href="https://www.linkedin.com/in/shan-lin-rotasy/" target="_blank">linkedin</a>
     <a href="https://rotasy2niaa.itch.io" target="_blank">itch.io</a>
   </div>
@@ -81,7 +79,7 @@
     </section>
 
 
-    <section class="works">
+    <section class="works works-selected">
       <h2>Selected Works</h2>
 
       <!-- Rendered dynamically -->
