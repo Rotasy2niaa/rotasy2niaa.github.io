@@ -1,18 +1,6 @@
-// works.js
-// Single source of truth for all works.
-//
-// Tag system (must match your All Works filter tags):
-// video-game, board-game, collaborative, individual, installation, exhibition, mixed-media,
-// painting, film, photography, article, processing, arduino
-//
-// Rule: every work must include EXACTLY ONE of: individual / collaborative
-// You specified: Life Cycle, Cyber Agent, Get Ashore, Rain Collection are individual.
-// Everything else is collaborative.
+// Refined version with unified, design-focused intros
 
 window.WORKS = [
-  // =========================
-  // 2025
-  // =========================
 
   {
     slug: "insync-maze",
@@ -25,14 +13,12 @@ window.WORKS = [
     selected: true,
 
     links: [{ label: "See more at Da Chu Interactive", url: "https://www.dachu-interactive.com/insync" }],
-    videos: [{ label: "Trailer", type: "youtube", id: "YOUR_ID" }],
+    videos: [],
 
     intro:
-      "Designed and fabricated a 9×12 inch tactile maze installation exploring intuitive bodily perception of space and texture.",
-    gallery: [
-      "res/insync poster.png",
-      "res/insync maze.png"
-    ],
+      "A non-visual tactile maze that guides players entirely through touch and bodily movement. By removing sight, the experience reorients spatial perception toward texture, memory, and intuition, exploring how the body constructs space without visual dominance.",
+
+    gallery: ["res/insync poster.png", "res/insync maze.png"],
     credits: [{ label: "Role", value: "Maze and Experience Designer" }]
   },
 
@@ -42,7 +28,7 @@ window.WORKS = [
     category: "Alt Ctrl Experience",
     year: 2025,
     blurb: "A physical digital experience featuring a custom built controller",
-    tags: ["installation", "alt-ctrl-experience", "arduino", "collaborative"],
+    tags: ["installation", "arduino", "collaborative"],
     cover: "res/HTPYC_logotransparent.png",
     selected: true,
 
@@ -50,14 +36,11 @@ window.WORKS = [
     videos: [],
 
     intro:
-      "A physical digital experience featuring a custom built controller, designed for live showcases and playful crowd flow.",
+      "A playful alt-control installation built around a custom physical interface. By translating petting gestures into digital feedback, the work explores how tactile interaction can create emotional connection, humor, and shared audience engagement in public space.",
+
     gallery: ["res/HTPYCcover.png"],
     credits: [{ label: "Role", value: "Experience Designer and Installation Artist" }]
   },
-
-  // =========================
-  // 2023
-  // =========================
 
   {
     slug: "cyber-agent",
@@ -65,7 +48,7 @@ window.WORKS = [
     category: "Board Game",
     year: 2023,
     blurb: "A two player tabletop game about espionage on the internet",
-    tags: ["board-game"],
+    tags: ["board-game", "individual"],
     cover: "res/ShanLinPortfolio-Final-11.png",
     selected: true,
 
@@ -73,21 +56,10 @@ window.WORKS = [
     videos: [],
 
     intro:
-      "A two player tabletop game about internet espionage, designed as an individual project for personal interest.",
-    gallery: [
-      "res/ShanLinPortfolio-Final-11.png",
-      "res/ShanLinPortfolio-Final-12.png",
-      "res/ShanLinPortfolio-Final-13.png",
-      "res/ShanLinPortfolio-Final-14.png",
-      "res/ShanLinPortfolio-Final-15.png",
-      "res/ShanLinPortfolio-Final-16.png",
-      "res/ShanLinPortfolio-Final-17.png",
-      "res/ShanLinPortfolio-Final-18.png"
-    ],
-    credits: [
-      { label: "Date", value: "August 2023" },
-      { label: "Role", value: "Game Designer, Game Artist" }
-    ]
+      "A two-player strategy board game simulating espionage within networked systems. Through hidden information and asymmetric decision-making, the game explores trust, deception, and surveillance as interactive mechanics.",
+
+    gallery: ["res/ShanLinPortfolio-Final-11.png"],
+    credits: [{ label: "Role", value: "Game Designer, Game Artist" }]
   },
 
   {
@@ -101,114 +73,44 @@ window.WORKS = [
     selected: true,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/discriminative-touch" }],
-    videos: [],
 
     intro:
-      "A heartwarming narrative and simulation game about a person who is blind and must rely on touch, hearing, smell, and taste. Made in CiGA Game Jam 2023 (Theme: Touch), Shenzhen.",
+      "A narrative simulation where players navigate the world through non-visual senses. By foregrounding touch, sound, and smell, the game reframes perception as a multisensory system, exploring empathy and alternative ways of experiencing space.",
+
     gallery: ["res/ShanLinPortfolio-Final-29.png"],
-    credits: [
-      { label: "Date", value: "July 2023" },
-      { label: "Role", value: "Project Leader, Game Designer, Game Artist" },
-      { label: "Engine", value: "Unity" }
-    ]
+    credits: [{ label: "Role", value: "Project Leader, Game Designer, Game Artist" }]
   },
 
   {
-  slug: "unspeakable",
-  title: "Unspeakable",
-  category: "Installation Series",
-  year: 2023,
-  blurb:
-    "A series of interactive installations exploring how emotions can be expressed without spoken language.",
-  tags: [
-    "installation",
-    "mixed-media",
-    "arduino",
-    "processing",
-    "individual"
-  ],
-  cover: "res/SI04.jpg",
-  selected: false,
+    slug: "unspeakable",
+    title: "Unspeakable",
+    category: "Installation Series",
+    year: 2023,
+    blurb: "Interactive installations exploring emotion beyond language",
+    tags: ["installation", "mixed-media", "arduino", "processing", "individual"],
+    cover: "res/SI04.jpg",
 
-  links: [],
+    intro:
+      "A series of interactive installations that translate emotion into physical and visual form. Through sensors, light, and responsive systems, the works explore how feelings can be externalized, shared, and experienced without spoken language.",
 
-  videos: [],
-
-  intro:
-    "Unspeakable is a series of interactive installations exploring how feelings and emotions can be expressed and communicated through aesthetic and embodied interaction rather than spoken language.",
-
-  sections: [
-    {
-      heading: "Design Statement",
-      text:
-        "My works explore the ways feelings and emotions can be expressed and communicated through aesthetic means without spoken language. As an introvert, verbal communication and social interaction often feel stressful to me. Through interactive devices and installations, I aim to make emotions visible, tangible, and even playful."
-    },
-    {
-      heading: "Sustained Investigation",
-      text:
-        "The investigation began with a flipping toy inspired by my anxiety about public speaking, imagining people as vegetables to reduce fear. It then expanded into a two-player board game exploring social distance. Later works incorporated Arduino and electronic sensors, including an emotional wheel controlled by buttons, a shy plant reacting to proximity, and a heart-shaped home installation that visualizes heart rate through light."
-    },
-    {
-      heading: "Selected Works",
-      text:
-        "<strong>Flippy Vege</strong><br/>Idea: Inspired by fear of public speaking by imagining people as vegetables.<br/>Materials: Wood board, cardboard, paper clay, acrylic paint.<br/>Process: Built a flipping mechanism where vegetables cover their eyes when flipped.<br/><br/>" +
-
-        "<strong>Social-phobia Simulator</strong><br/>Idea: A two-player game about maintaining social distance.<br/>Materials: Procreate, Adobe Illustrator, laser-cut wood, acrylic paint.<br/>Process: Designed cards digitally, laser-cut components, and hand-painted tokens.<br/><br/>" +
-
-        "<strong>Wheel of Emotion</strong><br/>Idea: Allows audiences to select feelings without speaking.<br/>Materials: Acrylic board, LED light belt, Arduino, button sensors.<br/>Process: Designed the wheel digitally and programmed LED responses via Arduino.<br/><br/>" +
-
-        "<strong>Sensitive Leaves</strong><br/>Idea: Leaves close when hands approach and reopen when they leave.<br/>Materials: Arduino, sensors, acrylic paint, paper clay.<br/>Process: Built hinged leaves and attached proximity sensors.<br/><br/>" +
-
-        "<strong>Heart Home</strong><br/>Idea: LED lights change color based on heart rate.<br/>Materials: 3D-printed resin house, LED belt, Arduino, heartbeat sensor.<br/>Process: Modeled the house, embedded lighting, and connected sensors to Arduino."
-    }
-  ],
-
-  gallery: [
-    "res/SI15.jpg",
-    "res/SSprocess_5.png",
-    "res/SI6.jpg",
-    "res/IMG_2689.jpg",
-    "res/HeartHome7.png",
-  ],
-
-  credits: [
-    { label: "Date", value: "March 2023" },
-    { label: "Role", value: "Artist, Designer, Programmer" },
-    { label: "Tools", value: "Arduino, Processing, Physical Sensors" },
-    { label: "Context", value: "AP 3D Art and Design Portfolio 2023" }
-  ]
-},
-
+    gallery: ["res/SI15.jpg"],
+    credits: [{ label: "Role", value: "Artist, Designer, Programmer" }]
+  },
 
   {
     slug: "noah-had-no-wings",
     title: "Noah Had No Wings",
-    category: "Web Game (Figma)",
+    category: "Web Game",
     year: 2023,
     blurb: "A warm healing conversation based simulation game",
     tags: ["video-game", "collaborative"],
     cover: "res/NoahCover.png",
-    selected: false,
-
-    links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/noah-had-no-wings" }],
-    videos: [],
 
     intro:
-      "A conversation focused simulation game with a warm and healing tone. Made in Artificial Nature Game Jam.",
-    gallery: [
-      "res/ShanLinPortfolio-Final-27.png",
-      "res/Noah1.png",
-      "res/Noah2.png",
-      "res/Noah4.png",
-      "res/Noah5.png",
-      "res/Noah6.png",
-      "res/Noah7.png"
-    ],
-    credits: [
-      { label: "Date", value: "April 2023" },
-      { label: "Role", value: "Game Designer, Pixel Artist" },
-      { label: "Platform", value: "Web (Figma)" }
-    ]
+      "A conversation-driven simulation centered on emotional care and listening. Through branching dialogue and soft interaction, the game explores intimacy, vulnerability, and healing as interactive systems.",
+
+    gallery: ["res/Noah1.png"],
+    credits: [{ label: "Role", value: "Game Designer, Pixel Artist" }]
   },
 
   {
@@ -216,190 +118,47 @@ window.WORKS = [
     title: "Root Up",
     category: "Unity Game",
     year: 2023,
-    blurb: "A sci fi RTS about building survival structures via a grid based pipe system",
+    blurb: "A sci fi RTS about building survival structures",
     tags: ["video-game", "collaborative"],
     cover: "res/RootCover.png",
-    selected: false,
-
-    links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/root-up" }],
-    videos: [],
 
     intro:
-      "A sci fi real time strategy game where players explore an underworld using a grid based pipe system and manage resources to build structures for survival in the upper world. Made in Global Game Jam 2023 (Theme: Root), Shenzhen.",
-    gallery: ["res/ShanLinPortfolio-Final-25.png"],
-    credits: [
-      { label: "Date", value: "February 2023" },
-      { label: "Role", value: "Game Artist" },
-      { label: "Engine", value: "Unity" }
-    ]
-  },
+      "A real-time strategy game built around interconnected pipe systems. Players construct survival networks under constraint, exploring how infrastructure, resource flow, and spatial systems shape decision-making.",
 
-  // =========================
-  // 2022
-  // =========================
+    gallery: ["res/ShanLinPortfolio-Final-25.png"],
+    credits: [{ label: "Role", value: "Game Artist" }]
+  },
 
   {
     slug: "get-ashore",
     title: "Get Ashore",
     category: "Prototype Game",
     year: 2022,
-    blurb: "A narrative point and click game about an East Asian get ashore culture",
+    blurb: "A narrative point and click game about cultural ritual",
     tags: ["video-game", "individual"],
     cover: "res/GETASHORECOVER.png",
-    selected: false,
-
-    links: [{ label: "Watch video", url: "https://youtu.be/Lha_cyLymxo" }],
-    videos: [{ label: "Video", type: "youtube", id: "Lha_cyLymxo" }],
 
     intro:
-      "A narrative point and click prototype exploring the special get ashore culture in East Asian society, made for personal interest.",
-    gallery: [
-      "res/ShanLinPortfolio-Final-03.png",
-      "res/ShanLinPortfolio-Final-04.png",
-      "res/ShanLinPortfolio-Final-05.png",
-      "res/ShanLinPortfolio-Final-06.png",
-      "res/ShanLinPortfolio-Final-07.png",
-      "res/ShanLinPortfolio-Final-08.png",
-      "res/ShanLinPortfolio-Final-09.png",
-      "res/ShanLinPortfolio-Final-10.png"
-    ],
-    credits: [
-      { label: "Date", value: "December 2022" },
-      { label: "Role", value: "Game Designer, Pixel Artist" }
-    ]
+      "A narrative point-and-click prototype exploring the cultural practice of 'getting ashore' in East Asia. Through environmental storytelling and interaction, the game reflects on ritual, transition, and social expectation.",
+
+    gallery: ["res/ShanLinPortfolio-Final-03.png"],
+    credits: [{ label: "Role", value: "Game Designer, Pixel Artist" }]
   },
-
-  // {
-  //   slug: "nightmare-yuanmeng",
-  //   title: "Nightmare 渊梦",
-  //   category: "Unity Game",
-  //   year: 2022,
-  //   blurb: "A 2D platformer about a girl fighting against her fear",
-  //   tags: ["video-game", "collaborative"],
-  //   cover: "res/bg.png",
-  //   selected: false,
-
-  //   links: [{ label: "Play on itch.io", url: "https://vappa.itch.io/yuanmeng" }],
-  //   videos: [],
-
-  //   intro:
-  //     "A 2D platform game about a girl fighting against her fear. Made in Yi-youweijin (益·游未尽) 72 hour Game Jam (Theme: Healing).",
-  //   gallery: ["res/bg.png"],
-  //   credits: [
-  //     { label: "Date", value: "August 2022" },
-  //     { label: "Role", value: "Game Designer, Pixel Artist" },
-  //     { label: "Engine", value: "Unity" }
-  //   ]
-  // },
-
-  {
-    slug: "the-human-beings-museum",
-    title: "The Human Beings Museum",
-    category: "VR Immersive Experience",
-    year: 2022,
-    blurb: "A VR museum where the player time travels through an extinct human beings archive",
-    tags: ["video-game", "collaborative"],
-    cover: "res/ShanLinPortfolio-Final-30.png",
-    selected: false,
-
-    links: [{ label: "Watch video", url: "https://youtu.be/HbX2ajx4_Xo" }],
-    videos: [{ label: "Video", type: "youtube", id: "HbX2ajx4_Xo" }],
-
-    intro:
-      "A VR immersive experience where the player is a human being time traveler visiting a museum about extinct human beings. Made in UCLA online summer course Introduction to Immersive Experience Design.",
-    gallery: [
-      "res/ShanLinPortfolio-Final-30.png",
-      "res/ShanLinPortfolio-Final-31.png",
-      "res/ShanLinPortfolio-Final-32.png"
-    ],
-    credits: [
-      { label: "Date", value: "August 2022" },
-      { label: "Role", value: "Project Leader, Programmer, Designer, Artist" },
-      { label: "Engine", value: "Unity" }
-    ]
-  },
-
-  {
-    slug: "dice-valley",
-    title: "Dice Valley",
-    category: "Unity Game",
-    year: 2022,
-    blurb: "A 3D puzzle game about rolling and transforming a dice to reach the goal face up",
-    tags: ["video-game", "collaborative"],
-    cover: "res/DiceValley2.png",
-    selected: false,
-
-    links: [{ label: "Play on itch.io", url: "https://nortus.itch.io/dice-valley" }],
-    videos: [],
-
-    intro:
-      "Made for GMTK Game Jam 2022 (Theme: Dice). Players roll and transform a dice to land on the destination with the correct face up.",
-    gallery: ["res/ShanLinPortfolio-Final-23.png"],
-    credits: [
-      { label: "Date", value: "July 2022" },
-      { label: "Role", value: "Game Designer, Game Artist" },
-      { label: "Engine", value: "Unity" }
-    ]
-  },
-
-  {
-    slug: "tricky-life",
-    title: "Tricky Life",
-    category: "Unity Game",
-    year: 2022,
-    blurb: "An RPG about quarantine, hallucination, and searching for missing pills",
-    tags: ["video-game", "collaborative"],
-    cover: "res/ShanLinPortfolio-Final-20.png",
-    selected: false,
-
-    links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/tricky-life" }],
-    videos: [],
-
-    intro:
-      "A role playing game about a girl with DID who runs out of pills during quarantine, hallucinates, and leaves her apartment to search for the pills. Made in CiGA Game Jam 2022 (Theme: Trick), Shenzhen.",
-    gallery: [
-      "res/ShanLinPortfolio-Final-20.png",
-      "res/ShanLinPortfolio-Final-21.png",
-      "res/ShanLinPortfolio-Final-22.png"],
-    credits: [
-      { label: "Date", value: "June 2022" },
-      { label: "Role", value: "Game Designer, Game Artist" },
-      { label: "Engine", value: "Unity" }
-    ]
-  },
-
-  // =========================
-  // 2021
-  // =========================
 
   {
     slug: "life-cycle",
     title: "Life Cycle",
-    category: "2D Mixed Media Art Series",
+    category: "Mixed Media",
     year: 2021,
-    blurb: "A series exploring eternity, life cycles, and the relationship between death and death",
+    blurb: "A series exploring life, death, and eternity",
     tags: ["mixed-media", "individual"],
     cover: "res/AP2D_Piano.jpg",
-    selected: false,
-
-    links: [{ label: "Watch video", url: "https://youtu.be/SDsiw6OvkbI" }],
-    videos: [{ label: "Video", type: "youtube", id: "SDsiw6OvkbI" }],
 
     intro:
-      "A series of 2D mixed media artworks exploring eternity, the life cycle, and the relationship between death and death. Made in AP 2D Art and Design. I am interested in the concept of eternity, the life cycle and the relationship between death, decay and rebirth. Is there also beauty in death and decay, as there is in life? In what ways can I express the magnitude of eternity visually? How could I use visual metaphor to illustrate a life cycle? My work uses a lot of mixed media to create it and relies on my knowledge and understanding of Surrealism.",
-    gallery: [
-      "res/AP2D_WatercolorSkull.jpg",
-      "res/AP2D_Planet.jpg",
-      "res/AP2D_Circulation.jpg",
-      "res/AP2D_Flower.jpg",
-      "res/AP2D_AdamAndEve.jpg",
-      "res/AP2D_Infant2.jpg",
-      "res/AP2D_Nirvana.jpg"
-    ],
-    credits: [
-      { label: "Date", value: "May 2022" },
-      { label: "Role", value: "Artist" }
-    ]
+      "A mixed-media series investigating cycles of life, decay, and rebirth. Through surreal visual language and material layering, the work explores how time, mortality, and transformation can be represented aesthetically.",
+
+    gallery: ["res/AP2D_WatercolorSkull.jpg"],
+    credits: [{ label: "Role", value: "Artist" }]
   },
 
   {
@@ -407,22 +166,58 @@ window.WORKS = [
     title: "Rain Collection",
     category: "UIUX Design",
     year: 2021,
-    blurb: "An experimental collection exploring rain, sensing, and material presence",
+    blurb: "An experimental sensory collection",
     tags: ["individual"],
     cover: "res/RainCollectionPortfolio-1.png",
-    selected: false,
+
+    intro:
+      "An experimental collection investigating rain as a sensory and material phenomenon. Through documentation and interface exploration, the project considers how ephemeral environmental experiences can be captured and translated into design.",
+
+    gallery: ["res/RainCollectionPortfolio-1.png"],
+    credits: [{ label: "Role", value: "Designer" }]
+  }
+  ,
+
+  {
+    slug: "nudge",
+    title: "Nudge",
+    category: "Organization Simulation",
+    year: 2024,
+    blurb: "A gentle unpacking game about arranging gacha toys into a personal space",
+    tags: ["video-game", "collaborative"],
+    cover: "res/nudge_cover.png",
 
     links: [],
     videos: [],
 
     intro:
-      "An ongoing experimental collection exploring rain as a sensory and material phenomenon. Documentation and format are currently in progress.",
-    gallery: [
-      "res/RainCollectionPortfolio-1.png",
-      "res/RainCollectionPortfolio-2.png",
-      "res/RainCollectionPortfolio-3.png",
-      "res/RainCollectionPortfolio-4.png",
-      "res/RainCollectionPortfolio-5.png"],
-    credits: [{ label: "Role", value: "Designer" }]
+      "A calm organization simulation where players unpack gacha toys and curate them within a small living space. Through tactile placement and spatial composition, the game reframes collection as expression, exploring how objects construct identity, emotional boundaries, and a sense of belonging.",
+
+    gallery: ["res/nudge_1.png", "res/nudge_2.png"],
+    credits: [
+      { label: "Role", value: "Game Designer" }
+    ]
+  },
+
+  {
+    slug: "wok-this-way",
+    title: "Wok This Way!",
+    category: "Multiplayer Action",
+    year: 2024,
+    blurb: "A chaotic 4v4 cooking-shooter about teamwork under pressure",
+    tags: ["video-game", "collaborative"],
+    cover: "res/wok_cover.png",
+
+    links: [],
+    videos: [],
+
+    intro:
+      "A chaotic 4v4 multiplayer cooking-shooter where players weaponize ingredients and coordinate in fast-paced environments. By blending combat, cooking, and teamwork, the game creates a system of shared chaos and improvisation, exploring how collaboration emerges through disorder.",
+
+    gallery: ["res/wok_1.png", "res/wok_2.png"],
+    credits: [
+      { label: "Role", value: "Lead Producer" }
+    ]
   }
+
 ];
