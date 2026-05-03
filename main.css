@@ -183,6 +183,11 @@ figure {
   justify-items: end;
 }
 
+.home-portrait {
+  width: min(100%, 420px);
+  height: auto;
+}
+
 .float-frame,
 .filters-shell .tag-row,
 .detail-panel,
@@ -317,6 +322,23 @@ figure {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.work-media-placeholder {
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  background:
+    linear-gradient(135deg, rgba(241, 208, 186, 0.95), rgba(228, 236, 210, 0.92));
+  text-align: center;
+}
+
+.work-media-placeholder span {
+  max-width: 12ch;
+  color: var(--c-text);
+  font-family: var(--font-pixel);
+  font-size: 0.92rem;
+  line-height: 1.35;
 }
 
 .work-copy {
@@ -884,6 +906,10 @@ figure {
 
   .intro-right {
     justify-items: start;
+  }
+
+  .home-portrait {
+    width: min(100%, 420px);
   }
 
   .profile-links {

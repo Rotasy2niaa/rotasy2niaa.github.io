@@ -1,22 +1,39 @@
-const META_ONLY_TAGS = new Set(["individual", "collaborative"]);
-
 function normalizeTagValue(value) {
   return (value || "").trim().toLowerCase();
 }
 
 function getFilterableTags(tags) {
-  return (tags || []).filter(tag => !META_ONLY_TAGS.has(normalizeTagValue(tag)));
+  return (tags || []).filter(tag => normalizeTagValue(tag));
 }
 
-function getProjectStatus(tags) {
+function getProjectStatus(collaboration) {
+  const normalized = normalizeTagValue(collaboration);
+  if (normalized === "individual") return "solo";
+  if (normalized === "solo" || normalized === "collaborative") return normalized;
 
   return "";
+}
+
+function buildWorkMedia(work) {
+  if (work.cover) {
+    return `
+      <div class="work-media">
+        <img src="${work.cover}" alt="${work.title} cover" loading="lazy" />
+      </div>
+    `;
+  }
+
+  return `
+    <div class="work-media work-media-placeholder" aria-hidden="true">
+      <span>${work.title}</span>
+    </div>
+  `;
 }
 
 function buildWorkCard(work) {
   const a = document.createElement("a");
   const filterableTags = getFilterableTags(work.tags || []);
-  const projectStatus = getProjectStatus(work.tags || []);
+  const projectStatus = getProjectStatus(work.collaboration);
 
   a.className = "work-card";
   a.href = `work.html?slug=${encodeURIComponent(work.slug)}`;
@@ -24,9 +41,7 @@ function buildWorkCard(work) {
   a.dataset.tags = JSON.stringify(filterableTags);
 
   a.innerHTML = `
-    <div class="work-media">
-      <img src="${work.cover}" alt="${work.title} cover" loading="lazy" />
-    </div>
+    ${buildWorkMedia(work)}
     <div class="work-copy">
       <div class="work-title">${work.title}</div>
       <div class="work-sub">
@@ -227,9 +242,11 @@ function renderWorkDetail() {
     return;
   }
 
+  const projectStatus = getProjectStatus(work.collaboration);
   const metaLine = `
     <span class="work-meta-boxed">${work.category}</span>
     <span class="work-meta-boxed">${work.year}</span>
+    ${projectStatus ? `<span class="work-meta-boxed">${projectStatus}</span>` : ""}
   `;
 
   container.innerHTML = `
