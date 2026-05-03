@@ -2,11 +2,7 @@
 
 window.WORKS = [
 
-  // TODO: Add Nightmare 渊梦 if you want it in the portfolio later.
-  // Link reminder: https://vappa.itch.io/yuanmeng
-
-  // 2026
-  {
+   {
     slug: "nudge",
     title: "Nudge",
     category: "Organization Simulation",
@@ -14,10 +10,9 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A gentle unpacking game about arranging gacha toys into a personal space",
     tags: ["video-game"],
-    cover: "res/nudge_cover.png",
-    // Missing local assets: res/nudge_cover.png, res/nudge_1.png, res/nudge_2.png
+    cover: "res/Nudge/Main Capsule 1232x706.jpg",
 
-    links: [],
+    links: [{ label: "View on Steam", url: "https://store.steampowered.com/app/4516490/nudge/" }],
     videos: [],
 
     intro:
@@ -25,7 +20,7 @@ window.WORKS = [
 
     gallery: ["res/nudge_1.png", "res/nudge_2.png"],
     credits: [
-      { label: "Role", value: "Game Designer" }
+      { label: "Role", value: "System Designer, Level Designer" }
     ]
   },
 
@@ -37,22 +32,32 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A chaotic 4v4 cooking-shooter about teamwork under pressure",
     tags: ["video-game"],
-    cover: "res/wok_cover.png",
-    // Missing local assets: res/wok_cover.png, res/wok_1.png, res/wok_2.png
+    cover: "res/wok-this-way/header capsule.png",
+    shellClass: "work-theme-wok",
 
-    links: [],
+    links: [{ label: "View on Steam", url: "https://store.steampowered.com/app/4333580/Wok_This_Way/" }],
     videos: [],
 
     intro:
       "A chaotic 4v4 multiplayer cooking-shooter where players weaponize ingredients and coordinate in fast-paced environments. By blending combat, cooking, and teamwork, the game creates a system of shared chaos and improvisation, exploring how collaboration emerges through disorder.",
 
-    gallery: ["res/wok_1.png", "res/wok_2.png"],
+    gallery: [
+      "res/wok-this-way/header capsule.png",
+      "res/wok-this-way/Logo_graphic.png"
+    ],
+    ambientItems: [
+      { src: "res/wok-this-way/snack1 (1).png", side: "left", x: "18px", size: "64px", duration: "14s", delay: "-2s", drift: "26px", rotateStart: "-10deg", rotateEnd: "210deg", opacity: "0.92" },
+      { src: "res/wok-this-way/snack2 (1).png", side: "left", x: "54px", size: "58px", duration: "17s", delay: "-7s", drift: "-18px", rotateStart: "6deg", rotateEnd: "188deg", opacity: "0.88" },
+      { src: "res/wok-this-way/snack3 (1).png", side: "left", x: "30px", size: "72px", duration: "18s", delay: "-11s", drift: "14px", rotateStart: "-4deg", rotateEnd: "230deg", opacity: "0.86" },
+      { src: "res/wok-this-way/snack8 (1).png", side: "right", x: "20px", size: "66px", duration: "15s", delay: "-4s", drift: "-24px", rotateStart: "8deg", rotateEnd: "-200deg", opacity: "0.92" },
+      { src: "res/wok-this-way/snack9 (1).png", side: "right", x: "58px", size: "74px", duration: "19s", delay: "-9s", drift: "20px", rotateStart: "-6deg", rotateEnd: "-240deg", opacity: "0.84" },
+      { src: "res/wok-this-way/snack1 (1).png", side: "right", x: "34px", size: "54px", duration: "16s", delay: "-13s", drift: "-12px", rotateStart: "10deg", rotateEnd: "-185deg", opacity: "0.82" }
+    ],
     credits: [
       { label: "Role", value: "Lead Producer" }
     ]
   },
 
-  // 2025
   {
     slug: "insync-maze",
     title: "InSync",
@@ -60,7 +65,7 @@ window.WORKS = [
     year: 2025,
     collaboration: "collaborative",
     blurb: "A non visual multisensory tactile maze guided entirely by touch",
-    tags: ["installation"],
+    tags: ["alt-control","installation"],
     cover: "res/InSync/insyncposter.jpg",
     selected: true,
 
@@ -70,12 +75,7 @@ window.WORKS = [
     intro:
       "A non-visual tactile maze that guides players entirely through touch and bodily movement. By removing sight, the experience reorients spatial perception toward texture, memory, and intuition, exploring how the body constructs space without visual dominance.",
 
-    gallery: [
-      "res/InSync/insyncposter.jpg",
-      "res/InSync/insync poster.png",
-      "res/InSync/InSync01.png",
-      "res/InSync/insync_layout.png"
-    ],
+    gallery: ["res/InSync/insync poster.png", "res/InSync/InSync01.png"],
     credits: [{ label: "Role", value: "Maze and Experience Designer" }]
   },
 
@@ -96,11 +96,7 @@ window.WORKS = [
     intro:
       "A playful alt-control installation built around a custom physical interface. By translating petting gestures into digital feedback, the work explores how tactile interaction can create emotional connection, humor, and shared audience engagement in public space.",
 
-    gallery: [
-      "res/How To Pet Your Cat/HTPYC_logotransparent.png",
-      "res/How To Pet Your Cat/HTPYCcover.png",
-      "res/How To Pet Your Cat/HTPYCGrey.png"
-    ],
+    gallery: ["res/How To Pet Your Cat/HTPYCcover.png"],
     credits: [{ label: "Role", value: "Experience Designer and Installation Artist" }]
   },
 
@@ -126,43 +122,8 @@ window.WORKS = [
     ]
   },
 
-  {
-    slug: "meow-alone",
-    title: "Meow Alone",
-    category: "PICO-8 Game",
-    year: 2025,
-    collaboration: "solo",
-    blurb: "Are you a well behaved cat?",
-    tags: ["video-game"],
-    // Missing local cover and gallery assets.
+ 
 
-    links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/meow-alone" }],
-    videos: [],
-
-    intro:
-      "A small PICO-8 game about being a cat at home. Simple movement and interaction turn everyday domestic space into a playful character study built around curiosity, affection, and mischief.",
-
-    gallery: []
-  },
-
-  // 2024
-  {
-    slug: "ghost-cat",
-    title: "Ghost Cat",
-    category: "Puzzle Game",
-    year: 2024,
-    collaboration: "solo",
-    blurb: "CiGA Game Jam 2024.",
-    tags: ["video-game"],
-    // Missing local cover, intro details, and gallery assets.
-
-    links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/ghost-cat" }],
-    videos: [],
-
-    gallery: []
-  },
-
-  // 2023
   {
     slug: "cyber-agent",
     title: "Cyber Agent",
@@ -173,7 +134,6 @@ window.WORKS = [
     tags: ["board-game"],
     cover: "res/Cyber Agent/ShanLinPortfolio-Final-11.png",
     selected: true,
-    // Missing external project link.
 
     links: [],
     videos: [],
@@ -197,12 +157,12 @@ window.WORKS = [
   {
     slug: "discriminative-touch",
     title: "Discriminative Touch",
-    category: "Unity Game",
+    category: "Point and Click Game",
     year: 2023,
     collaboration: "collaborative",
     blurb: "A narrative simulation about blindness and sensory perception",
     tags: ["video-game"],
-    cover: "res/Discriminative Touch/ShanLinPortfolio-Final-28.png",
+    cover: "res/Discriminative Touch/O+2V_A.png",
     selected: true,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/discriminative-touch" }],
@@ -210,10 +170,9 @@ window.WORKS = [
     intro:
       "A narrative simulation where players navigate the world through non-visual senses. By foregrounding touch, sound, and smell, the game reframes perception as a multisensory system, exploring empathy and alternative ways of experiencing space.",
 
-    gallery: [
-      "res/Discriminative Touch/ShanLinPortfolio-Final-28.png",
-      "res/Discriminative Touch/ShanLinPortfolio-Final-29.png"
-    ],
+    gallery: ["res/Discriminative Touch/ShanLinPortfolio-Final-28.png",
+
+    "res/Discriminative Touch/ShanLinPortfolio-Final-29.png", "res/Discriminative Touch/3MAQRe.png","res/Discriminative Touch/fQbK7j.png" ],
     credits: [{ label: "Role", value: "Project Leader, Game Designer, Game Artist" }]
   },
 
@@ -225,42 +184,37 @@ window.WORKS = [
     collaboration: "solo",
     blurb: "Interactive installations exploring emotion beyond language",
     tags: ["installation", "mixed-media"],
-    cover: "res/AP3D/SI04.jpg",
-    // Missing external project link.
+    cover: "res/Unspeakable/SI04.jpg",
 
     intro:
       "A series of interactive installations that translate emotion into physical and visual form. Through sensors, light, and responsive systems, the works explore how feelings can be externalized, shared, and experienced without spoken language.",
 
-    gallery: ["res/AP3D/SI15.JPG"],
+    gallery: [
+      "res/Unspeakable/SI04.jpg",
+      "res/Unspeakable/SI6.jpg",
+      "res/Unspeakable/SI8.jpg",
+      "res/Unspeakable/SI13.jpg",
+      "res/Unspeakable/SI14.jpg",
+      "res/Unspeakable/SI15.JPG"
+    ],
     credits: [{ label: "Role", value: "Artist, Designer, Programmer" }]
   },
 
   {
     slug: "noah-had-no-wings",
     title: "Noah Had No Wings",
-    category: "Web Game",
+    category: "Figma Game",
     year: 2023,
     collaboration: "collaborative",
     blurb: "A warm healing conversation based simulation game",
     tags: ["video-game"],
     cover: "res/Noah Had No Wings/NoahCover.png",
-
-    links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/noah-had-no-wings" }],
+  links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/noah-had-no-wings" }],
 
     intro:
       "A conversation-driven simulation centered on emotional care and listening. Through branching dialogue and soft interaction, the game explores intimacy, vulnerability, and healing as interactive systems.",
 
-    gallery: [
-      "res/Noah Had No Wings/NoahCover.png",
-      "res/Noah Had No Wings/ShanLinPortfolio-Final-26.png",
-      "res/Noah Had No Wings/ShanLinPortfolio-Final-27.png",
-      "res/Noah Had No Wings/Noah1.png",
-      "res/Noah Had No Wings/Noah2.png",
-      "res/Noah Had No Wings/Noah4.png",
-      "res/Noah Had No Wings/Noah5.png",
-      "res/Noah Had No Wings/Noah6.png",
-      "res/Noah Had No Wings/Noah7.png"
-    ],
+    gallery: ["res/Noah Had No Wings/Noah1.png"],
     credits: [{ label: "Role", value: "Game Designer, Pixel Artist" }]
   },
 
@@ -287,37 +241,6 @@ window.WORKS = [
     credits: [{ label: "Role", value: "Game Artist" }]
   },
 
-  // 2022
-  {
-    slug: "tricky-life",
-    title: "Tricky Life",
-    category: "Adventure Game",
-    year: 2022,
-    collaboration: "collaborative",
-    blurb: "A surreal apartment adventure shaped by lockdown life.",
-    tags: ["video-game"],
-    cover: "res/Tricky Life/TrickyLifeCover.png",
-
-    links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/tricky-life" }],
-    videos: [],
-
-    intro:
-      "When the epidemic hits, Jean Doe becomes trapped inside her small rental apartment until everyday routine and absurdity start folding into each other. The game turns confinement into a strange domestic adventure full of interaction, unease, and humor.",
-
-    gallery: [
-      "res/Tricky Life/TrickyLifeCover.png",
-      "res/Tricky Life/ShanLinPortfolio-Final-20.png",
-      "res/Tricky Life/ShanLinPortfolio-Final-21.png",
-      "res/Tricky Life/ShanLinPortfolio-Final-22.png"
-    ],
-    credits: [
-      { label: "Programming", value: "米袋" },
-      { label: "Design", value: "阿云, 东川" },
-      { label: "Design and Art", value: "二喵" },
-      { label: "Art", value: "阿虎" }
-    ]
-  },
-
   {
     slug: "get-ashore",
     title: "Get Ashore",
@@ -327,7 +250,6 @@ window.WORKS = [
     blurb: "A narrative point and click game about cultural ritual",
     tags: ["video-game"],
     cover: "res/Get Ashore/GETASHORECOVER.png",
-    // Missing external project link.
 
     intro:
       "A narrative point-and-click prototype exploring the cultural practice of 'getting ashore' in East Asia. Through environmental storytelling and interaction, the game reflects on ritual, transition, and social expectation.",
@@ -349,7 +271,6 @@ window.WORKS = [
     credits: [{ label: "Role", value: "Game Designer, Pixel Artist" }]
   },
 
-  // 2021
   {
     slug: "life-cycle",
     title: "Life Cycle",
@@ -359,7 +280,6 @@ window.WORKS = [
     blurb: "A series exploring life, death, and eternity",
     tags: ["mixed-media"],
     cover: "res/Life Cycle/AP2D_Piano.jpg",
-    // Missing external project link.
 
     intro:
       "A mixed-media series investigating cycles of life, decay, and rebirth. Through surreal visual language and material layering, the work explores how time, mortality, and transformation can be represented aesthetically.",
@@ -389,7 +309,6 @@ window.WORKS = [
     blurb: "An experimental sensory collection",
     tags: ["mixed-media"],
     cover: "res/Rain Collection/RainCollectionPortfolio-1.png",
-    // Missing external project link.
 
     intro:
       "An experimental collection investigating rain as a sensory and material phenomenon. Through documentation and interface exploration, the project considers how ephemeral environmental experiences can be captured and translated into design.",

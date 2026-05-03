@@ -117,12 +117,53 @@ function buildLinksSection(links) {
   `;
 }
 
-function buildCreditsSection(credits) {
-  if (!credits || !credits.length) return "";
+function buildAmbientDecor(work) {
+  if (!work.ambientItems || !work.ambientItems.length) return "";
+
+  return `
+    <div class="work-ambient" aria-hidden="true">
+      ${work.ambientItems
+        .map(
+          item => `
+            <img
+              class="work-ambient-item work-ambient-item-${item.side || "left"}"
+              src="${item.src}"
+              alt=""
+              loading="lazy"
+              style="
+                --ambient-x: ${item.x || "24px"};
+                --ambient-size: ${item.size || "60px"};
+                --ambient-duration: ${item.duration || "16s"};
+                --ambient-delay: ${item.delay || "0s"};
+                --ambient-drift: ${item.drift || "0px"};
+                --ambient-rotate-start: ${item.rotateStart || "0deg"};
+                --ambient-rotate-end: ${item.rotateEnd || "180deg"};
+                --ambient-opacity: ${item.opacity || "0.9"};
+              "
+            />
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function buildCreditsSection(credits, contributions) {
+  const hasCredits = credits && credits.length;
+  const hasContributions = contributions && contributions.length;
+  if (!hasCredits && !hasContributions) return "";
 
   return `
     <div class="detail-panel">
       <div class="work-credits">
+        ${hasContributions ? `
+          <div class="credit-item">
+            <div class="credit-label">Contribution</div>
+            <ul class="detail-list">
+              ${contributions.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+          </div>
+        ` : ""}
         ${credits
           .map(
             credit => `
@@ -221,6 +262,8 @@ function buildVideosSection(work) {
 function renderWorkDetail() {
   const container = document.getElementById("workDetail");
   if (!container) return;
+  container.className = "work-detail-shell";
+  container.removeAttribute("data-work-slug");
 
   const params = new URLSearchParams(window.location.search);
   const slug = params.get("slug");
@@ -242,6 +285,9 @@ function renderWorkDetail() {
     return;
   }
 
+  container.className = ["work-detail-shell", work.shellClass || ""].filter(Boolean).join(" ");
+  container.dataset.workSlug = work.slug;
+
   const projectStatus = getProjectStatus(work.collaboration);
   const metaLine = `
     <span class="work-meta-boxed">${work.category}</span>
@@ -250,6 +296,7 @@ function renderWorkDetail() {
   `;
 
   container.innerHTML = `
+    ${buildAmbientDecor(work)}
     <article class="work-detail">
       <a href="all.html" class="back-link">Back to All Works</a>
 
@@ -265,7 +312,7 @@ function renderWorkDetail() {
       ${buildGallery(work)}
       ${buildLinksSection(work.links)}
       ${buildVideosSection(work)}
-      ${buildCreditsSection(work.credits)}
+      ${buildCreditsSection(work.credits, work.contributions)}
     </article>
   `;
 }
