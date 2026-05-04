@@ -153,28 +153,37 @@ function buildCreditsSection(credits, contributions) {
   const hasContributions = contributions && contributions.length;
   if (!hasCredits && !hasContributions) return "";
 
-  return `
-    <div class="detail-panel">
-      <div class="work-credits">
-        ${hasContributions ? `
+  const boxes = [];
+
+  if (hasContributions) {
+    boxes.push(`
+      <section class="detail-panel detail-meta-panel detail-panel-wide">
+        <div class="credit-item">
+          <div class="credit-label">Contribution</div>
+          <ul class="detail-list">
+            ${contributions.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>
+      </section>
+    `);
+  }
+
+  if (hasCredits) {
+    credits.forEach(credit => {
+      boxes.push(`
+        <section class="detail-panel detail-meta-panel">
           <div class="credit-item">
-            <div class="credit-label">Contribution</div>
-            <ul class="detail-list">
-              ${contributions.map(item => `<li>${item}</li>`).join("")}
-            </ul>
+            <div class="credit-label">${credit.label}</div>
+            <div class="credit-value">${credit.value}</div>
           </div>
-        ` : ""}
-        ${credits
-          .map(
-            credit => `
-              <div class="credit-item">
-                <div class="credit-label">${credit.label}</div>
-                <div class="credit-value">${credit.value}</div>
-              </div>
-            `
-          )
-          .join("")}
-      </div>
+        </section>
+      `);
+    });
+  }
+
+  return `
+    <div class="detail-meta-grid">
+      ${boxes.join("")}
     </div>
   `;
 }
@@ -245,6 +254,23 @@ function buildVideosSection(work) {
                       allow="autoplay; fullscreen; picture-in-picture"
                       allowfullscreen>
                     </iframe>
+                  </div>
+                  ${video.label ? `<div class="video-caption">${video.label}</div>` : ""}
+                </div>
+              `;
+            }
+
+            if (video.type === "local") {
+              return `
+                <div class="video-card">
+                  <div class="video-embed">
+                    <video
+                      src="${video.src}"
+                      title="${video.label || work.title}"
+                      controls
+                      preload="metadata"
+                      playsinline>
+                    </video>
                   </div>
                   ${video.label ? `<div class="video-caption">${video.label}</div>` : ""}
                 </div>
