@@ -194,6 +194,43 @@ window.WORKS = [
   },
 
   {
+    slug: "self-portraits",
+    title: "Self Portraits",
+    category: "Photography",
+    year: 2024,
+    collaboration: "solo",
+    blurb: "A self-portrait series moving between staged softness and unease",
+    tags: ["photography"],
+    cover: "res/self-portraits/SelfA1.jpg",
+
+    links: [],
+    videos: [],
+
+    intro:
+      "A self-portrait photography series that uses styling, props, color, and fragmentation to explore vulnerability, performance, and the unstable relationship between the body and self-image.",
+
+    gallery: [
+      "res/self-portraits/SelfA1.jpg",
+      "res/self-portraits/SelfA2.jpg",
+      "res/self-portraits/SelfA3.jpg",
+      "res/self-portraits/SelfA4.jpg",
+      "res/self-portraits/SelfA5.jpg",
+      "res/self-portraits/SelfA6.jpg",
+      "res/self-portraits/SelfA7.jpg",
+      "res/self-portraits/SelfA8.jpg",
+      "res/self-portraits/SelfC1.jpg",
+      "res/self-portraits/SelfC2.jpg",
+      "res/self-portraits/SelfC3.jpg",
+      "res/self-portraits/SelfC4.jpg",
+      "res/self-portraits/SelfC5.jpg",
+      "res/self-portraits/SelfC6.jpg",
+      "res/self-portraits/SelfC7.jpg",
+      "res/self-portraits/SelfC8.jpg"
+    ],
+    credits: [{ label: "Role", value: "Photographer" }]
+  },
+
+  {
     slug: "cyber-agent",
     title: "Cyber Agent",
     category: "Board Game",
@@ -438,15 +475,21 @@ window.WORKS = [
     category: "3D Modeling",
     year: 2026,
     collaboration: "solo",
-    blurb: "Rigging studies in progress",
+    blurb: "A rigging study focused on structure, deformation, and character setup",
     tags: ["3d-modeling"],
+    cover: "res/rigging/Rig2.png",
 
     links: [],
-    videos: [],
+    videos: [
+      { type: "local", src: "res/rigging/Rig1.mp4", label: "Rig Test 1" },
+      { type: "local", src: "res/rigging/Rig3.mp4", label: "Rig Test 2" },
+      { type: "local", src: "res/rigging/Rig4.mp4", label: "Rig Test 3" }
+    ],
 
-    intro: "",
+    intro:
+      "A rigging study centered on preparing a stylized character for movement. The work focuses on structural clarity, deformation readiness, and the relationship between model topology and character setup.",
 
-    gallery: [],
+    gallery: ["res/rigging/Rig2.png"],
     credits: [{ label: "Role", value: "Rigger" }]
   },
 
