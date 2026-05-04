@@ -172,7 +172,8 @@ window.WORKS = [
       "res/meow-alone/MeowALone_cover.png",
       "res/meow-alone/MeowALone_gallery1.png",
       "res/meow-alone/MeowALone_gallery2.png"
-    ]
+    ],
+    credits: [{ label: "Role", value: "Game Designer, Developer" }]
   },
 
   {
@@ -188,7 +189,8 @@ window.WORKS = [
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/ghost-cat" }],
     videos: [],
 
-    gallery: ["res/ghost-cat/6U2mCu.png"]
+    gallery: ["res/ghost-cat/6U2mCu.png"],
+    credits: [{ label: "Role", value: "Game Designer" }]
   },
 
   {
@@ -364,6 +366,7 @@ window.WORKS = [
       "res/tricky-life/ShanLinPortfolio-Final-22.png"
     ],
     credits: [
+      { label: "Role", value: "Game Designer, Game Artist" },
       { label: "Programming", value: "米袋" },
       { label: "Design", value: "阿云, 东川" },
       { label: "Design and Art", value: "二喵" },
@@ -444,7 +447,7 @@ window.WORKS = [
     intro: "",
 
     gallery: [],
-    credits: []
+    credits: [{ label: "Role", value: "Rigger" }]
   },
 
   {
