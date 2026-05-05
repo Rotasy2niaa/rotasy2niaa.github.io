@@ -14,34 +14,67 @@ function getProjectStatus(collaboration) {
   return "";
 }
 
-function buildWorkMedia(work) {
+function buildWorkMedia(work, mediaClass = "", overlayMarkup = "") {
+  const className = ["work-media", mediaClass].filter(Boolean).join(" ");
+
   if (work.cover) {
     return `
-      <div class="work-media">
+      <div class="${className}">
         <img src="${work.cover}" alt="${work.title} cover" loading="lazy" />
+        ${overlayMarkup}
       </div>
     `;
   }
 
   return `
-    <div class="work-media work-media-placeholder" aria-hidden="true">
+    <div class="${className} work-media-placeholder" aria-hidden="true">
       <span>${work.title}</span>
     </div>
   `;
 }
 
-function buildWorkCard(work) {
+function buildIntroOverlay(introText) {
+  if (!introText) return "";
+
+  return `
+    <div class="selected-work-overlay" aria-hidden="true">
+      <div class="selected-work-label">Introduction</div>
+      <p class="selected-work-overlay-copy">${introText}</p>
+    </div>
+  `;
+}
+
+function buildWorkCard(work, options = {}) {
+  const variant = options.variant || "default";
   const a = document.createElement("a");
   const filterableTags = getFilterableTags(work.tags || []);
   const projectStatus = getProjectStatus(work.collaboration);
+  const introText = work.intro || work.blurb || "";
 
-  a.className = "work-card";
+  a.className = ["work-card", introText ? "work-card-has-overlay" : "", variant === "selected" ? "selected-work-card" : ""].filter(Boolean).join(" ");
   a.href = `work.html?slug=${encodeURIComponent(work.slug)}`;
   a.setAttribute("aria-label", work.title);
   a.dataset.tags = JSON.stringify(filterableTags);
 
+  if (variant === "selected") {
+    a.innerHTML = `
+      ${buildWorkMedia(work, "selected-work-media", buildIntroOverlay(introText))}
+      <div class="work-copy selected-work-copy">
+        <div class="work-title">${work.title}</div>
+        <div class="work-sub">
+          <span>${work.category}</span>
+          <span aria-hidden="true">/</span>
+          <span>${work.year}</span>
+        </div>
+        ${projectStatus ? `<div class="work-status">${projectStatus}</div>` : ""}
+      </div>
+    `;
+
+    return a;
+  }
+
   a.innerHTML = `
-    ${buildWorkMedia(work)}
+    ${buildWorkMedia(work, "", buildIntroOverlay(introText))}
     <div class="work-copy">
       <div class="work-title">${work.title}</div>
       <div class="work-sub">
@@ -56,19 +89,20 @@ function buildWorkCard(work) {
   return a;
 }
 
-function renderWorkList(containerId, works) {
+function renderWorkList(containerId, works, options = {}) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
+  container.classList.toggle("selected-work-grid", options.variant === "selected");
   container.innerHTML = "";
   works.forEach(work => {
-    container.appendChild(buildWorkCard(work));
+    container.appendChild(buildWorkCard(work, options));
   });
 }
 
 function renderSelected(containerId) {
   const selectedWorks = window.WORKS.filter(work => work.selected);
-  renderWorkList(containerId, selectedWorks);
+  renderWorkList(containerId, selectedWorks, { variant: "selected" });
 }
 
 function renderAll(containerId) {

@@ -10,7 +10,7 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A gentle unpacking game about arranging gacha toys into a personal space",
     tags: ["video-game"],
-    cover: "res/nudge/Main Capsule 1232x706.jpg",
+    cover: "res/Nudge/Main Capsule 1232x706.jpg",
 
     links: [{ label: "View on Steam", url: "https://store.steampowered.com/app/4516490/nudge/" }],
     videos: [],
@@ -26,10 +26,9 @@ window.WORKS = [
     ],
 
     gallery: [
-      "res/nudge/Main Capsule 1232x706.jpg",
-      "res/nudge/library capsule 920x430.jpg",
-      "res/nudge/Small Capsule 462x274.jpg",
-      "res/nudge/NUDGE-LOGO.png"
+      "res/Nudge/Main Capsule 1232x706.jpg",
+      "res/Nudge/library capsule 920x430.jpg",
+      "res/Nudge/Small Capsule 462x274.jpg"
     ],
     credits: [
       { label: "Role", value: "System Designer, Level Designer" }
@@ -293,18 +292,18 @@ window.WORKS = [
     collaboration: "solo",
     blurb: "Interactive installations exploring emotion beyond language",
     tags: ["installation", "mixed-media"],
-    cover: "res/unspeakable/SI04.jpg",
+    cover: "res/Unspeakable/SI04.jpg",
 
     intro:
       "A series of interactive installations that translate emotion into physical and visual form. Through sensors, light, and responsive systems, the works explore how feelings can be externalized, shared, and experienced without spoken language.",
 
     gallery: [
-      "res/unspeakable/SI04.jpg",
-      "res/unspeakable/SI6.jpg",
-      "res/unspeakable/SI8.jpg",
-      "res/unspeakable/SI13.jpg",
-      "res/unspeakable/SI14.jpg",
-      "res/unspeakable/SI15.JPG"
+      "res/Unspeakable/SI04.jpg",
+      "res/Unspeakable/SI6.jpg",
+      "res/Unspeakable/SI8.jpg",
+      "res/Unspeakable/SI13.jpg",
+      "res/Unspeakable/SI14.jpg",
+      "res/Unspeakable/SI15.JPG"
     ],
     credits: [{ label: "Role", value: "Artist, Designer, Programmer" }]
   },
