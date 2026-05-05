@@ -60,7 +60,10 @@
       } catch (error) {
         cardTags = [];
       }
-      const cardYear = card.querySelector(".work-sub span:last-child").textContent;
+      const cardYear =
+        card.dataset.year ||
+        card.querySelector("[data-meta-year]")?.getAttribute("data-meta-year") ||
+        "";
 
       const tagMatch =
         selectedTags.size === 0 ||

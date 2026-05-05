@@ -5,7 +5,7 @@ window.WORKS = [
    {
     slug: "nudge",
     title: "Nudge",
-    category: "Organization Simulation",
+    category: "Simulation",
     year: 2026,
     collaboration: "collaborative",
     blurb: "A gentle unpacking game about arranging gacha toys into a personal space",
@@ -38,7 +38,7 @@ window.WORKS = [
   {
     slug: "wok-this-way",
     title: "Wok This Way!",
-    category: "Multiplayer Action",
+    category: "Multiplayer Shooting",
     year: 2026,
     collaboration: "collaborative",
     blurb: "A chaotic 4v4 cooking-shooter about teamwork under pressure",

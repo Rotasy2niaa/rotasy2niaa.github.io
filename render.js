@@ -14,6 +14,54 @@ function getProjectStatus(collaboration) {
   return "";
 }
 
+function getPrimaryFilterTag(tags) {
+  const filterableTags = getFilterableTags(tags || []);
+  return filterableTags.length ? filterableTags[0] : "";
+}
+
+function getCategoryFilterUrl(work) {
+  const primaryTag = getPrimaryFilterTag(work.tags);
+  return primaryTag ? `all.html?tag=${encodeURIComponent(primaryTag)}` : "all.html";
+}
+
+function getYearFilterUrl(year) {
+  return `all.html?year=${encodeURIComponent(String(year))}`;
+}
+
+function buildMetaBadge(label, url, options = {}) {
+  const attributes = [];
+  if (options.yearValue !== undefined) {
+    attributes.push(`data-meta-year="${options.yearValue}"`);
+  }
+
+  return `
+    <span class="work-meta-boxed work-meta-linklike" role="link" tabindex="0" data-filter-url="${url}" ${attributes.join(" ")}>
+      ${label}
+    </span>
+  `;
+}
+
+function attachMetaBadgeNavigation(card) {
+  function navigateWithBadge(event) {
+    const badge = event.target.closest("[data-filter-url]");
+    if (!badge) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const destination = badge.getAttribute("data-filter-url");
+    if (destination) {
+      window.location.href = destination;
+    }
+  }
+
+  card.addEventListener("click", navigateWithBadge);
+  card.addEventListener("keydown", event => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    navigateWithBadge(event);
+  });
+}
+
 function buildWorkMedia(work, mediaClass = "", overlayMarkup = "") {
   const className = ["work-media", mediaClass].filter(Boolean).join(" ");
 
@@ -38,7 +86,6 @@ function buildIntroOverlay(introText) {
 
   return `
     <div class="selected-work-overlay" aria-hidden="true">
-      <div class="selected-work-label">Introduction</div>
       <p class="selected-work-overlay-copy">${introText}</p>
     </div>
   `;
@@ -50,26 +97,31 @@ function buildWorkCard(work, options = {}) {
   const filterableTags = getFilterableTags(work.tags || []);
   const projectStatus = getProjectStatus(work.collaboration);
   const introText = work.intro || work.blurb || "";
+  const categoryFilterUrl = getCategoryFilterUrl(work);
+  const yearFilterUrl = getYearFilterUrl(work.year);
 
   a.className = ["work-card", introText ? "work-card-has-overlay" : "", variant === "selected" ? "selected-work-card" : ""].filter(Boolean).join(" ");
   a.href = `work.html?slug=${encodeURIComponent(work.slug)}`;
   a.setAttribute("aria-label", work.title);
   a.dataset.tags = JSON.stringify(filterableTags);
+  a.dataset.year = String(work.year);
 
   if (variant === "selected") {
     a.innerHTML = `
       ${buildWorkMedia(work, "selected-work-media", buildIntroOverlay(introText))}
       <div class="work-copy selected-work-copy">
         <div class="work-title">${work.title}</div>
-        <div class="work-sub">
-          <span>${work.category}</span>
-          <span aria-hidden="true">/</span>
-          <span>${work.year}</span>
+        <div class="work-meta-row">
+          <div class="work-sub">
+            ${buildMetaBadge(work.category, categoryFilterUrl)}
+            ${buildMetaBadge(work.year, yearFilterUrl, { yearValue: work.year })}
+          </div>
+          ${projectStatus ? `<div class="work-collaboration">${projectStatus}</div>` : ""}
         </div>
-        ${projectStatus ? `<div class="work-status">${projectStatus}</div>` : ""}
       </div>
     `;
 
+    attachMetaBadgeNavigation(a);
     return a;
   }
 
@@ -77,15 +129,17 @@ function buildWorkCard(work, options = {}) {
     ${buildWorkMedia(work, "", buildIntroOverlay(introText))}
     <div class="work-copy">
       <div class="work-title">${work.title}</div>
-      <div class="work-sub">
-        <span>${work.category}</span>
-        <span aria-hidden="true">/</span>
-        <span>${work.year}</span>
+      <div class="work-meta-row">
+        <div class="work-sub">
+          ${buildMetaBadge(work.category, categoryFilterUrl)}
+          ${buildMetaBadge(work.year, yearFilterUrl, { yearValue: work.year })}
+        </div>
+        ${projectStatus ? `<div class="work-collaboration">${projectStatus}</div>` : ""}
       </div>
-      ${projectStatus ? `<div class="work-status">${projectStatus}</div>` : ""}
     </div>
   `;
 
+  attachMetaBadgeNavigation(a);
   return a;
 }
 
@@ -349,10 +403,14 @@ function renderWorkDetail() {
   container.dataset.workSlug = work.slug;
 
   const projectStatus = getProjectStatus(work.collaboration);
+  const categoryFilterUrl = getCategoryFilterUrl(work);
+  const yearFilterUrl = getYearFilterUrl(work.year);
   const metaLine = `
-    <span class="work-meta-boxed">${work.category}</span>
-    <span class="work-meta-boxed">${work.year}</span>
-    ${projectStatus ? `<span class="work-meta-boxed">${projectStatus}</span>` : ""}
+    <span class="work-sub">
+      <a class="work-meta-boxed work-meta-link" href="${categoryFilterUrl}">${work.category}</a>
+      <a class="work-meta-boxed work-meta-link" href="${yearFilterUrl}">${work.year}</a>
+    </span>
+    ${projectStatus ? `<span class="work-collaboration">${projectStatus}</span>` : ""}
   `;
 
   container.innerHTML = `

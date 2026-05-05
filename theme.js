@@ -37,11 +37,12 @@
     document.querySelectorAll(".theme-toggle").forEach(button => {
       button.dataset.theme = theme;
       button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
-      button.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
+      button.setAttribute("aria-label", `Current theme: ${theme}. Click to switch to ${nextTheme}.`);
       button.title = `Switch to ${nextTheme} theme`;
       button.innerHTML = `
-        <span class="theme-toggle-label">Theme</span>
-        <span class="theme-toggle-value">${theme === "dark" ? "Dark" : "Light"}</span>
+        <span class="theme-toggle-option theme-toggle-option-light">Light</span>
+        <span class="theme-toggle-separator">/</span>
+        <span class="theme-toggle-option theme-toggle-option-dark">Dark</span>
       `;
     });
   }

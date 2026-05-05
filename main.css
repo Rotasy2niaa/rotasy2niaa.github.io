@@ -212,16 +212,33 @@ figure {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
-.theme-toggle-label {
-  opacity: 0.7;
+.theme-toggle-option {
+  display: inline-block;
+  font-size: 0.72rem;
+  line-height: 1;
+  opacity: 0.52;
+  transition: opacity 120ms ease, font-size 120ms ease, color 120ms ease;
 }
 
-.theme-toggle-value {
-  min-width: 4.5ch;
-  text-align: left;
+.theme-toggle-separator {
+  opacity: 0.68;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.theme-toggle[data-theme="light"] .theme-toggle-option-light,
+.theme-toggle[data-theme="dark"] .theme-toggle-option-dark {
+  opacity: 1;
+  font-size: 0.82rem;
+}
+
+.theme-toggle[data-theme="light"] .theme-toggle-option-dark,
+.theme-toggle[data-theme="dark"] .theme-toggle-option-light {
+  opacity: 0.45;
+  font-size: 0.68rem;
 }
 
 .intro-split,
@@ -461,14 +478,6 @@ figure {
   pointer-events: none;
 }
 
-.selected-work-label {
-  color: var(--c-overlay-text);
-  font-family: var(--font-pixel);
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
 .selected-work-overlay-copy {
   margin: 0;
   color: var(--c-overlay-text);
@@ -542,10 +551,52 @@ figure {
   color: var(--c-muted);
 }
 
+.work-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.work-meta-row .work-sub {
+  flex: 1 1 auto;
+}
+
+.work-meta-row .work-collaboration,
+.work-meta-line .work-collaboration {
+  margin-left: auto;
+}
+
 .work-meta-boxed {
   padding: 2px 6px;
   border: 1px solid var(--c-line);
   background: var(--c-surface);
+}
+
+.work-meta-link,
+.work-meta-linklike {
+  display: inline-block;
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+
+.work-meta-linklike {
+  cursor: pointer;
+}
+
+.work-meta-link:hover,
+.work-meta-link:focus-visible,
+.work-meta-linklike:hover,
+.work-meta-linklike:focus-visible {
+  background: var(--c-pink);
+  transform: translate(-1px, -1px);
+}
+
+.work-collaboration {
+  display: inline-block;
+  width: fit-content;
+  color: var(--c-muted);
+  font-size: 0.78rem;
+  line-height: 1.2;
+  text-transform: lowercase;
 }
 
 .work-blurb {
