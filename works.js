@@ -63,12 +63,12 @@ window.WORKS = [
       "res/wok-this-way/header capsule.png"
     ],
     ambientItems: [
-      { src: "res/wok-this-way/snack1 (1).png", side: "left", x: "28px", size: "108px", duration: "14s", delay: "-2s", drift: "36px", rotateStart: "-10deg", rotateEnd: "210deg", opacity: "0.96" },
-      { src: "res/wok-this-way/snack2 (1).png", side: "left", x: "78px", size: "96px", duration: "17s", delay: "-7s", drift: "-24px", rotateStart: "6deg", rotateEnd: "188deg", opacity: "0.92" },
-      { src: "res/wok-this-way/snack3 (1).png", side: "left", x: "46px", size: "124px", duration: "18s", delay: "-11s", drift: "18px", rotateStart: "-4deg", rotateEnd: "230deg", opacity: "0.9" },
-      { src: "res/wok-this-way/snack8 (1).png", side: "right", x: "28px", size: "112px", duration: "15s", delay: "-4s", drift: "-32px", rotateStart: "8deg", rotateEnd: "-200deg", opacity: "0.96" },
-      { src: "res/wok-this-way/snack9 (1).png", side: "right", x: "80px", size: "130px", duration: "19s", delay: "-9s", drift: "24px", rotateStart: "-6deg", rotateEnd: "-240deg", opacity: "0.88" },
-      { src: "res/wok-this-way/snack1 (1).png", side: "right", x: "42px", size: "92px", duration: "16s", delay: "-13s", drift: "-18px", rotateStart: "10deg", rotateEnd: "-185deg", opacity: "0.86" }
+      { src: "res/wok-this-way/snack1 (1).png", side: "left", top: "-8vh", x: "20px", size: "92px", duration: "18s", delay: "-2s", drift: "10px", rotateStart: "-10deg", rotateEnd: "210deg", opacity: "0.94" },
+      { src: "res/wok-this-way/snack2 (1).png", side: "left", top: "-42vh", x: "168px", size: "84px", duration: "21s", delay: "-9s", drift: "-8px", rotateStart: "6deg", rotateEnd: "188deg", opacity: "0.9" },
+      { src: "res/wok-this-way/snack3 (1).png", side: "left", top: "-78vh", x: "324px", size: "106px", duration: "24s", delay: "-16s", drift: "12px", rotateStart: "-4deg", rotateEnd: "230deg", opacity: "0.88" },
+      { src: "res/wok-this-way/snack8 (1).png", side: "right", top: "-18vh", x: "18px", size: "96px", duration: "19s", delay: "-5s", drift: "-10px", rotateStart: "8deg", rotateEnd: "-200deg", opacity: "0.95" },
+      { src: "res/wok-this-way/snack9 (1).png", side: "right", top: "-54vh", x: "170px", size: "114px", duration: "22s", delay: "-12s", drift: "8px", rotateStart: "-6deg", rotateEnd: "-240deg", opacity: "0.86" },
+      { src: "res/wok-this-way/snack1 (1).png", side: "right", top: "-90vh", x: "320px", size: "82px", duration: "25s", delay: "-19s", drift: "-12px", rotateStart: "10deg", rotateEnd: "-185deg", opacity: "0.84" }
     ],
     credits: [
       { label: "Role", value: "Lead Producer" }
@@ -138,6 +138,7 @@ window.WORKS = [
     blurb: "You are just wandering at school with your skateboard and camera.",
     tags: ["video-game"],
     cover: "res/skateboarding-photographer/zgymGr.png",
+    selected: true,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/skateboarding-photographer" }],
     videos: [],
@@ -172,6 +173,7 @@ window.WORKS = [
       "res/meow-alone/MeowALone_gallery1.png",
       "res/meow-alone/MeowALone_gallery2.png"
     ],
+    galleryLayout: "two-up",
     credits: [{ label: "Role", value: "Game Designer, Developer" }]
   },
 
@@ -316,13 +318,23 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A warm healing conversation based simulation game",
     tags: ["video-game"],
-    cover: "res/noah-had-no-wings/NoahCover.png",
+    cover: "res/noah-had-no-wings/ShanLinPortfolio-Final-26.png",
+    selected: true,
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/noah-had-no-wings" }],
 
     intro:
       "A conversation-driven simulation centered on emotional care and listening. Through branching dialogue and soft interaction, the game explores intimacy, vulnerability, and healing as interactive systems.",
 
-    gallery: ["res/noah-had-no-wings/Noah1.png"],
+    gallery: [
+      "res/noah-had-no-wings/ShanLinPortfolio-Final-26.png",
+      "res/noah-had-no-wings/ShanLinPortfolio-Final-27.png",
+      "res/noah-had-no-wings/Noah1.png",
+      "res/noah-had-no-wings/Noah2.png",
+      "res/noah-had-no-wings/Noah4.png",
+      "res/noah-had-no-wings/Noah5.png",
+      "res/noah-had-no-wings/Noah6.png",
+      "res/noah-had-no-wings/Noah7.png"
+    ],
     credits: [{ label: "Role", value: "Game Designer, Pixel Artist" }]
   },
 
@@ -402,11 +414,7 @@ window.WORKS = [
       "res/tricky-life/ShanLinPortfolio-Final-22.png"
     ],
     credits: [
-      { label: "Role", value: "Game Designer, Game Artist" },
-      { label: "Programming", value: "米袋" },
-      { label: "Design", value: "阿云, 东川" },
-      { label: "Design and Art", value: "二喵" },
-      { label: "Art", value: "阿虎" }
+      { label: "Role", value: "Game Designer, Game Artist" }
     ]
   },
 

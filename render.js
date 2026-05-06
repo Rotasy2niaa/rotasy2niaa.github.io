@@ -163,40 +163,164 @@ function renderAll(containerId) {
   renderWorkList(containerId, window.WORKS);
 }
 
-function buildTagLinks(tags) {
+function buildTagLinks(tags, options = {}) {
   const filterableTags = getFilterableTags(tags);
   if (!filterableTags.length) return "";
+
+  const tagLinkClass = options.variant === "inline"
+    ? "tag-link work-meta-boxed work-meta-link work-hero-tag-link"
+    : "tag-link";
+
+  const tagLinks = filterableTags
+    .map(
+      tag => `
+        <a class="${tagLinkClass}" href="all.html?tag=${encodeURIComponent(tag)}">
+          ${tag}
+        </a>
+      `
+    )
+    .join("");
+
+  if (options.variant === "inline") {
+    return `
+      <div class="tag-row work-hero-tags">
+        ${tagLinks}
+      </div>
+    `;
+  }
 
   return `
     <div class="detail-panel">
       <div class="tag-row">
-        ${filterableTags
-          .map(
-            tag => `
-              <a class="tag-link" href="all.html?tag=${encodeURIComponent(tag)}">
-                ${tag}
-              </a>
-            `
-          )
-          .join("")}
+        ${tagLinks}
       </div>
     </div>
   `;
 }
 
-function buildLinksSection(links) {
+function buildLinksSection(work) {
+  const links = work.links;
   if (!links || !links.length) return "";
+
+  function getSteamAppId(url) {
+    const match = /store\.steampowered\.com\/app\/(\d+)/i.exec(url || "");
+    return match ? match[1] : "";
+  }
+
+  function getItchGameInfo(url) {
+    const match = /^https?:\/\/([^.]+)\.itch\.io\/([^/?#]+)/i.exec(url || "");
+    if (!match) return null;
+
+    return {
+      user: match[1],
+      game: match[2]
+    };
+  }
+
+  function getHostLabel(url) {
+    try {
+      const parsed = new URL(url);
+      return parsed.hostname.replace(/^www\./i, "");
+    } catch {
+      return "external link";
+    }
+  }
+
+  function buildLinkPreview(link) {
+    const steamAppId = getSteamAppId(link.url);
+    if (!steamAppId) return "";
+
+    return `
+      <div class="link-preview link-preview-steam">
+        <iframe
+          src="https://store.steampowered.com/widget/${steamAppId}/"
+          title="${link.label} preview"
+          loading="lazy">
+        </iframe>
+      </div>
+    `;
+  }
+
+  function buildItchPreview(link) {
+    const itchGame = getItchGameInfo(link.url);
+    if (!itchGame) return "";
+
+    const summary = work.blurb || work.intro || "";
+
+    return `
+      <div
+        class="link-preview link-preview-itch"
+        data-itch-user="${itchGame.user}"
+        data-itch-game="${itchGame.game}">
+        <div class="link-preview-itch-media">
+          ${work.cover
+            ? `<img src="${work.cover}" alt="${work.title} cover" loading="lazy" />`
+            : `<div class="link-preview-itch-placeholder">${work.title}</div>`}
+        </div>
+        <div class="link-preview-itch-shell">
+          <div class="link-preview-itch-kicker">itch.io preview</div>
+          <div class="link-preview-itch-head">
+            <div class="link-preview-itch-title">${work.title}</div>
+            <div class="link-preview-itch-price" data-itch-price hidden></div>
+          </div>
+          ${summary ? `<p class="link-preview-itch-copy">${summary}</p>` : ""}
+          <div class="link-preview-itch-meta" data-itch-meta>Open this project on itch.io.</div>
+          <div class="detail-links">
+            <button class="detail-link detail-link-button" type="button" data-itch-buy-button>
+              Open buy / download
+            </button>
+            <a class="detail-link" href="${link.url}" target="_blank" rel="noopener">
+              View on itch.io
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function buildExternalPreview(link) {
+    const summary = work.blurb || work.intro || "";
+    const hostLabel = getHostLabel(link.url);
+
+    return `
+      <div class="link-preview link-preview-external">
+        <div class="link-preview-external-media">
+          ${work.cover
+            ? `<img src="${work.cover}" alt="${work.title} cover" loading="lazy" />`
+            : `<div class="link-preview-external-placeholder">${work.title}</div>`}
+        </div>
+        <div class="link-preview-external-shell">
+          <div class="link-preview-external-kicker">${hostLabel}</div>
+          <div class="link-preview-external-head">
+            <div class="link-preview-external-title">${work.title}</div>
+          </div>
+          ${summary ? `<p class="link-preview-external-copy">${summary}</p>` : ""}
+          <div class="link-preview-external-meta">${link.label}</div>
+          <div class="detail-links">
+            <a class="detail-link" href="${link.url}" target="_blank" rel="noopener">
+              Open site
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
   return `
     <div class="detail-panel detail-section">
       <h2 class="detail-h2">Links</h2>
-      <div class="detail-links">
+      <div class="link-card-grid">
         ${links
           .map(
             link => `
-              <a class="detail-link" href="${link.url}" target="_blank" rel="noopener">
-                ${link.label}
-              </a>
+              <div class="link-card">
+                <div class="detail-links">
+                  <a class="detail-link" href="${link.url}" target="_blank" rel="noopener">
+                    ${link.label}
+                  </a>
+                </div>
+                ${buildLinkPreview(link) || buildItchPreview(link) || buildExternalPreview(link)}
+              </div>
             `
           )
           .join("")}
@@ -219,6 +343,7 @@ function buildAmbientDecor(work) {
               alt=""
               loading="lazy"
               style="
+                --ambient-top: ${item.top || "-18vh"};
                 --ambient-x: ${item.x || "24px"};
                 --ambient-size: ${item.size || "60px"};
                 --ambient-duration: ${item.duration || "16s"};
@@ -323,11 +448,15 @@ function buildGallery(work) {
   const galleryItems = work.cover
     ? work.gallery.filter(src => src !== work.cover)
     : work.gallery.slice();
+  const galleryLayoutClass = work.galleryLayout
+    ? `work-gallery-${work.galleryLayout}`
+    : "";
+  const galleryClassName = ["work-gallery", galleryLayoutClass].filter(Boolean).join(" ");
 
   if (!galleryItems.length) return "";
 
   return `
-    <div class="work-gallery">
+    <div class="${galleryClassName}">
       ${galleryItems
         .map(src => `<img src="${src}" alt="${work.title}" loading="lazy" />`)
         .join("")}
@@ -401,6 +530,83 @@ function buildVideosSection(work) {
   `;
 }
 
+let itchApiLoadPromise = null;
+
+function ensureItchApiLoaded() {
+  if (window.Itch) return Promise.resolve(window.Itch);
+  if (itchApiLoadPromise) return itchApiLoadPromise;
+
+  itchApiLoadPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://static.itch.io/api.js";
+    script.async = true;
+    script.dataset.itchApi = "true";
+    script.onload = () => resolve(window.Itch);
+    script.onerror = () => reject(new Error("Failed to load itch.io API"));
+    document.head.appendChild(script);
+  });
+
+  return itchApiLoadPromise;
+}
+
+function enhanceItchPreviews(container) {
+  const cards = Array.from(container.querySelectorAll(".link-preview-itch[data-itch-user][data-itch-game]"));
+  if (!cards.length) return;
+
+  ensureItchApiLoaded()
+    .then(Itch => {
+      if (!Itch) return;
+
+      cards.forEach(card => {
+        const { itchUser, itchGame } = card.dataset;
+        const buyButton = card.querySelector("[data-itch-buy-button]");
+        const price = card.querySelector("[data-itch-price]");
+        const meta = card.querySelector("[data-itch-meta]");
+
+        if (buyButton && Itch.attachBuyButton) {
+          Itch.attachBuyButton(buyButton, {
+            user: itchUser,
+            game: itchGame,
+            width: 720,
+            height: 480
+          });
+        }
+
+        if (!meta || !Itch.getGameData) return;
+
+        Itch.getGameData({
+          user: itchUser,
+          game: itchGame,
+          onComplete: data => {
+            if (!data) return;
+
+            if (price && data.price) {
+              price.textContent = data.price;
+              price.hidden = false;
+            }
+
+            if (!meta) return;
+
+            const metaParts = [];
+            if (data.sale && data.sale.rate && data.original_price) {
+              metaParts.push(`was ${data.original_price}`);
+              metaParts.push(`${data.sale.rate}% off`);
+            } else if (data.price) {
+              metaParts.push("Available on itch.io");
+            }
+
+            if (metaParts.length) {
+              meta.textContent = metaParts.join(" · ");
+            }
+          }
+        });
+      });
+    })
+    .catch(() => {
+      // Leave the direct itch.io link intact if the API script is blocked.
+    });
+}
+
 function renderWorkDetail() {
   const container = document.getElementById("workDetail");
   if (!container) return;
@@ -433,13 +639,7 @@ function renderWorkDetail() {
   const projectStatus = getProjectStatus(work.collaboration);
   const categoryFilterUrl = getCategoryFilterUrl(work);
   const yearFilterUrl = getYearFilterUrl(work.year);
-  const metaLine = `
-    <span class="work-sub">
-      <a class="work-meta-boxed work-meta-link" href="${categoryFilterUrl}">${work.category}</a>
-      <a class="work-meta-boxed work-meta-link" href="${yearFilterUrl}">${work.year}</a>
-    </span>
-    ${projectStatus ? `<span class="work-collaboration">${projectStatus}</span>` : ""}
-  `;
+  const heroTags = buildTagLinks(work.tags, { variant: "inline" });
 
   container.innerHTML = `
     ${buildAmbientDecor(work)}
@@ -449,18 +649,30 @@ function renderWorkDetail() {
       ${buildHeroBanner(work)}
 
       <header class="work-hero-main">
-        <p class="work-meta-line">${metaLine}</p>
+        <div class="work-hero-topline">
+          <div class="work-hero-meta-stack">
+            ${heroTags}
+            <p class="work-meta-line">
+              <span class="work-sub">
+                <a class="work-meta-boxed work-meta-link" href="${categoryFilterUrl}">${work.category}</a>
+                <a class="work-meta-boxed work-meta-link" href="${yearFilterUrl}">${work.year}</a>
+              </span>
+            </p>
+          </div>
+          ${projectStatus ? `<span class="work-collaboration">${projectStatus}</span>` : ""}
+        </div>
         <h1>${work.title}</h1>
       </header>
 
       ${buildCreditsSection(work.credits, work.contributions)}
       ${buildIntroSection(work.intro)}
-      ${buildTagLinks(work.tags)}
 
       ${work.sections && work.sections.length ? buildSections(work.sections) : ""}
       ${buildVideosSection(work)}
       ${buildGallery(work)}
-      ${buildLinksSection(work.links)}
+      ${buildLinksSection(work)}
     </article>
   `;
+
+  enhanceItchPreviews(container);
 }

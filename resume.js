@@ -26,10 +26,11 @@
   const frame = document.getElementById("resumeFrame");
   const status = document.getElementById("resumeStatus");
   const openLink = document.getElementById("resumeOpenLink");
+  const fallback = document.getElementById("resumeFallback");
   const fallbackLink = document.getElementById("resumeFallbackLink");
   const missing = document.getElementById("resumeMissing");
 
-  if (!buttons.length || !frame || !status || !openLink || !fallbackLink || !missing) return;
+  if (!buttons.length || !frame || !status || !openLink || !fallback || !fallbackLink || !missing) return;
 
   const firstAvailableKey = Object.keys(RESUME_VERSIONS).find(
     key => RESUME_VERSIONS[key].openUrl || RESUME_VERSIONS[key].embedUrl
@@ -72,12 +73,14 @@
     if (hasFile) {
       frame.hidden = false;
       frame.src = frameUrl;
+      fallback.hidden = false;
       missing.hidden = true;
       return;
     }
 
     frame.hidden = true;
     frame.removeAttribute("src");
+    fallback.hidden = true;
     missing.hidden = false;
   }
 
