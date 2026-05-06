@@ -41,7 +41,7 @@
       </div>
 
       <div class="profile-links">
-        <a id="resumeOpenLink" href="res/File/Shan%20Lin%20resume2025.pdf" target="_blank" rel="noopener">Open PDF / &#25171;&#24320; PDF</a>
+        <a id="resumeOpenLink" href="https://drive.google.com/file/d/1ywteaSgiErVN4RNzRLbX16KqsMTxPs-w/view?usp=drive_link" target="_blank" rel="noopener">Open PDF / &#25171;&#24320; PDF</a>
       </div>
     </section>
 
@@ -80,12 +80,17 @@
     <section class="detail-section resume-panel" aria-label="Resume preview">
       <div class="resume-status" id="resumeStatus">English / Designer</div>
 
-      <object class="resume-frame" id="resumeFrame" data="res/File/Shan%20Lin%20resume2025.pdf" type="application/pdf">
-        <p class="resume-fallback">
-          Your browser could not preview the PDF here.
-          <a class="detail-link" id="resumeFallbackLink" href="res/File/Shan%20Lin%20resume2025.pdf" target="_blank" rel="noopener">Open the resume PDF</a>
-        </p>
-      </object>
+      <iframe
+        class="resume-frame"
+        id="resumeFrame"
+        src="https://drive.google.com/file/d/1ywteaSgiErVN4RNzRLbX16KqsMTxPs-w/preview"
+        title="Resume preview"
+        loading="lazy">
+      </iframe>
+
+      <p class="resume-fallback">
+        If the preview does not load, <a class="detail-link" id="resumeFallbackLink" href="https://drive.google.com/file/d/1ywteaSgiErVN4RNzRLbX16KqsMTxPs-w/view?usp=drive_link" target="_blank" rel="noopener">open the resume PDF</a>.
+      </p>
 
       <div class="resume-missing" id="resumeMissing" hidden>
         <p>This version has not been added yet.</p>

@@ -677,12 +677,38 @@ figure {
   max-width: 760px;
 }
 
+.work-banner-section {
+  padding: 0;
+  overflow: hidden;
+}
+
+.work-banner-media {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  background: var(--c-media-bg);
+}
+
+.work-banner-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 #workDetail h1 {
   max-width: 10ch;
 }
 
 .work-intro {
   font-size: 1rem;
+}
+
+.work-intro-section {
+  max-width: 760px;
+}
+
+.work-intro-section .work-intro {
+  margin: 0;
 }
 
 .work-rail {

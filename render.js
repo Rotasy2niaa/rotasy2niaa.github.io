@@ -236,25 +236,34 @@ function buildAmbientDecor(work) {
   `;
 }
 
+function buildHeroBanner(work) {
+  if (!work.cover) return "";
+
+  return `
+    <section class="detail-section work-banner-section" aria-label="${work.title} cover image">
+      <div class="work-banner-media">
+        <img src="${work.cover}" alt="${work.title} cover" loading="eager" fetchpriority="high" />
+      </div>
+    </section>
+  `;
+}
+
+function buildIntroSection(introText) {
+  if (!introText) return "";
+
+  return `
+    <section class="detail-panel work-intro-section">
+      <p class="work-intro">${introText}</p>
+    </section>
+  `;
+}
+
 function buildCreditsSection(credits, contributions) {
   const hasCredits = credits && credits.length;
   const hasContributions = contributions && contributions.length;
   if (!hasCredits && !hasContributions) return "";
 
   const boxes = [];
-
-  if (hasContributions) {
-    boxes.push(`
-      <section class="detail-panel detail-meta-panel detail-panel-wide">
-        <div class="credit-item">
-          <div class="credit-label">Contribution</div>
-          <ul class="detail-list">
-            ${contributions.map(item => `<li>${item}</li>`).join("")}
-          </ul>
-        </div>
-      </section>
-    `);
-  }
 
   if (hasCredits) {
     credits.forEach(credit => {
@@ -267,6 +276,19 @@ function buildCreditsSection(credits, contributions) {
         </section>
       `);
     });
+  }
+
+  if (hasContributions) {
+    boxes.push(`
+      <section class="detail-panel detail-meta-panel detail-panel-wide">
+        <div class="credit-item">
+          <div class="credit-label">Contribution</div>
+          <ul class="detail-list">
+            ${contributions.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>
+      </section>
+    `);
   }
 
   return `
@@ -298,9 +320,15 @@ function buildSections(sections) {
 function buildGallery(work) {
   if (!work.gallery || !work.gallery.length) return "";
 
+  const galleryItems = work.cover
+    ? work.gallery.filter(src => src !== work.cover)
+    : work.gallery.slice();
+
+  if (!galleryItems.length) return "";
+
   return `
     <div class="work-gallery">
-      ${work.gallery
+      ${galleryItems
         .map(src => `<img src="${src}" alt="${work.title}" loading="lazy" />`)
         .join("")}
     </div>
@@ -418,19 +446,21 @@ function renderWorkDetail() {
     <article class="work-detail">
       <a href="all.html" class="back-link">Back to All Works</a>
 
+      ${buildHeroBanner(work)}
+
       <header class="work-hero-main">
         <p class="work-meta-line">${metaLine}</p>
         <h1>${work.title}</h1>
-        ${work.intro ? `<p class="work-intro">${work.intro}</p>` : ""}
       </header>
 
+      ${buildCreditsSection(work.credits, work.contributions)}
+      ${buildIntroSection(work.intro)}
       ${buildTagLinks(work.tags)}
 
       ${work.sections && work.sections.length ? buildSections(work.sections) : ""}
+      ${buildVideosSection(work)}
       ${buildGallery(work)}
       ${buildLinksSection(work.links)}
-      ${buildVideosSection(work)}
-      ${buildCreditsSection(work.credits, work.contributions)}
     </article>
   `;
 }

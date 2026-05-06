@@ -2,19 +2,23 @@
   const RESUME_VERSIONS = {
     "en-designer": {
       label: "English / Designer",
-      file: "res/File/Shan%20Lin%20resume2025.pdf"
+      openUrl: "https://drive.google.com/file/d/1ywteaSgiErVN4RNzRLbX16KqsMTxPs-w/view?usp=drive_link",
+      embedUrl: "https://drive.google.com/file/d/1ywteaSgiErVN4RNzRLbX16KqsMTxPs-w/preview"
     },
     "en-producer": {
       label: "English / Producer",
-      file: ""
+      openUrl: "https://drive.google.com/file/d/1FXapVvFKslPeYGyRjx465IwHNzYF5BSp/view?usp=drive_link",
+      embedUrl: "https://drive.google.com/file/d/1FXapVvFKslPeYGyRjx465IwHNzYF5BSp/preview"
     },
     "zh-designer": {
       label: "\u4e2d\u6587 / \u8bbe\u8ba1",
-      file: ""
+      openUrl: "",
+      embedUrl: ""
     },
     "zh-producer": {
       label: "\u4e2d\u6587 / \u5236\u4f5c\u4eba",
-      file: ""
+      openUrl: "",
+      embedUrl: ""
     }
   };
 
@@ -28,7 +32,7 @@
   if (!buttons.length || !frame || !status || !openLink || !fallbackLink || !missing) return;
 
   const firstAvailableKey = Object.keys(RESUME_VERSIONS).find(
-    key => RESUME_VERSIONS[key].file
+    key => RESUME_VERSIONS[key].openUrl || RESUME_VERSIONS[key].embedUrl
   ) || "en-designer";
 
   function setActiveButton(activeKey) {
@@ -39,10 +43,10 @@
     });
   }
 
-  function setOpenLink(file) {
-    if (file) {
-      openLink.href = file;
-      fallbackLink.href = file;
+  function setOpenLink(url) {
+    if (url) {
+      openLink.href = url;
+      fallbackLink.href = url;
       openLink.removeAttribute("aria-disabled");
       openLink.classList.remove("is-disabled");
       openLink.tabIndex = 0;
@@ -58,21 +62,22 @@
 
   function showVersion(key) {
     const version = RESUME_VERSIONS[key] || RESUME_VERSIONS[firstAvailableKey];
-    const hasFile = Boolean(version.file);
+    const frameUrl = version.embedUrl || version.openUrl;
+    const hasFile = Boolean(frameUrl);
 
     setActiveButton(key);
     status.textContent = version.label;
-    setOpenLink(version.file);
+    setOpenLink(version.openUrl || frameUrl);
 
     if (hasFile) {
       frame.hidden = false;
-      frame.data = version.file;
+      frame.src = frameUrl;
       missing.hidden = true;
       return;
     }
 
     frame.hidden = true;
-    frame.removeAttribute("data");
+    frame.removeAttribute("src");
     missing.hidden = false;
   }
 
