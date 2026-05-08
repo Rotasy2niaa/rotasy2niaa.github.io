@@ -84,6 +84,7 @@ window.WORKS = [
     blurb: "A non visual multisensory tactile maze guided entirely by touch",
     tags: ["alt-control","installation"],
     cover: "res/insync-maze/insyncposter.jpg",
+    coverBackdrop: "black",
     selected: true,
 
     links: [{ label: "See more at Da Chu Interactive", url: "https://www.dachu-interactive.com/insync" }],
@@ -109,7 +110,7 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A creature crafting experience built around modular bones and tactile stitching",
     tags: ["video-game"],
-    cover: "res/how-to-create-a-creature/Cover_itch.png",
+    cover: "res/how-to-create-a-creature/Cover.png",
     selected: true,
 
     links: [
@@ -128,7 +129,7 @@ window.WORKS = [
     ],
 
     gallery: [
-      "res/how-to-create-a-creature/Cover_itch.png",
+      "res/how-to-create-a-creature/Cover.png",
       "res/how-to-create-a-creature/HTCAC-01.jpg",
       "res/how-to-create-a-creature/HTCAC-02.jpg",
       "res/how-to-create-a-creature/HTCAC-03.jpg",
@@ -175,6 +176,7 @@ window.WORKS = [
     blurb: "You are just wandering at school with your skateboard and camera.",
     tags: ["video-game"],
     cover: "res/skateboarding-photographer/zgymGr.png",
+    coverBackdrop: "black",
     selected: true,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/skateboarding-photographer" }],
@@ -198,6 +200,7 @@ window.WORKS = [
     blurb: "Are you a well behaved cat?",
     tags: ["video-game"],
     cover: "res/meow-alone/MeowALone_cover.png",
+    coverBackdrop: "black",
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/meow-alone" }],
     videos: [],
@@ -216,13 +219,14 @@ window.WORKS = [
 
   {
     slug: "ghost-cat",
-    title: "Ghost Cat",
+    title: "Ghost Cat Runner",
     category: "Puzzle Game",
     year: 2024,
     collaboration: "solo",
     blurb: "CiGA Game Jam 2024.",
     tags: ["video-game"],
     cover: "res/ghost-cat/6U2mCu.png",
+    coverBackdrop: "white",
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/ghost-cat" }],
     videos: [],
@@ -307,6 +311,7 @@ window.WORKS = [
     blurb: "A narrative simulation about blindness and sensory perception",
     tags: ["video-game"],
     cover: "res/discriminative-touch/O+2V_A.png",
+    coverBackdropColor: "#301923",
     selected: true,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/discriminative-touch" }],
@@ -466,6 +471,8 @@ window.WORKS = [
     blurb: "Voxel interiors and object studies built around lighting and atmosphere",
     tags: ["3d-modeling"],
     cover: "res/scene-practice/3DRoom01.png",
+    coverFit: "cover",
+    coverBackdropColor: "#575347",
 
     links: [],
     videos: [],
@@ -495,6 +502,7 @@ window.WORKS = [
     blurb: "A stylized character workflow from model sheet to wireframe and UV",
     tags: ["3d-modeling"],
     cover: "res/character-modeling/Lin_Shan_Final_Model_.png",
+    coverFit: "cover",
 
     links: [],
     videos: [
@@ -524,6 +532,7 @@ window.WORKS = [
     blurb: "A rigging study focused on structure, deformation, and character setup",
     tags: ["3d-modeling"],
     cover: "res/rigging/Rig2.png",
+    coverFit: "cover",
 
     links: [],
     videos: [

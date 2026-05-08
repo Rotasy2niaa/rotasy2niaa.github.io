@@ -424,14 +424,54 @@ figure {
 .work-media {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   border: 1px solid var(--c-line);
   background: var(--c-media-bg);
+  isolation: isolate;
+}
+
+.work-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--cover-image);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.08);
+  filter: blur(16px) saturate(1.08);
+  opacity: 0.54;
+  pointer-events: none;
+}
+
+.work-media[data-cover-backdrop="black"] {
+  background: #000;
+}
+
+.work-media[data-cover-backdrop="white"] {
+  background: #fff;
+}
+
+.work-media[data-cover-backdrop="custom"] {
+  background: var(--cover-backdrop-color, var(--c-media-bg));
+}
+
+.work-media[data-cover-backdrop="black"]::before,
+.work-media[data-cover-backdrop="white"]::before,
+.work-media[data-cover-backdrop="custom"]::before {
+  opacity: 0;
 }
 
 .work-media img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.work-media[data-cover-fit="cover"] img {
   object-fit: cover;
 }
 
@@ -473,6 +513,7 @@ figure {
 .selected-work-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: grid;
   align-content: end;
   gap: 8px;
@@ -835,16 +876,57 @@ figure {
 
 .link-preview-itch-media,
 .link-preview-external-media {
+  position: relative;
+  overflow: hidden;
   border-right: 1px solid var(--c-line);
   background: var(--c-media-bg);
 }
 
+.link-preview-external-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--cover-image);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.08);
+  filter: blur(16px) saturate(1.08);
+  opacity: 0.54;
+  pointer-events: none;
+}
+
+.link-preview-external-media[data-cover-backdrop="black"] {
+  background: #000;
+}
+
+.link-preview-external-media[data-cover-backdrop="white"] {
+  background: #fff;
+}
+
+.link-preview-external-media[data-cover-backdrop="custom"] {
+  background: var(--cover-backdrop-color, var(--c-media-bg));
+}
+
+.link-preview-external-media[data-cover-backdrop="black"]::before,
+.link-preview-external-media[data-cover-backdrop="white"]::before,
+.link-preview-external-media[data-cover-backdrop="custom"]::before {
+  opacity: 0;
+}
+
 .link-preview-itch-media img,
 .link-preview-external-media img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
   min-height: 220px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.link-preview-external-media[data-cover-fit="cover"] img {
   object-fit: cover;
 }
 

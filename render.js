@@ -62,12 +62,49 @@ function attachMetaBadgeNavigation(card) {
   });
 }
 
+function sanitizeHexColor(value) {
+  const raw = (value || "").trim();
+  if (!raw) return "";
+  return /^#[0-9a-fA-F]{3,8}$/.test(raw) ? raw : "";
+}
+
+function buildCoverMediaStyle(work) {
+  const styleParts = [];
+  if (work && work.cover) {
+    const escapedSrc = work.cover.replace(/'/g, "\\'");
+    styleParts.push(`--cover-image: url('${escapedSrc}')`);
+  }
+
+  const customBackdropColor = sanitizeHexColor(work && work.coverBackdropColor);
+  if (customBackdropColor) {
+    styleParts.push(`--cover-backdrop-color: ${customBackdropColor}`);
+  }
+
+  return styleParts.length ? ` style="${styleParts.join("; ")}"` : "";
+}
+
+function getCoverFit(work) {
+  return work && work.coverFit === "cover" ? "cover" : "contain";
+}
+
+function getCoverBackdrop(work) {
+  if (!work) return "image";
+  if (sanitizeHexColor(work.coverBackdropColor)) return "custom";
+  if (work.coverBackdrop === "black") return "black";
+  if (work.coverBackdrop === "white") return "white";
+  return "image";
+}
+
+function buildCoverMediaAttrs(work) {
+  return ` data-cover-fit="${getCoverFit(work)}" data-cover-backdrop="${getCoverBackdrop(work)}"`;
+}
+
 function buildWorkMedia(work, mediaClass = "", overlayMarkup = "") {
   const className = ["work-media", mediaClass].filter(Boolean).join(" ");
 
   if (work.cover) {
     return `
-      <div class="${className}">
+      <div class="${className}"${buildCoverMediaAttrs(work)}${buildCoverMediaStyle(work)}>
         <img src="${work.cover}" alt="${work.title} cover" loading="lazy" />
         ${overlayMarkup}
       </div>
@@ -227,7 +264,7 @@ function buildLinksSection(work) {
     return `
       <div class="link-preview link-preview-steam">
         <iframe
-          src="https://store.steampowered.com/widget/${steamAppId}/"
+          src="https://store.steampowered.com/widget/${steamAppId}/?l=english"
           title="${link.label} preview"
           loading="lazy">
         </iframe>
@@ -241,7 +278,7 @@ function buildLinksSection(work) {
 
     return `
       <div class="link-preview link-preview-external">
-        <div class="link-preview-external-media">
+        <div class="link-preview-external-media"${buildCoverMediaAttrs(work)}${buildCoverMediaStyle(work)}>
           ${work.cover
             ? `<img src="${work.cover}" alt="${work.title} cover" loading="lazy" />`
             : `<div class="link-preview-external-placeholder">${work.title}</div>`}
