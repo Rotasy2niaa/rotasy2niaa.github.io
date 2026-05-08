@@ -207,14 +207,8 @@ function buildLinksSection(work) {
     return match ? match[1] : "";
   }
 
-  function getItchGameInfo(url) {
-    const match = /^https?:\/\/([^.]+)\.itch\.io\/([^/?#]+)/i.exec(url || "");
-    if (!match) return null;
-
-    return {
-      user: match[1],
-      game: match[2]
-    };
+  function isItchLink(url) {
+    return /^https?:\/\/([^.]+)\.itch\.io\/([^/?#]+)/i.test(url || "");
   }
 
   function getHostLabel(url) {
@@ -237,43 +231,6 @@ function buildLinksSection(work) {
           title="${link.label} preview"
           loading="lazy">
         </iframe>
-      </div>
-    `;
-  }
-
-  function buildItchPreview(link) {
-    const itchGame = getItchGameInfo(link.url);
-    if (!itchGame) return "";
-
-    const summary = work.blurb || work.intro || "";
-
-    return `
-      <div
-        class="link-preview link-preview-itch"
-        data-itch-user="${itchGame.user}"
-        data-itch-game="${itchGame.game}">
-        <div class="link-preview-itch-media">
-          ${work.cover
-            ? `<img src="${work.cover}" alt="${work.title} cover" loading="lazy" />`
-            : `<div class="link-preview-itch-placeholder">${work.title}</div>`}
-        </div>
-        <div class="link-preview-itch-shell">
-          <div class="link-preview-itch-kicker">itch.io preview</div>
-          <div class="link-preview-itch-head">
-            <div class="link-preview-itch-title">${work.title}</div>
-            <div class="link-preview-itch-price" data-itch-price hidden></div>
-          </div>
-          ${summary ? `<p class="link-preview-itch-copy">${summary}</p>` : ""}
-          <div class="link-preview-itch-meta" data-itch-meta>Open this project on itch.io.</div>
-          <div class="detail-links">
-            <button class="detail-link detail-link-button" type="button" data-itch-buy-button>
-              Open buy / download
-            </button>
-            <a class="detail-link" href="${link.url}" target="_blank" rel="noopener">
-              View on itch.io
-            </a>
-          </div>
-        </div>
       </div>
     `;
   }
@@ -311,18 +268,19 @@ function buildLinksSection(work) {
       <h2 class="detail-h2">Links</h2>
       <div class="link-card-grid">
         ${links
-          .map(
-            link => `
+          .map(link => {
+            const itchOnlyButton = isItchLink(link.url);
+            return `
               <div class="link-card">
                 <div class="detail-links">
                   <a class="detail-link" href="${link.url}" target="_blank" rel="noopener">
                     ${link.label}
                   </a>
                 </div>
-                ${buildLinkPreview(link) || buildItchPreview(link) || buildExternalPreview(link)}
+                ${itchOnlyButton ? "" : buildLinkPreview(link) || buildExternalPreview(link)}
               </div>
-            `
-          )
+            `;
+          })
           .join("")}
       </div>
     </div>
@@ -466,21 +424,54 @@ function buildGallery(work) {
 
 function buildVideosSection(work) {
   if (!work.videos || !work.videos.length) return "";
+  const sectionTitle = work.videoSectionTitle || "Video";
+
+  function getYouTubeId(value) {
+    const raw = (value || "").trim();
+    if (!raw) return "";
+    if (/^[a-zA-Z0-9_-]{11}$/.test(raw)) return raw;
+
+    try {
+      const parsed = new URL(raw);
+      const host = parsed.hostname.toLowerCase();
+
+      if (host === "youtu.be") {
+        return parsed.pathname.replace(/^\/+/, "").split("/")[0] || "";
+      }
+
+      if (host === "youtube.com" || host === "www.youtube.com" || host === "m.youtube.com") {
+        const videoId = parsed.searchParams.get("v");
+        if (videoId) return videoId;
+
+        const parts = parsed.pathname.split("/").filter(Boolean);
+        if (parts[0] === "embed" && parts[1]) return parts[1];
+        if (parts[0] === "shorts" && parts[1]) return parts[1];
+      }
+    } catch {
+      return "";
+    }
+
+    return "";
+  }
 
   return `
     <div class="detail-section">
-      <h2 class="detail-h2">Video</h2>
+      <h2 class="detail-h2">${sectionTitle}</h2>
       <div class="video-grid">
         ${work.videos
           .map(video => {
             if (video.type === "youtube") {
+              const youtubeId = getYouTubeId(video.id || video.url || "");
+              if (!youtubeId) return "";
+
               return `
                 <div class="video-card">
                   <div class="video-embed">
                     <iframe
-                      src="https://www.youtube-nocookie.com/embed/${video.id}"
+                      src="https://www.youtube.com/embed/${youtubeId}"
                       title="${video.label || work.title}"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin"
                       allowfullscreen>
                     </iframe>
                   </div>

@@ -102,6 +102,43 @@ window.WORKS = [
   },
 
   {
+    slug: "how-to-create-a-creature",
+    title: "How to Create a Creature",
+    category: "Simulation",
+    year: 2026,
+    collaboration: "collaborative",
+    blurb: "A creature crafting experience built around modular bones and tactile stitching",
+    tags: ["video-game"],
+    cover: "res/how-to-create-a-creature/Cover_itch.png",
+    selected: true,
+
+    links: [
+      { label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/how-to-create-a-creature" }
+    ],
+    videoSectionTitle: "Trailer",
+    videos: [{ type: "youtube", url: "https://www.youtube.com/watch?v=e-18e2o5_Ks&feature=youtu.be", label: "Official Trailer" }],
+
+    intro:
+      "This is a creature crafting game where you construct a body from modular bone pieces, customize its anatomy, and bring it together through a tactile sewing process.",
+
+    contributions: [
+      "Designed and implemented the core creature-crafting flow from assembling modular bones to final sewing.",
+      "Built interaction systems for grabbing, moving, stitching, and anatomy adjustment.",
+      "Shaped the overall gameplay experience and project direction around tactile interaction and unease."
+    ],
+
+    gallery: [
+      "res/how-to-create-a-creature/Cover_itch.png",
+      "res/how-to-create-a-creature/HTCAC-01.jpg",
+      "res/how-to-create-a-creature/HTCAC-02.jpg",
+      "res/how-to-create-a-creature/HTCAC-03.jpg",
+      "res/how-to-create-a-creature/HTCAC-04.jpg",
+      "res/how-to-create-a-creature/HTCAC-05.jpg"
+    ],
+    credits: [{ label: "Role", value: "Programmer, Game Designer" }]
+  },
+
+  {
     slug: "how-to-pet-your-cat",
     title: "How to Pet Your Cat",
     category: "Alt Ctrl Experience",
@@ -321,6 +358,7 @@ window.WORKS = [
     cover: "res/noah-had-no-wings/ShanLinPortfolio-Final-26.png",
     selected: true,
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/noah-had-no-wings" }],
+    videos: [{ type: "youtube", url: "https://youtu.be/nhH-Ud4fb04", label: "Gameplay Video" }],
 
     intro:
       "A conversation-driven simulation centered on emotional care and listening. Through branching dialogue and soft interaction, the game explores intimacy, vulnerability, and healing as interactive systems.",
@@ -370,6 +408,7 @@ window.WORKS = [
     blurb: "A narrative point and click game about cultural ritual",
     tags: ["video-game"],
     cover: "res/get-ashore/GETASHORECOVER.png",
+    videos: [{ type: "youtube", url: "https://youtu.be/Lha_cyLymxo", label: "Gameplay Video" }],
 
     intro:
       "A narrative point-and-click prototype exploring the cultural practice of 'getting ashore' in East Asia. Through environmental storytelling and interaction, the game reflects on ritual, transition, and social expectation.",
