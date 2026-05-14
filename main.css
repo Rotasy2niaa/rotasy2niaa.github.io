@@ -1005,15 +1005,19 @@ figure {
   max-width: none;
 }
 
+.work-gallery-row,
 .work-gallery-two-up {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
 }
 
 .work-gallery img {
   width: 100%;
   border: 1px solid var(--c-line);
   background: var(--c-surface);
+  display: block;
 }
 
 .work-ambient {

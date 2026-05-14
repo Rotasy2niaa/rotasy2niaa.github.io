@@ -440,20 +440,49 @@ function buildSections(sections) {
 function buildGallery(work) {
   if (!work.gallery || !work.gallery.length) return "";
 
-  const galleryItems = work.cover
-    ? work.gallery.filter(src => src !== work.cover)
-    : work.gallery.slice();
-  const galleryLayoutClass = work.galleryLayout
-    ? `work-gallery-${work.galleryLayout}`
-    : "";
-  const galleryClassName = ["work-gallery", galleryLayoutClass].filter(Boolean).join(" ");
+  const galleryItems = (work.cover
+    ? work.gallery.filter(item => item !== work.cover)
+    : work.gallery.slice())
+    .filter(Boolean);
 
   if (!galleryItems.length) return "";
 
+  function buildGalleryImage(src, extraClass = "") {
+    const className = ["work-gallery-image", extraClass].filter(Boolean).join(" ");
+    return `<img class="${className}" src="${src}" alt="${work.title}" loading="lazy" />`;
+  }
+
+  function buildGalleryItem(item) {
+    if (typeof item === "string") {
+      return buildGalleryImage(item);
+    }
+
+    if (!item || typeof item !== "object") {
+      return "";
+    }
+
+    if (item.type === "row" && Array.isArray(item.items)) {
+      const rowItems = item.items
+        .filter(Boolean)
+        .map(src => buildGalleryImage(src))
+        .join("");
+
+      if (!rowItems) return "";
+
+      return `<div class="work-gallery-row">${rowItems}</div>`;
+    }
+
+    if (item.src) {
+      return buildGalleryImage(item.src);
+    }
+
+    return "";
+  }
+
   return `
-    <div class="${galleryClassName}">
+    <div class="work-gallery">
       ${galleryItems
-        .map(src => `<img src="${src}" alt="${work.title}" loading="lazy" />`)
+        .map(buildGalleryItem)
         .join("")}
     </div>
   `;

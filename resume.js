@@ -2,23 +2,23 @@
   const RESUME_VERSIONS = {
     "en-designer": {
       label: "English / Designer",
-      openUrl: "https://drive.google.com/file/d/1ywteaSgiErVN4RNzRLbX16KqsMTxPs-w/view?usp=drive_link",
-      embedUrl: "https://drive.google.com/file/d/1ywteaSgiErVN4RNzRLbX16KqsMTxPs-w/preview"
+      openUrl: "res/resume/shan-lin-game-design-resume-2026.pdf",
+      embedUrl: "res/resume/shan-lin-game-design-resume-2026.pdf"
     },
     "en-producer": {
       label: "English / Producer",
-      openUrl: "https://drive.google.com/file/d/1FXapVvFKslPeYGyRjx465IwHNzYF5BSp/view?usp=drive_link",
-      embedUrl: "https://drive.google.com/file/d/1FXapVvFKslPeYGyRjx465IwHNzYF5BSp/preview"
+      openUrl: "res/resume/shan-lin-game-production-resume-2026.pdf",
+      embedUrl: "res/resume/shan-lin-game-production-resume-2026.pdf"
     },
     "zh-designer": {
       label: "\u4e2d\u6587 / \u8bbe\u8ba1",
-      openUrl: "",
-      embedUrl: ""
+      openUrl: "res/resume/shan-lin-game-design-resume-zh-2026.pdf",
+      embedUrl: "res/resume/shan-lin-game-design-resume-zh-2026.pdf"
     },
     "zh-producer": {
       label: "\u4e2d\u6587 / \u5236\u4f5c\u4eba",
-      openUrl: "",
-      embedUrl: ""
+      openUrl: "res/resume/shan-lin-game-production-resume-zh-2026.pdf",
+      embedUrl: "res/resume/shan-lin-game-production-resume-zh-2026.pdf"
     }
   };
 
