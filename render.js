@@ -472,6 +472,42 @@ function buildGallery(work) {
       return `<div class="work-gallery-row">${rowItems}</div>`;
     }
 
+    if (item.type === "carousel" && Array.isArray(item.items)) {
+      const slides = item.items
+        .filter(Boolean)
+        .map((src, index) => `
+          <div
+            class="work-gallery-slide"
+            data-carousel-slide
+            data-index="${index}"
+            aria-hidden="true">
+            <img class="work-gallery-image" src="${src}" alt="${work.title}" loading="lazy" />
+          </div>
+        `)
+        .join("");
+
+      if (!slides) return "";
+
+      return `
+        <section
+          class="work-gallery-carousel"
+          data-carousel
+          data-carousel-count="${item.items.length}"
+          tabindex="0"
+          aria-label="${work.title} image carousel">
+          <div class="work-gallery-carousel-track" data-carousel-track>
+            ${slides}
+            <div class="work-gallery-hoverzone work-gallery-hoverzone-prev" data-carousel-hover="prev" aria-hidden="true"></div>
+            <div class="work-gallery-hoverzone work-gallery-hoverzone-next" data-carousel-hover="next" aria-hidden="true"></div>
+          </div>
+          <div class="work-gallery-carousel-hints" aria-hidden="true">
+            <span class="work-gallery-hint work-gallery-hint-prev">← look back</span>
+            <span class="work-gallery-hint work-gallery-hint-next">look ahead →</span>
+          </div>
+        </section>
+      `;
+    }
+
     if (item.src) {
       return buildGalleryImage(item.src);
     }
@@ -588,6 +624,147 @@ function buildVideosSection(work) {
 }
 
 let itchApiLoadPromise = null;
+
+function enhanceGalleryCarousels(container) {
+  const carousels = Array.from(container.querySelectorAll("[data-carousel]"));
+  if (!carousels.length) return;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  carousels.forEach(carousel => {
+    const slides = Array.from(carousel.querySelectorAll("[data-carousel-slide]"));
+    const prevHoverZone = carousel.querySelector('[data-carousel-hover="prev"]');
+    const nextHoverZone = carousel.querySelector('[data-carousel-hover="next"]');
+    if (!slides.length) return;
+
+    let activeIndex = 0;
+    let autoplayId = null;
+    let hoverAdvanceId = null;
+    let hoverDirection = 0;
+
+    function updateCarousel() {
+      const total = slides.length;
+      const prevIndex = (activeIndex - 1 + total) % total;
+      const nextIndex = (activeIndex + 1) % total;
+
+      slides.forEach((slide, index) => {
+        slide.classList.remove("is-active", "is-prev", "is-next", "is-hidden");
+        slide.setAttribute("aria-hidden", index === activeIndex ? "false" : "true");
+
+        if (index === activeIndex) {
+          slide.classList.add("is-active");
+          return;
+        }
+
+        if (total > 1 && index === prevIndex) {
+          slide.classList.add("is-prev");
+          return;
+        }
+
+        if (total > 2 && index === nextIndex) {
+          slide.classList.add("is-next");
+          return;
+        }
+
+        slide.classList.add("is-hidden");
+      });
+    }
+
+    function stepCarousel(direction) {
+      const total = slides.length;
+      activeIndex = (activeIndex + direction + total) % total;
+      updateCarousel();
+    }
+
+    function stopAutoplay() {
+      if (autoplayId) {
+        window.clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      if (reducedMotion || slides.length < 2 || autoplayId) return;
+      autoplayId = window.setInterval(() => {
+        stepCarousel(1);
+      }, 3200);
+    }
+
+    function stopHoverAdvance() {
+      hoverDirection = 0;
+      delete carousel.dataset.hoverDirection;
+      if (hoverAdvanceId) {
+        window.clearInterval(hoverAdvanceId);
+        hoverAdvanceId = null;
+      }
+    }
+
+    function startHoverAdvance(direction) {
+      if (slides.length < 2) return;
+      stopAutoplay();
+
+      if (hoverDirection === direction && hoverAdvanceId) {
+        return;
+      }
+
+      stopHoverAdvance();
+      hoverDirection = direction;
+      carousel.dataset.hoverDirection = direction < 0 ? "prev" : "next";
+
+      stepCarousel(direction);
+      hoverAdvanceId = window.setInterval(() => {
+        stepCarousel(direction);
+      }, reducedMotion ? 1600 : 900);
+    }
+
+    carousel.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        stepCarousel(-1);
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        stepCarousel(1);
+      }
+    });
+
+    if (prevHoverZone) {
+      prevHoverZone.addEventListener("mouseenter", () => startHoverAdvance(-1));
+      prevHoverZone.addEventListener("mouseleave", () => {
+        stopHoverAdvance();
+        startAutoplay();
+      });
+    }
+
+    if (nextHoverZone) {
+      nextHoverZone.addEventListener("mouseenter", () => startHoverAdvance(1));
+      nextHoverZone.addEventListener("mouseleave", () => {
+        stopHoverAdvance();
+        startAutoplay();
+      });
+    }
+
+    carousel.addEventListener("mouseenter", () => {
+      if (!hoverAdvanceId) {
+        startAutoplay();
+      }
+    });
+    carousel.addEventListener("mouseleave", () => {
+      stopHoverAdvance();
+      startAutoplay();
+    });
+    carousel.addEventListener("focusin", stopAutoplay);
+    carousel.addEventListener("focusout", event => {
+      stopHoverAdvance();
+      if (!carousel.contains(event.relatedTarget)) {
+        startAutoplay();
+      }
+    });
+
+    updateCarousel();
+    startAutoplay();
+  });
+}
 
 function ensureItchApiLoaded() {
   if (window.Itch) return Promise.resolve(window.Itch);
@@ -732,4 +909,5 @@ function renderWorkDetail() {
   `;
 
   enhanceItchPreviews(container);
+  enhanceGalleryCarousels(container);
 }

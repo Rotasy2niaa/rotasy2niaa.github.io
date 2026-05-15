@@ -104,13 +104,13 @@ window.WORKS = [
 
     gallery: [
       {
-        type: "row",
+        type: "carousel",
         items: [
           "res/insync-maze/insync-poster.png",
-          "res/insync-maze/insync_layout.png"
+          "res/insync-maze/insync_layout.png",
+          "res/insync-maze/insync-01.png"
         ]
-      },
-      "res/insync-maze/insync-01.png"
+      }
     ],
     credits: [{ label: "Role", value: "Maze and Experience Designer" }]
   },
@@ -142,12 +142,16 @@ window.WORKS = [
     ],
 
     gallery: [
-      "res/how-to-create-a-creature/cover.png",
-      "res/how-to-create-a-creature/HTCAC-01.jpg",
-      "res/how-to-create-a-creature/HTCAC-02.jpg",
-      "res/how-to-create-a-creature/HTCAC-03.jpg",
-      "res/how-to-create-a-creature/HTCAC-04.jpg",
-      "res/how-to-create-a-creature/HTCAC-05.jpg"
+      {
+        type: "carousel",
+        items: [
+          "res/how-to-create-a-creature/HTCAC-01.jpg",
+          "res/how-to-create-a-creature/HTCAC-02.jpg",
+          "res/how-to-create-a-creature/HTCAC-03.jpg",
+          "res/how-to-create-a-creature/HTCAC-04.jpg",
+          "res/how-to-create-a-creature/HTCAC-05.jpg"
+        ]
+      }
     ],
     credits: [{ label: "Role", value: "Programmer, Game Designer" }]
   },
