@@ -91,6 +91,7 @@
     });
 
     updateToggleButtons(root.dataset.theme || "light");
+    updateThemeAssets(root.dataset.theme || "light");
   }
 
   function watchSystemTheme() {
