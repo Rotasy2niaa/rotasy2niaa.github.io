@@ -192,12 +192,15 @@ function renderWorkList(containerId, works, options = {}) {
 }
 
 function renderSelected(containerId) {
-  const selectedWorks = window.WORKS.filter(work => work.selected);
+  const selectedWorks = window.WORKS.filter(work => work.selected && work.listed !== false);
   renderWorkList(containerId, selectedWorks, { variant: "selected" });
 }
 
 function renderAll(containerId) {
-  renderWorkList(containerId, window.WORKS);
+  renderWorkList(
+    containerId,
+    window.WORKS.filter(work => work.listed !== false)
+  );
 }
 
 function buildTagLinks(tags, options = {}) {

@@ -47,11 +47,26 @@
     });
   }
 
+  function updateThemeAssets(theme) {
+    const logoSrc = theme === "dark"
+      ? "res/logo_glitch_light.png"
+      : "res/logo_glitch.png";
+
+    document.querySelectorAll(".brand-logo").forEach(image => {
+      image.setAttribute("src", logoSrc);
+    });
+
+    document.querySelectorAll('link[rel="icon"]').forEach(link => {
+      link.setAttribute("href", logoSrc);
+    });
+  }
+
   function applyTheme(theme) {
     const resolvedTheme = theme === "dark" ? "dark" : "light";
     root.dataset.theme = resolvedTheme;
     root.style.colorScheme = resolvedTheme;
     updateToggleButtons(resolvedTheme);
+    updateThemeAssets(resolvedTheme);
   }
 
   function toggleTheme() {

@@ -123,7 +123,7 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A creature crafting experience built around modular bones and tactile stitching",
     tags: ["video-game"],
-    cover: "res/how-to-create-a-creature/cover.png",
+    cover: "res/how-to-create-a-creature/Cover_itch.png",
     selected: true,
 
     links: [
@@ -154,6 +154,39 @@ window.WORKS = [
       }
     ],
     credits: [{ label: "Role", value: "Programmer, Game Designer" }]
+  },
+
+  {
+    slug: "resolution",
+    title: "Resolution",
+    category: "WIP",
+    year: 2026,
+    collaboration: "solo",
+    blurb: "A work in progress project page.",
+    tags: ["video-game"],
+    cover: "res/resolution/Resolution_bg.png",
+    listed: false,
+
+    links: [],
+    videos: [],
+
+    intro:
+      "Resolution is currently in progress. This page is a placeholder for the project while its materials, writing, and final presentation are still being assembled.",
+
+    contributions: [
+      "Work in progress."
+    ],
+
+    sections: [
+      {
+        heading: "Status",
+        text:
+          "<p>This project is still in development. More details, media, and documentation will be added here once the work is ready to share publicly.</p>"
+      }
+    ],
+
+    gallery: ["res/resolution/Resolution_bg.png"],
+    credits: [{ label: "State", value: "WIP" }]
   },
 
   {

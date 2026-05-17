@@ -45,7 +45,7 @@
     }
 
     return works
-      .filter(work => work && work.slug && work.title)
+      .filter(work => work && work.slug && work.title && work.listed !== false)
       .map((work, index) => {
         const gallery = Array.isArray(work.gallery) ? work.gallery.filter(Boolean) : [];
         const year = work.year == null ? "" : String(work.year);

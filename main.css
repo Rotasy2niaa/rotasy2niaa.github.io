@@ -277,9 +277,9 @@ figure {
 }
 
 .intro-left h1 {
-  max-width: 10ch;
-  font-size: clamp(2.2rem, 5.8vw, 3.8rem);
-  line-height: 1.18;
+  max-width: 14ch;
+  font-size: clamp(1.9rem, 4.6vw, 3rem);
+  line-height: 1.08;
 }
 
 .intro-left p,
