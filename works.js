@@ -123,7 +123,7 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A creature crafting experience built around modular bones and tactile stitching",
     tags: ["video-game"],
-    cover: "res/how-to-create-a-creature/Cover_itch.png",
+    cover: "res/how-to-create-a-creature/cover.png",
     selected: true,
 
     links: [
