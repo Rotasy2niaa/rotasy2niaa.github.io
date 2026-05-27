@@ -11,6 +11,7 @@ window.WORKS = [
     blurb: "A gentle unpacking game about arranging gacha toys into a personal space",
     tags: ["video-game"],
     cover: "res/nudge/main-capsule-1232x706.jpg",
+    selected: true,
 
     links: [{ label: "View on Steam", url: "https://store.steampowered.com/app/4516490/nudge/" }],
     videos: [],
@@ -26,9 +27,7 @@ window.WORKS = [
     ],
 
     gallery: [
-      "res/nudge/main-capsule-1232x706.jpg",
-      "res/nudge/library-capsule-920x430.jpg",
-      "res/nudge/small-capsule-462x274.jpg"
+      "res/nudge/main-capsule-1232x706.jpg"
     ],
     credits: [
       { label: "Role", value: "System Designer, Level Designer" }
@@ -60,7 +59,19 @@ window.WORKS = [
     ],
 
     gallery: [
-      "res/wok-this-way/header-capsule.png"
+      {
+        type: "carousel",
+        items: [
+          "res/wok-this-way/wok-gallery-temp-01.png",
+          "res/wok-this-way/wok-gallery-temp-02.png",
+          "res/wok-this-way/wok-gallery-temp-03.png",
+          "res/wok-this-way/wok-gallery-temp-04.png",
+          "res/wok-this-way/wok-gallery-temp-05.png",
+          "res/wok-this-way/wok-gallery-temp-06.png",
+          "res/wok-this-way/wok-gallery-temp-07.png",
+          "res/wok-this-way/wok-gallery-temp-08.png"
+        ]
+      }
     ],
     ambientItems: [
       { src: "res/wok-this-way/snack-1.png", side: "left", top: "-8vh", x: "20px", size: "92px", duration: "18s", delay: "-2s", drift: "10px", rotateStart: "-10deg", rotateEnd: "210deg", opacity: "0.94" },
@@ -123,7 +134,7 @@ window.WORKS = [
     collaboration: "collaborative",
     blurb: "A creature crafting experience built around modular bones and tactile stitching",
     tags: ["video-game"],
-    cover: "res/how-to-create-a-creature/cover.png",
+    cover: "res/how-to-create-a-creature/Cover.png",
     selected: true,
 
     links: [
@@ -244,7 +255,6 @@ window.WORKS = [
     tags: ["video-game"],
     cover: "res/skateboarding-photographer/zgymGr.png",
     coverBackdrop: "black",
-    selected: true,
 
     links: [{ label: "Play on itch.io", url: "https://rotasy2niaa.itch.io/skateboarding-photographer" }],
     videos: [],
@@ -403,18 +413,18 @@ window.WORKS = [
     collaboration: "solo",
     blurb: "Interactive installations exploring emotion beyond language",
     tags: ["installation", "mixed-media"],
-    cover: "res/unspeakable/SI04.jpg",
+    cover: "res/Unspeakable/SI04.jpg",
 
     intro:
       "A series of interactive installations that translate emotion into physical and visual form. Through sensors, light, and responsive systems, the works explore how feelings can be externalized, shared, and experienced without spoken language.",
 
     gallery: [
-      "res/unspeakable/SI04.jpg",
-      "res/unspeakable/SI6.jpg",
-      "res/unspeakable/SI8.jpg",
-      "res/unspeakable/SI13.jpg",
-      "res/unspeakable/SI14.jpg",
-      "res/unspeakable/SI15.JPG"
+      "res/Unspeakable/SI04.jpg",
+      "res/Unspeakable/SI6.jpg",
+      "res/Unspeakable/SI8.jpg",
+      "res/Unspeakable/SI13.jpg",
+      "res/Unspeakable/SI14.jpg",
+      "res/Unspeakable/SI15.JPG"
     ],
     credits: [{ label: "Role", value: "Artist, Designer, Programmer" }]
   },
