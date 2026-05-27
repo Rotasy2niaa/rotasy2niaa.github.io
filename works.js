@@ -14,7 +14,10 @@ window.WORKS = [
     selected: true,
 
     links: [{ label: "View on Steam", url: "https://store.steampowered.com/app/4516490/nudge/" }],
-    videos: [],
+    videoSectionTitle: "Trailer",
+    videos: [
+      { type: "local", src: "res/nudge/nudge-trailer.mov", label: "Official Trailer" }
+    ],
 
     intro:
       "A calm organization simulation where players unpack gacha toys and curate them within a small living space. Through tactile placement and spatial composition, the game reframes collection as expression, exploring how objects construct identity, emotional boundaries, and a sense of belonging.",
@@ -27,7 +30,16 @@ window.WORKS = [
     ],
 
     gallery: [
-      "res/nudge/main-capsule-1232x706.jpg"
+      {
+        type: "carousel",
+        items: [
+          "res/nudge/nudge-gallery-01.jpg",
+          "res/nudge/nudge-gallery-02.jpg",
+          "res/nudge/nudge-gallery-03.jpg",
+          "res/nudge/nudge-gallery-04.jpg",
+          "res/nudge/nudge-gallery-05.jpg"
+        ]
+      }
     ],
     credits: [
       { label: "Role", value: "System Designer, Level Designer" }
