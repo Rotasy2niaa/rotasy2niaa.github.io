@@ -2,13 +2,13 @@
   const RESUME_VERSIONS = {
     "en-designer": {
       label: "English / Designer",
-      openUrl: "res/resume/shan-lin-game-design-resume-2026.pdf",
-      embedUrl: "res/resume/shan-lin-game-design-resume-2026.pdf"
+      openUrl: "res/resume/shan-lin-game-design-resume-2027.pdf",
+      embedUrl: "res/resume/shan-lin-game-design-resume-2027.pdf"
     },
     "en-producer": {
       label: "English / Producer",
-      openUrl: "res/resume/shan-lin-game-production-resume-2026.pdf",
-      embedUrl: "res/resume/shan-lin-game-production-resume-2026.pdf"
+      openUrl: "res/resume/shan-lin-game-production-resume-2027.pdf",
+      embedUrl: "res/resume/shan-lin-game-production-resume-2027.pdf"
     },
     "zh-designer": {
       label: "\u4e2d\u6587 / \u8bbe\u8ba1",
