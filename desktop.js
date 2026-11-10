@@ -146,8 +146,11 @@ function openWindow(key, app = applications[key], options = {}) {
   else if (key === "featured") buildFeatured(content);
   else if (key === "cv" || key === "about") {
     content.append(document.querySelector("#" + key + "-content").content.cloneNode(true));
+    if (key === "about") bindAboutContact(content);
   }
-  else if (key === "research" || key === "notes" || key === "involuntary") buildDocument(content, key);
+  else if (key === "notes") buildNotes(content);
+  else if (app.note) buildNote(content, app.note);
+  else if (key === "research" || key === "involuntary") buildDocument(content, key);
   else renderProject(content, projectsBySlug.get(app.project));
 
   task.addEventListener("click", () => {
@@ -201,6 +204,23 @@ function openProject(project, updateHistory = true) {
   });
 }
 
+function bindAboutContact(content) {
+  const address = content.querySelector(".contact-address");
+  const status = content.querySelector(".contact-status");
+  content.querySelector("[data-copy-email]").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(address.value);
+      address.hidden = true;
+      status.textContent = "Copied " + address.value;
+    } catch {
+      address.hidden = false;
+      status.textContent = "Copy this email address:";
+      address.focus();
+      address.select();
+    }
+  });
+}
+
 function buildProjectFile(project, showDescription = false) {
   const button = document.createElement("button");
   button.type = "button";
@@ -236,18 +256,67 @@ function buildFeatured(content) {
       <div class="file-list featured-files"></div>
     </div>`;
   content.querySelector("button").addEventListener("click", () => openWindow("work"));
-  const featured = projects.filter(project => project.selected).slice(0, 3);
+  const featured = projects.filter(project => project.selected);
   content.querySelector(".file-list").append(...featured.map(project => buildProjectFile(project, true)));
 }
 
 function buildDocument(content, key) {
   const documents = {
     research: '<h3>Research files</h3><button type="button">Involuntary Hold</button>',
-    notes: '<h3>Notes</h3><p>No public notes yet.</p>',
     involuntary: '<h3>Involuntary Hold</h3><p>Research-creation project · Twine · 2026</p><p>Explores how institutional routines constrain player agency in a psychiatric unit. A daily schedule and rooms that open at specific times shape what the player can do in Twine.</p>'
   };
   content.innerHTML = '<article class="explorer">' + documents[key] + '</article>';
   content.querySelector("button")?.addEventListener("click", () => openWindow("involuntary"));
+}
+
+async function buildNotes(content) {
+  content.innerHTML = '<article class="os-document"><h3>Notes</h3><p role="status">Loading notes…</p><ol class="note-list"></ol></article>';
+  const status = content.querySelector('[role="status"]');
+  const list = content.querySelector("ol");
+  try {
+    const response = await fetch("notes/index.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error("Notes index unavailable");
+    const notes = await response.json();
+    notes.sort((a, b) => b.date.localeCompare(a.date));
+    for (const note of notes) {
+      const item = document.createElement("li");
+      const date = document.createElement("time");
+      date.dateTime = note.date;
+      date.textContent = note.date;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = note.title;
+      button.addEventListener("click", () => openWindow("note:" + note.file, { title: note.title, note }));
+      item.append(date, button);
+      list.append(item);
+    }
+    status.textContent = notes.length ? "" : "No public notes yet.";
+  } catch {
+    status.textContent = "Notes could not be loaded. Close and reopen Notes to try again.";
+  }
+}
+
+async function buildNote(content, note) {
+  const article = document.createElement("article");
+  article.className = "os-document";
+  const heading = document.createElement("h3");
+  heading.textContent = note.title;
+  const date = document.createElement("time");
+  date.dateTime = note.date;
+  date.textContent = note.date;
+  const entry = document.createElement("p");
+  entry.className = "note-entry";
+  entry.textContent = "Loading note…";
+  article.append(heading, date, entry);
+  content.append(article);
+  try {
+    if (!/^[a-z0-9][a-z0-9-]*\.txt$/.test(note.file)) throw new Error("Invalid note filename");
+    const response = await fetch("notes/" + note.file, { cache: "no-cache" });
+    if (!response.ok) throw new Error("Note unavailable");
+    entry.textContent = await response.text();
+  } catch {
+    entry.textContent = "This note could not be loaded. Close and reopen it to try again.";
+  }
 }
 
 function buildExplorer(content, initialFilters) {
@@ -319,16 +388,6 @@ for (const button of launchers) {
 document.querySelector("#show-desktop").addEventListener("click", () => {
   for (const item of openWindows.values()) item.minimized = true;
   selectNext();
-});
-
-const wallpapers = ["grid", "mint", "plain"];
-desktop.dataset.wallpaper = localStorage.getItem("shanlin-wallpaper") || "grid";
-document.querySelector("#desktop-wallpaper").addEventListener("click", event => {
-  const index = wallpapers.indexOf(desktop.dataset.wallpaper);
-  const wallpaper = wallpapers[(index + 1) % wallpapers.length];
-  desktop.dataset.wallpaper = wallpaper;
-  localStorage.setItem("shanlin-wallpaper", wallpaper);
-  event.currentTarget.textContent = "Wallpaper · " + wallpaper;
 });
 
 const themeButton = document.querySelector("#desktop-theme");
