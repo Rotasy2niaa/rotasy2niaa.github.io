@@ -5,17 +5,22 @@ const template = document.querySelector("#window-template");
 const mobile = matchMedia("(max-width: 640px), (pointer: coarse)");
 const launchers = [...document.querySelectorAll("[data-app]")];
 const applications = {
-  home: { title: "Home/", url: "index.html" },
-  work: { title: "Work/" },
-  about: { title: "About/", url: "about.html" },
-  cv: { title: "CV", url: "cv.html" }
+  featured: { title: "Selected Works" },
+  work: { title: "Archive/" },
+  research: { title: "Research/" },
+  notes: { title: "Notes/" },
+  involuntary: { title: "Involuntary Hold" },
+  about: { title: "About/" },
+  cv: { title: "CV" }
 };
-const projects = (window.WORKS || []).filter(project => project.listed !== false);
+const projectsBySlug = new Map(window.WORKS.map(project => [project.slug, project]));
+const projects = window.WORKS.filter(project => project.listed !== false);
 const openWindows = new Map();
 let active = null;
 let layer = 1;
 let sequence = 0;
 let selectedLauncher = launchers[0];
+let linkedProject = null;
 
 function clamp(value, minimum, maximum) {
   return Math.min(Math.max(value, minimum), maximum);
@@ -79,7 +84,6 @@ function bindPointer(item, handle, resize) {
     const startY = event.clientY;
     const pointer = event.pointerId;
     handle.setPointerCapture(pointer);
-    item.element.classList.add("is-moving");
 
     function move(next) {
       if (next.pointerId !== pointer) return;
@@ -101,7 +105,6 @@ function bindPointer(item, handle, resize) {
 
     function finish() {
       handle.removeEventListener("pointermove", move);
-      item.element.classList.remove("is-moving");
     }
 
     handle.addEventListener("pointermove", move);
@@ -130,9 +133,9 @@ function openWindow(key, app = applications[key], options = {}) {
     element, task, minimized: false, maximized: false,
     rect: fit({
       left: Math.min(136, desktop.clientWidth * .14) + offset,
-      top: 28 + offset,
+      top: key === "featured" ? Math.min(190, desktop.clientHeight * .28) : 28 + offset,
       width: Math.min(960, desktop.clientWidth * .76),
-      height: Math.min(710, desktop.clientHeight * .84)
+      height: Math.min(710, desktop.clientHeight * (key === "featured" ? .7 : .84))
     })
   };
   openWindows.set(key, item);
@@ -140,14 +143,23 @@ function openWindow(key, app = applications[key], options = {}) {
   tasks.append(task);
   const content = element.querySelector(".window-content");
   if (key === "work") item.setFilters = buildExplorer(content, options.filters);
-  else mountPage(content, app, item);
+  else if (key === "featured") buildFeatured(content);
+  else if (key === "cv" || key === "about") {
+    content.append(document.querySelector("#" + key + "-content").content.cloneNode(true));
+  }
+  else if (key === "research" || key === "notes" || key === "involuntary") buildDocument(content, key);
+  else renderProject(content, projectsBySlug.get(app.project));
 
-  task.addEventListener("click", () => focusWindow(item));
+  task.addEventListener("click", () => {
+    if (app.project) setProjectUrl(app.project, "pushState");
+    focusWindow(item);
+  });
   element.addEventListener("pointerdown", () => focusWindow(item, false));
   element.addEventListener("focusin", () => {
     if (active !== item) focusWindow(item, false);
   });
   element.querySelector('[data-action="close"]').addEventListener("click", () => {
+    if (app.project && linkedProject === app.project) setProjectUrl(null, "replaceState");
     openWindows.delete(key);
     element.remove();
     task.remove();
@@ -172,72 +184,87 @@ function openWindow(key, app = applications[key], options = {}) {
   focusWindow(item, options.focus !== false);
 }
 
-function openProject(project) {
+function setProjectUrl(slug, method) {
+  if (linkedProject === slug) return;
+  const url = new URL(location.href);
+  if (slug) url.searchParams.set("project", slug);
+  else url.searchParams.delete("project");
+  history[method](null, "", url);
+  linkedProject = slug;
+}
+
+function openProject(project, updateHistory = true) {
+  if (updateHistory) setProjectUrl(project.slug, "pushState");
   openWindow("project:" + project.slug, {
     title: project.title,
-    url: "work.html?slug=" + encodeURIComponent(project.slug)
+    project: project.slug
   });
 }
 
-function mountPage(content, app, item) {
-  const frame = document.createElement("iframe");
-  frame.title = app.title;
-  frame.addEventListener("load", () => {
-    const doc = frame.contentDocument;
-    if (!doc) return;
-    const style = doc.createElement("style");
-    style.textContent = ".site-header { display:none; }";
-    doc.head.append(style);
-    doc.documentElement.dataset.theme = document.documentElement.dataset.theme;
-    doc.documentElement.style.colorScheme = document.documentElement.dataset.theme;
-    doc.addEventListener("pointerdown", () => focusWindow(item, false), true);
-    doc.addEventListener("focusin", () => {
-      if (active !== item) focusWindow(item, false);
-    });
+function buildProjectFile(project, showDescription = false) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "project-file";
+  if (project.cover) {
+    const image = document.createElement("img");
+    image.src = project.cover;
+    image.loading = "lazy";
+    image.alt = "";
+    button.append(image);
+  }
+  const title = document.createElement("strong");
+  title.textContent = project.title;
+  const metadata = document.createElement("small");
+  metadata.textContent = [project.category, project.year].filter(Boolean).join(" / ");
+  button.append(title, metadata);
+  if (showDescription && project.blurb) {
+    const description = document.createElement("p");
+    description.textContent = project.blurb;
+    button.append(description);
+  }
+  button.addEventListener("click", () => openProject(project));
+  return button;
+}
 
-    function route(event) {
-      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-      const badge = event.target.closest("[data-filter-url]");
-      const anchor = event.target.closest("a[href]");
-      if (!badge && (!anchor || anchor.target === "_blank" || anchor.hasAttribute("download"))) return;
-      const url = new URL(badge?.dataset.filterUrl || anchor.href, doc.URL);
-      if (url.origin !== location.origin) return;
-      const page = url.pathname.split("/").pop();
-      if (page === "work.html") {
-        const project = projects.find(candidate => candidate.slug === url.searchParams.get("slug"));
-        if (!project) return;
-        event.preventDefault();
-        event.stopPropagation();
-        openProject(project);
-      } else {
-        const key = { "index.html": "home", "all.html": "work", "about.html": "about", "cv.html": "cv" }[page];
-        if (!key || (url.hash && url.pathname === new URL(doc.URL).pathname)) return;
-        event.preventDefault();
-        event.stopPropagation();
-        openWindow(key, applications[key], key === "work" ? { filters: url.searchParams } : {});
-      }
-    }
+function buildFeatured(content) {
+  content.innerHTML = `
+    <div class="explorer featured">
+      <div class="featured-header">
+        <h3>Selected Works</h3>
+        <button type="button">Browse Archive →</button>
+      </div>
+      <div class="file-list featured-files"></div>
+    </div>`;
+  content.querySelector("button").addEventListener("click", () => openWindow("work"));
+  const featured = projects.filter(project => project.selected).slice(0, 3);
+  content.querySelector(".file-list").append(...featured.map(project => buildProjectFile(project, true)));
+}
 
-    doc.addEventListener("click", route, true);
-    doc.addEventListener("keydown", event => {
-      if ((event.key === "Enter" || event.key === " ") && event.target.closest("[data-filter-url]")) route(event);
-    }, true);
-  });
-  frame.src = app.url;
-  content.append(frame);
+function buildDocument(content, key) {
+  const documents = {
+    research: '<h3>Research files</h3><button type="button">Involuntary Hold</button>',
+    notes: '<h3>Notes</h3><p>No public notes yet.</p>',
+    involuntary: '<h3>Involuntary Hold</h3><p>Research-creation project · Twine · 2026</p><p>Explores how institutional routines constrain player agency in a psychiatric unit. A daily schedule and rooms that open at specific times shape what the player can do in Twine.</p>'
+  };
+  content.innerHTML = '<article class="explorer">' + documents[key] + '</article>';
+  content.querySelector("button")?.addEventListener("click", () => openWindow("involuntary"));
 }
 
 function buildExplorer(content, initialFilters) {
   content.innerHTML = `
     <div class="explorer">
-      <h3>Project files</h3>
+      <h3>Archive / All files</h3>
+      <div class="explorer-layout">
       <div class="filters">
         <label>Search <input type="search" placeholder="Project name"></label>
         <label>Medium <select name="medium"><option value="">All media</option></select></label>
         <label>Year <select name="year"><option value="">All years</option></select></label>
       </div>
-      <p role="status"></p>
-      <div class="file-list"></div>
+      <div>
+        <p role="status"></p>
+        <div class="file-list"></div>
+      </div>
+      </div>
     </div>`;
   const search = content.querySelector("input");
   const medium = content.querySelector('[name="medium"]');
@@ -249,22 +276,7 @@ function buildExplorer(content, initialFilters) {
   tags.forEach(tag => medium.add(new Option(tag.replaceAll("-", " "), tag)));
   years.forEach(value => year.add(new Option(value, value)));
   const cards = projects.map(project => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "project-file";
-    if (project.cover) {
-      const image = document.createElement("img");
-      image.src = project.cover;
-      image.loading = "lazy";
-      image.alt = "";
-      button.append(image);
-    }
-    const title = document.createElement("strong");
-    title.textContent = project.title;
-    const metadata = document.createElement("small");
-    metadata.textContent = [project.category, project.year].filter(Boolean).join(" / ");
-    button.append(title, metadata);
-    button.addEventListener("click", () => openProject(project));
+    const button = buildProjectFile(project);
     files.append(button);
     return { project, button };
   });
@@ -309,6 +321,16 @@ document.querySelector("#show-desktop").addEventListener("click", () => {
   selectNext();
 });
 
+const wallpapers = ["grid", "mint", "plain"];
+desktop.dataset.wallpaper = localStorage.getItem("shanlin-wallpaper") || "grid";
+document.querySelector("#desktop-wallpaper").addEventListener("click", event => {
+  const index = wallpapers.indexOf(desktop.dataset.wallpaper);
+  const wallpaper = wallpapers[(index + 1) % wallpapers.length];
+  desktop.dataset.wallpaper = wallpaper;
+  localStorage.setItem("shanlin-wallpaper", wallpaper);
+  event.currentTarget.textContent = "Wallpaper · " + wallpaper;
+});
+
 const themeButton = document.querySelector("#desktop-theme");
 const systemTheme = matchMedia("(prefers-color-scheme: dark)");
 function setTheme(theme) {
@@ -316,13 +338,6 @@ function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   themeButton.setAttribute("aria-pressed", String(dark));
   themeButton.textContent = dark ? "Light mode" : "Dark mode";
-  for (const frame of windows.querySelectorAll("iframe")) {
-    const root = frame.contentDocument?.documentElement;
-    if (root) {
-      root.dataset.theme = theme;
-      root.style.colorScheme = theme;
-    }
-  }
 }
 const themeKey = "shanlin-desktop-theme";
 setTheme(localStorage.getItem(themeKey) || (systemTheme.matches ? "dark" : "light"));
@@ -339,4 +354,38 @@ mobile.addEventListener("change", () => {
   for (const item of openWindows.values()) layout(item);
   updateVisibility();
 });
-openWindow("home", applications.home, { focus: false });
+function restoreProjectFromUrl() {
+  const slug = new URLSearchParams(location.search).get("project");
+  const project = projectsBySlug.get(slug);
+  const previous = openWindows.get("project:" + linkedProject);
+  if (previous && linkedProject !== slug) previous.minimized = true;
+  linkedProject = project?.slug || null;
+  if (project) openProject(project, false);
+  else if (previous) selectNext();
+}
+
+windows.addEventListener("click", event => {
+  if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  const link = event.target.closest("a[href]");
+  if (!link || link.target === "_blank") return;
+  const url = new URL(link.href);
+  if (url.origin !== location.origin || url.pathname !== location.pathname) return;
+  const project = projectsBySlug.get(url.searchParams.get("project"));
+  if (project) {
+    event.preventDefault();
+    openProject(project);
+  } else if (url.searchParams.get("app") === "work") {
+    event.preventDefault();
+    openWindow("work", applications.work, { filters: url.searchParams });
+  }
+});
+
+addEventListener("popstate", restoreProjectFromUrl);
+const initial = new URLSearchParams(location.search);
+const initialApp = initial.get("app");
+if (["about", "cv", "work"].includes(initialApp)) {
+  openWindow(initialApp, applications[initialApp], { focus: false, filters: initial });
+} else {
+  openWindow("featured", applications.featured, { focus: false });
+}
+restoreProjectFromUrl();

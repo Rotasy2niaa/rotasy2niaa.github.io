@@ -1,46 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <title>Shan Lin | Work</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="res/logo_glitch.png" />
-
-  <script src="theme.js"></script>
-
-  <link rel="stylesheet" href="main.css" />
-</head>
-
-<body class="page-work">
-
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Shan Lin home">
-        <img class="brand-logo" src="res/logo_glitch.png" alt="">
-        <span class="brand-name">Shan Lin <span class="brand-alias">/ rotasy2niaa</span></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="all.html" aria-current="location">Archive</a>
-        <a href="about.html">About</a>
-        <a href="cv.html">CV</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container work-main">
-    <div class="work-detail-shell" id="workDetail"></div>
-  </main>
-
-  <script src="works.js"></script>
-  <script src="render.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shan Lin | Portfolio OS</title>
   <script>
-    renderWorkDetail();
+    const slug = new URLSearchParams(location.search).get("slug");
+    location.replace(slug ? "desktop.html?project=" + encodeURIComponent(slug) : "desktop.html?app=work");
   </script>
+  <meta http-equiv="refresh" content="0; url=desktop.html?app=work">
+</head>
+<body>
+  <p><a href="desktop.html?app=work">Open Shan Lin’s portfolio</a></p>
 </body>
-
 </html>

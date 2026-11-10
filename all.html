@@ -1,81 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shan Lin | Archive</title>
-  
-   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="res/logo_glitch.png" />
-
-  <script src="theme.js"></script>
-
-  <link rel="stylesheet" href="main.css" />
-</head>
-
-<body class="page-all">
-
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Shan Lin home">
-        <img class="brand-logo" src="res/logo_glitch.png" alt="">
-        <span class="brand-name">Shan Lin <span class="brand-alias">/ rotasy2niaa</span></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="all.html" aria-current="page">Archive</a>
-        <a href="about.html">About</a>
-        <a href="cv.html">CV</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container all-main">
-
-    <section class="page-head page-head-split">
-      <p class="label route-label">~/archive</p>
-      <h1>Archive</h1>
-      <p class="lede">Games, installations, and other things I’ve made. Browse by medium or year.</p>
-    </section>
-
-    <section class="filters filters-shell" aria-label="Work filters">
-      <div class="tag-row" id="tagRow">
-        <button class="tag is-active" data-tag="all">All</button>
-
-        <button class="tag" data-tag="video-game">video-game</button>
-        <button class="tag" data-tag="board-game">board-game</button>
-        <button class="tag" data-tag="alt-control">alt-control</button>
-        <button class="tag" data-tag="installation">installation</button>
-        <button class="tag" data-tag="film">film</button>
-        <button class="tag" data-tag="photography">photography</button>
-        <button class="tag" data-tag="3d-modeling">3d-modeling</button>
-        <button class="tag" data-tag="mixed-media">mixed-media</button>
-
-
-      </div>
-    </section>
-
-    <section class="filters filters-shell" aria-label="Sort filters">
-      <div class="tag-row" id="yearRow">
-        <button class="tag is-active" data-year="all">All Years</button>
-      </div>
-    </section>
-
-    <section class="works works-all">
-      <div class="work-grid" id="workGrid"></div>
-      <p class="no-results" id="noResults" hidden aria-live="polite">No works match this selection.</p>
-    </section>
-
-  </main>
-
-  <script src="works.js"></script>
-  <script src="render.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shan Lin | Portfolio OS</title>
   <script>
-    renderAll("workGrid");
+    const archive = new URL("desktop.html?app=work", location.href);
+    const filters = new URLSearchParams(location.search);
+    for (const name of ["tag", "year"]) {
+      if (filters.has(name)) archive.searchParams.set(name, filters.get(name));
+    }
+    location.replace(archive);
   </script>
-  <script src="all.js"></script>
-
+  <meta http-equiv="refresh" content="0; url=desktop.html?app=work">
+</head>
+<body>
+  <p><a href="desktop.html?app=work">Open Shan Lin’s portfolio</a></p>
 </body>
-
 </html>

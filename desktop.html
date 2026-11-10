@@ -5,22 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shan Lin · Desktop</title>
   <link rel="icon" href="res/logo_glitch.png">
-  <link rel="stylesheet" href="desktop.css">
+  <link rel="stylesheet" href="desktop.css?v=2">
   <script src="works.js" defer></script>
+  <script src="desktop-project.js" defer></script>
   <script src="desktop.js" defer></script>
 </head>
 <body>
   <header class="system-bar">
-    <span class="system-name"><span aria-hidden="true">✳</span> ROTASY2NIAA</span>
-    <a href="index.html">Portfolio</a>
+    <span class="system-name"><span aria-hidden="true">✳</span> Rotasy2niaa.exe</span>
+    <button type="button" id="desktop-wallpaper">Wallpaper</button>
     <button type="button" id="desktop-theme" aria-pressed="false">Dark mode</button>
   </header>
   <main class="desktop" id="desktop" aria-label="Portfolio desktop">
     <div class="launchers" aria-label="Applications">
-      <button type="button" data-app="home"><span class="desktop-icon" aria-hidden="true"></span>Home/</button>
-      <button type="button" data-app="work"><span class="desktop-icon" aria-hidden="true"></span>Work/</button>
+      <button type="button" data-app="featured"><span class="desktop-icon" aria-hidden="true"></span>Selected Works</button>
+      <button type="button" data-app="work"><span class="desktop-icon" aria-hidden="true"></span>Archive/</button>
+      <button type="button" data-app="research"><span class="desktop-icon" aria-hidden="true"></span>Research/</button>
+      <button type="button" data-app="notes"><span class="desktop-icon" aria-hidden="true"></span>Notes/</button>
       <button type="button" data-app="about"><span class="desktop-icon" aria-hidden="true"></span>About/</button>
+      <button type="button" data-app="cv"><span class="desktop-icon document-icon" aria-hidden="true"></span>CV</button>
     </div>
+    <section class="desktop-profile" aria-labelledby="desktop-name">
+      <p>Rotasy2niaa</p>
+      <h1 id="desktop-name">Shan Lin<span aria-hidden="true">_</span></h1>
+      <p>Game designer / producer / interactive artist</p>
+      <p>I design games, spatial systems, and interactive experiences.</p>
+      <a href="mailto:shanlin.play@gmail.com">Email</a>
+    </section>
     <div class="wallpaper" aria-hidden="true"><span>✦</span><span>✳</span><span>✦</span></div>
     <p class="desktop-hint">Double-click a folder to open it.</p>
     <div id="windows"></div>
@@ -42,6 +53,183 @@
       <div class="window-content"></div>
       <div class="resize-grip" aria-hidden="true"></div>
     </section>
+  </template>
+  <template id="cv-content">
+    <article class="os-document cv">
+    <header class="cv-intro">
+      <h3>Shan Lin</h3>
+      <p class="cv-role">Game Designer &amp; Interactive Media Artist</p>
+      <p class="cv-contact">
+        <a href="mailto:shanlin.play@gmail.com">shanlin.play@gmail.com</a>
+        <a href="https://www.linkedin.com/in/shan-lin-rotasy/">LinkedIn</a>
+      </p>
+    </header>
+
+    <section class="cv-section" aria-labelledby="education">
+      <h4 id="education">Education</h4>
+      <article class="cv-entry">
+        <h5><a href="https://cinema.usc.edu/interactive/">University of Southern California</a></h5>
+        <span class="label">Expected <time datetime="2028-05">May 2028</time></span>
+        <p class="cv-meta">BFA in Game Development and Interactive Design · Los Angeles, CA</p>
+      </article>
+    </section>
+
+    <section class="cv-section" aria-labelledby="interests">
+      <h4 id="interests">Research interests</h4>
+      <p>Game studies and research-creation. I’m interested in how game rules shape player agency and how touch, sound, and alternative controllers shape embodied play.</p>
+    </section>
+
+    <section class="cv-section" aria-labelledby="research">
+      <h4 id="research">Research in progress</h4>
+      <article class="cv-entry">
+        <h5>Involuntary Hold</h5>
+        <time class="label" datetime="2026">2026</time>
+        <p class="cv-meta">Research-creation project · Twine</p>
+        <p class="cv-details">Explores how institutional routines constrain player agency in a psychiatric unit. A daily schedule and rooms that open at specific times shape what the player can do in Twine.</p>
+      </article>
+    </section>
+
+    <section class="cv-section" aria-labelledby="creative-work">
+      <h4 id="creative-work">Selected creative works</h4>
+      <div>
+        <article class="cv-entry">
+          <h5>Iron Out!</h5>
+          <time class="label" datetime="2026">2026</time>
+          <p class="cv-meta">Experience Designer &amp; Developer · Daydreaming · Los Angeles, CA</p>
+          <p class="cv-details">Co-developed a game about escaping factory monotony through daydreams. Designed steam iron and turntable inputs, built minigames in Unity, and playtested how the controls responded.</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="desktop.html?project=how-to-create-a-creature">How to Create a Creature</a></h5>
+          <time class="label" datetime="2026">2026</time>
+          <p class="cv-meta">Creative Director · <a href="https://games.usc.edu/">USC Games</a> · Los Angeles, CA</p>
+          <p class="cv-details">Co-directed a body-horror game on a two-person team. Built the modular bone assembly system and designed the sewing and posing stages.</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="desktop.html?project=how-to-pet-your-cat">How to Pet Your Cat</a></h5>
+          <time class="label" datetime="2025">2025</time>
+          <p class="cv-meta">Experience Designer &amp; Installation Artist · <a href="https://www.dachu-interactive.com/">DaChu Interactive</a> · Los Angeles, CA</p>
+          <p class="cv-details">Helped build a plush controller that turns petting into game input. Observed visitors using it and refined the pacing and player flow for public exhibitions.</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="desktop.html?project=insync-maze">InSync</a></h5>
+          <time class="label" datetime="2025">2025</time>
+          <p class="cv-meta">Maze &amp; Experience Designer · DaChu Interactive · Los Angeles, CA</p>
+          <p class="cv-details">Designed and fabricated a 9 × 12-inch maze that players navigate by feeling shapes and textures. Refined its layout through usability tests and worked with the fabrication and engineering teams.</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="desktop.html?project=discriminative-touch">Discriminative Touch</a></h5>
+          <time class="label" datetime="2023">2023</time>
+          <p class="cv-meta">Game Designer · CiGA Game Jam · Shenzhen, China</p>
+          <p class="cv-details">Designed a narrative game in which descriptions of touch, sound, and smell guide player choices.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="exhibitions">
+      <h4 id="exhibitions">Exhibitions &amp; awards</h4>
+      <div>
+        <article class="cv-entry">
+          <h5><a href="https://2026.amaze-berlin.de/award-winners/">A MAZE. / Berlin</a></h5>
+          <time class="label" datetime="2026">2026</time>
+          <p class="cv-meta">Explorer Award for <a href="https://www.dachu-interactive.com/insync"><em>InSync XR</em></a> · DaChu Interactive team award</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="https://www.sfmoma.org/event/playsfmoma-the-mix-indie-games-gallery/">PlaySFMOMA: The MIX Indie Games Gallery</a></h5>
+          <time class="label" datetime="2026">2026</time>
+          <p class="cv-meta"><a href="https://www.dachu-interactive.com/insync"><em>InSync XR</em></a> and <a href="desktop.html?project=how-to-pet-your-cat"><em>How to Pet Your Cat</em></a> · San Francisco Museum of Modern Art · On-site exhibition support</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="https://www.dachu-interactive.com/how-to-pet-your-cat">Game Developers Conference</a></h5>
+          <time class="label" datetime="2025">2025</time>
+          <p class="cv-meta"><em>How to Pet Your Cat</em> · alt.ctrl.GDC showcase selection and IGF alt.ctrl.GDC Award finalist</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="https://www.dayofthedevs.org/games/how-to-pet-your-cat">Day of the Devs: San Francisco Edition</a></h5>
+          <time class="label" datetime="2025">2025</time>
+          <p class="cv-meta"><em>How to Pet Your Cat</em> · Showcase selection</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="production">
+      <h4 id="production">Additional design &amp; production</h4>
+      <div>
+        <article class="cv-entry">
+          <h5>Resolution</h5>
+          <span class="label">May 2026–present</span>
+          <p class="cv-meta">Lead Producer · USC Games · Los Angeles, CA</p>
+          <p class="cv-details">Coordinate a 22-person team across seven disciplines on a hybrid physical and digital game. Track prototypes and coordinate work across electronics, textiles, fabrication, and software.</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="desktop.html?project=nudge">Nudge</a></h5>
+          <span class="label">Aug 2025–Aug 2026</span>
+          <p class="cv-meta">Systems Designer · USC Games · Los Angeles, CA</p>
+          <p class="cv-details">Designed collection and placement systems for more than 80 collectible items and used playtests to refine the spatial rules and usability.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="experience">
+      <h4 id="experience">Professional experience</h4>
+      <div>
+        <article class="cv-entry">
+          <h5>Delicious Coworkers!</h5>
+          <span class="label">Jul–Aug 2026</span>
+          <p class="cv-meta">Game Design Intern &amp; Creative Director · <a href="https://www.seasungames.com/">The Amazing Seasun Games</a> · Zhuhai, China</p>
+          <p class="cv-details">Led a seven-person team on a dark comedy strategy game about workplace exploitation. Designed and playtested a mechanic in which eating coworkers gives players their abilities and their workload.</p>
+        </article>
+        <article class="cv-entry">
+          <h5><a href="https://www.versebuilding.com/games/karma">Karma: The Six Realms</a></h5>
+          <span class="label">May–Aug 2026</span>
+          <p class="cv-meta">Game Design Intern · The Verse · Remote</p>
+          <p class="cv-details">Built a bird-feeding minigame in Unity for a game about kindness and self-awareness. Prototyped three versions with distinct bird behaviors and encounter patterns.</p>
+        </article>
+        <article class="cv-entry">
+          <h5>Game Strategy &amp; Evaluation Intern</h5>
+          <span class="label">Jun–Sep 2025</span>
+          <p class="cv-meta">The Dream Network · Shanghai, China</p>
+          <p class="cv-details">Analyzed gameplay, user experience, monetization, and market positioning across more than 100 games. Summarized findings in weekly market and competitor reports.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cv-section" aria-labelledby="methods">
+      <h4 id="methods">Methods, tools &amp; languages</h4>
+      <div class="cv-methods">
+        <p><strong>Methods</strong> · Rapid prototyping, playtesting, usability testing, and tactile interaction design.</p>
+        <p><strong>Tools</strong> · Unity, Unreal Engine, Twine (SugarCube), PICO-8, C#, C++, JavaScript, Python, HTML, Figma, Adobe Creative Suite, Maya, and Blender.</p>
+        <p><strong>Languages</strong> · Mandarin and English.</p>
+      </div>
+    </section>
+      </article>
+  </template>
+  <template id="about-content">
+    <article class="os-document">
+      <div class="about-profile">
+        <div>
+          <h3>Shan Lin</h3>
+          <p>Part of me is made of video games, film, photography, mixed media, and physical computing.</p>
+          <p>I work with games and interactive systems, with a particular interest in level design and spatial storytelling. I’m based in Los Angeles and explore how environments, pacing, and subtle interactions shape emotional experience.</p>
+          <p>I’m drawn to private, intimate media, where small-scale mechanics and carefully composed spaces invite attention and reflection. With growing interests in 3D modeling and environment design, I approach games as aesthetic structures, using space itself as a medium.</p>
+          <div class="document-links">
+            <a href="mailto:shanlin.play@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/shan-lin-rotasy/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://rotasy2niaa.itch.io" target="_blank" rel="noopener">itch.io</a>
+          </div>
+        </div>
+        <img src="res/temp/pfp-2.png" alt="Shan Lin reading" loading="lazy">
+      </div>
+      <section class="document-section">
+        <h4>Creative materials</h4>
+        <div class="material-links">
+          <a href="desktop.html?app=work&amp;tag=installation"><img src="res/temp/crafting-box/arduino-board-1.png" alt="">Physical computing</a>
+          <a href="desktop.html?app=work&amp;tag=film"><img src="res/temp/crafting-box/Film.png" alt="">Film</a>
+          <a href="desktop.html?app=work&amp;tag=video-game"><img src="res/temp/crafting-box/video-game.png" alt="">Video games</a>
+          <a href="desktop.html?app=work&amp;tag=photography"><img src="res/temp/crafting-box/filmroll-1.png" alt="">Photography</a>
+          <a href="desktop.html?app=work&amp;tag=mixed-media"><img src="res/temp/crafting-box/Drawing.png" alt="">Mixed media</a>
+        </div>
+      </section>
+    </article>
   </template>
   <svg class="image-filters" width="0" height="0" aria-hidden="true">
     <filter id="thumbnail-palette" color-interpolation-filters="sRGB">
