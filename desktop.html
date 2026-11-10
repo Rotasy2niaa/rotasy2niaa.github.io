@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shan Lin · Desktop</title>
+  <link rel="icon" href="res/logo_glitch.png">
+  <link rel="stylesheet" href="desktop.css">
+  <script src="works.js" defer></script>
+  <script src="desktop.js" defer></script>
+</head>
+<body>
+  <header class="system-bar">
+    <span class="system-name"><span aria-hidden="true">✳</span> ROTASY2NIAA</span>
+    <a href="index.html">Portfolio</a>
+    <button type="button" id="desktop-theme" aria-pressed="false">Dark mode</button>
+  </header>
+  <main class="desktop" id="desktop" aria-label="Portfolio desktop">
+    <div class="launchers" aria-label="Applications">
+      <button type="button" data-app="home"><span class="desktop-icon" aria-hidden="true"></span>Home/</button>
+      <button type="button" data-app="work"><span class="desktop-icon" aria-hidden="true"></span>Work/</button>
+      <button type="button" data-app="about"><span class="desktop-icon" aria-hidden="true"></span>About/</button>
+    </div>
+    <div class="wallpaper" aria-hidden="true"><span>✦</span><span>✳</span><span>✦</span></div>
+    <p class="desktop-hint">Double-click a folder to open it.</p>
+    <div id="windows"></div>
+  </main>
+  <footer class="taskbar">
+    <button type="button" id="show-desktop">Desktop</button>
+    <div id="tasks" aria-label="Open windows"></div>
+  </footer>
+  <template id="window-template">
+    <section class="app-window" role="region" tabindex="-1">
+      <header class="title-bar">
+        <h2></h2>
+        <div class="window-controls">
+          <button type="button" data-action="minimize" aria-label="Minimize">−</button>
+          <button type="button" data-action="maximize" aria-label="Maximize">□</button>
+          <button type="button" data-action="close" aria-label="Close">×</button>
+        </div>
+      </header>
+      <div class="window-content"></div>
+      <div class="resize-grip" aria-hidden="true"></div>
+    </section>
+  </template>
+  <svg class="image-filters" width="0" height="0" aria-hidden="true">
+    <filter id="thumbnail-palette" color-interpolation-filters="sRGB">
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncR type="discrete" tableValues=".06 .44 .96 .98"/>
+        <feFuncG type="discrete" tableValues=".06 .57 .72 .97"/>
+        <feFuncB type="discrete" tableValues=".06 .40 .82 .97"/>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+</body>
+</html>
