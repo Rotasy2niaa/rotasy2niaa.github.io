@@ -855,7 +855,7 @@ function renderWorkDetail() {
 
   if (!slug) {
     container.innerHTML = `
-      <a href="all.html" class="back-link">Back to All Works</a>
+      <a href="all.html" class="back-link">← Archive</a>
       <p class="missing-work">Work not found.</p>
     `;
     return;
@@ -864,7 +864,7 @@ function renderWorkDetail() {
   const work = window.WORKS.find(item => item.slug === slug);
   if (!work) {
     container.innerHTML = `
-      <a href="all.html" class="back-link">Back to All Works</a>
+      <a href="all.html" class="back-link">← Archive</a>
       <p class="missing-work">Work not found.</p>
     `;
     return;
@@ -881,7 +881,7 @@ function renderWorkDetail() {
   container.innerHTML = `
     ${buildAmbientDecor(work)}
     <article class="work-detail">
-      <a href="all.html" class="back-link">Back to All Works</a>
+      <a href="all.html" class="back-link">← Archive</a>
 
       ${buildHeroBanner(work)}
 
