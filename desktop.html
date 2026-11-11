@@ -5,35 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shan Lin · Desktop</title>
   <link rel="icon" href="res/logo_glitch.png">
-  <link rel="stylesheet" href="desktop.css?v=5">
+  <link rel="stylesheet" href="desktop.css?v=7">
   <script src="works.js" defer></script>
   <script src="desktop-project.js" defer></script>
-  <script src="desktop.js?v=5" defer></script>
+  <script src="desktop.js?v=6" defer></script>
 </head>
 <body>
   <header class="system-bar">
     <span class="system-name"><span aria-hidden="true">✳</span> Rotasy2niaa.exe</span>
-    <button type="button" id="desktop-theme" aria-pressed="false">Dark mode</button>
+    <button type="button" id="desktop-theme" aria-pressed="false"><img class="ui-icon" src="res/os-icons/dark-mode.svg" alt=""><span>Dark mode</span></button>
   </header>
   <main class="desktop" id="desktop" aria-label="Portfolio desktop">
     <div class="launchers" aria-label="Applications">
-      <button type="button" data-app="featured"><span class="desktop-icon" aria-hidden="true"></span>Selected Works</button>
-      <button type="button" data-app="work"><span class="desktop-icon" aria-hidden="true"></span>Archive/</button>
-      <button type="button" data-app="research"><span class="desktop-icon" aria-hidden="true"></span>Research/</button>
-      <button type="button" data-app="notes"><span class="desktop-icon" aria-hidden="true"></span>Notes/</button>
-      <button type="button" data-app="about"><span class="desktop-icon" aria-hidden="true"></span>About/</button>
-      <button type="button" data-app="cv"><span class="desktop-icon document-icon" aria-hidden="true"></span>CV</button>
+      <button type="button" data-app="featured"><img class="ui-icon desktop-icon" src="res/os-icons/selected-works.svg" alt="">Selected Works</button>
+      <button type="button" data-app="work"><img class="ui-icon desktop-icon" src="res/os-icons/archive.svg" alt="">Archive/</button>
+      <button type="button" data-app="research"><img class="ui-icon desktop-icon" src="res/os-icons/research.svg" alt="">Research/</button>
+      <button type="button" data-app="notes"><img class="ui-icon desktop-icon" src="res/os-icons/notes.svg" alt="">Notes/</button>
+      <button type="button" data-app="about"><img class="ui-icon desktop-icon" src="res/os-icons/about.svg" alt="">About/</button>
+      <button type="button" data-app="cv"><img class="ui-icon desktop-icon" src="res/os-icons/cv.svg" alt="">CV</button>
     </div>
     <section class="desktop-profile" aria-labelledby="desktop-name">
       <p>Rotasy2niaa</p>
       <h1 id="desktop-name">Shan Lin<span aria-hidden="true">_</span></h1>
       <p>Shan Lin is a Chinese interactive media artist based in Los Angeles. She makes games and installations using touch, sound, and alternative controllers.</p>
     </section>
-    <p class="desktop-hint">Double-click a folder to open it.</p>
+    <aside class="desktop-player" aria-labelledby="desktop-player-title">
+      <h2 id="desktop-player-title">Media Player</h2>
+      <div class="desktop-player-body">
+        <iframe
+          title="Play frogtopia by b7lanket on Bandcamp"
+          src="https://bandcamp.com/EmbeddedPlayer/album=1568999564/size=small/bgcol=ffffff/linkcol=924566/transparent=true/"
+          height="42"
+          loading="lazy"
+        ></iframe>
+        <p><a href="https://b7lanket.bandcamp.com/album/frogtopia" target="_blank" rel="noopener">Open frogtopia on Bandcamp</a></p>
+      </div>
+    </aside>
+    <p class="desktop-hint">Double-click an app to open it.</p>
     <div id="windows"></div>
   </main>
   <footer class="taskbar">
-    <button type="button" id="show-desktop">Desktop</button>
+    <button type="button" id="show-desktop"><img class="ui-icon" src="res/os-icons/desktop.svg" alt="">Desktop</button>
     <div id="tasks" aria-label="Open windows"></div>
   </footer>
   <template id="window-template">
@@ -41,9 +53,9 @@
       <header class="title-bar">
         <h2></h2>
         <div class="window-controls">
-          <button type="button" data-action="minimize" aria-label="Minimize">−</button>
-          <button type="button" data-action="maximize" aria-label="Maximize">□</button>
-          <button type="button" data-action="close" aria-label="Close">×</button>
+          <button type="button" data-action="minimize" aria-label="Minimize"><img class="ui-icon" src="res/os-icons/minimize.svg" alt=""></button>
+          <button type="button" data-action="maximize" aria-label="Maximize"><img class="ui-icon" src="res/os-icons/maximize.svg" alt=""></button>
+          <button type="button" data-action="close" aria-label="Close"><img class="ui-icon" src="res/os-icons/close.svg" alt=""></button>
         </div>
       </header>
       <div class="window-content"></div>
@@ -209,22 +221,22 @@
         <figure class="crafting-stage">
           <div class="crafting-board">
             <img class="crafting-base" src="res/temp/crafting-box/crafting-box.png" alt="">
-            <a class="crafting-item" data-material="installation" href="desktop.html?app=work&amp;tag=installation"><img src="res/temp/crafting-box/arduino-board-1.png" alt=""><span>Physical computing</span></a>
-            <a class="crafting-item" data-material="film" href="desktop.html?app=work&amp;tag=film"><img src="res/temp/crafting-box/Film.png" alt=""><span>Film</span></a>
-            <a class="crafting-item" data-material="video-game" href="desktop.html?app=work&amp;tag=video-game"><img src="res/temp/crafting-box/video-game.png" alt=""><span>Video games</span></a>
-            <a class="crafting-item" data-material="photography" href="desktop.html?app=work&amp;tag=photography"><img src="res/temp/crafting-box/filmroll-1.png" alt=""><span>Photography</span></a>
-            <a class="crafting-item" data-material="mixed-media" href="desktop.html?app=work&amp;tag=mixed-media"><img src="res/temp/crafting-box/Drawing.png" alt=""><span>Mixed media</span></a>
+            <a class="crafting-item" data-material="installation" href="desktop.html?app=work&amp;tag=installation"><img class="crafting-icon" src="res/os-icons/physical-computing.svg" alt=""><span>Physical computing</span></a>
+            <a class="crafting-item" data-material="film" href="desktop.html?app=work&amp;tag=film"><img class="crafting-icon" src="res/os-icons/film.svg" alt=""><span>Film</span></a>
+            <a class="crafting-item" data-material="video-game" href="desktop.html?app=work&amp;tag=video-game"><img class="crafting-icon" src="res/os-icons/video-games.svg" alt=""><span>Video games</span></a>
+            <a class="crafting-item" data-material="photography" href="desktop.html?app=work&amp;tag=photography"><img class="crafting-icon" src="res/os-icons/photography.svg" alt=""><span>Photography</span></a>
+            <a class="crafting-item" data-material="mixed-media" href="desktop.html?app=work&amp;tag=mixed-media"><img class="crafting-icon" src="res/os-icons/mixed-media.svg" alt=""><span>Mixed media</span></a>
           </div>
-          <img class="crafting-arrow" src="res/temp/crafting-box/arrow%201.png" alt="">
+          <img class="ui-icon crafting-arrow" src="res/os-icons/craft-arrow.svg" alt="">
           <img class="crafting-result" src="res/temp/crafting-box/group-5.png" alt="A collage portrait of Shan Lin">
         </figure>
       </section>
       <footer class="document-section">
         <h4>Contact</h4>
         <div class="document-links">
-          <button type="button" data-copy-email aria-label="Email: copy address">Email</button>
-          <a href="https://www.linkedin.com/in/shan-lin-rotasy/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://rotasy2niaa.itch.io" target="_blank" rel="noopener">itch.io</a>
+          <button type="button" data-copy-email aria-label="Email: copy address"><img class="ui-icon" src="res/os-icons/email.svg" alt="">Email</button>
+          <a href="https://www.linkedin.com/in/shan-lin-rotasy/" target="_blank" rel="noopener">LinkedIn<img class="ui-icon" src="res/os-icons/external-link.svg" alt=""></a>
+          <a href="https://rotasy2niaa.itch.io" target="_blank" rel="noopener">itch.io<img class="ui-icon" src="res/os-icons/external-link.svg" alt=""></a>
         </div>
         <p class="contact-status" role="status"></p>
         <input class="contact-address" type="text" aria-label="Email address" value="shanlin.play@gmail.com" readonly hidden>

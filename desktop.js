@@ -178,7 +178,7 @@ function openWindow(key, app = applications[key], options = {}) {
     const label = item.maximized ? "Restore" : "Maximize";
     maximize.setAttribute("aria-label", label);
     maximize.title = label;
-    maximize.textContent = item.maximized ? "❐" : "□";
+    maximize.querySelector("img").src = item.maximized ? "res/os-icons/restore.svg" : "res/os-icons/maximize.svg";
     layout(item);
   });
   bindPointer(item, element.querySelector(".title-bar"), false);
@@ -325,8 +325,8 @@ function buildExplorer(content, initialFilters) {
       <h3>Archive / All files</h3>
       <div class="explorer-layout">
       <div class="filters">
-        <label>Search <input type="search" placeholder="Project name"></label>
-        <label>Medium <select name="medium"><option value="">All media</option></select></label>
+        <label><span class="icon-label"><img class="ui-icon" src="res/os-icons/search.svg" alt="">Search</span><input type="search" placeholder="Project name"></label>
+        <label><span class="icon-label"><img class="ui-icon" src="res/os-icons/filter.svg" alt="">Medium</span><select name="medium"><option value="">All media</option></select></label>
         <label>Year <select name="year"><option value="">All years</option></select></label>
       </div>
       <div>
@@ -396,7 +396,8 @@ function setTheme(theme) {
   const dark = theme === "dark";
   document.documentElement.dataset.theme = theme;
   themeButton.setAttribute("aria-pressed", String(dark));
-  themeButton.textContent = dark ? "Light mode" : "Dark mode";
+  themeButton.querySelector("img").src = dark ? "res/os-icons/light-mode.svg" : "res/os-icons/dark-mode.svg";
+  themeButton.querySelector("span").textContent = dark ? "Light mode" : "Dark mode";
 }
 const themeKey = "shanlin-desktop-theme";
 setTheme(localStorage.getItem(themeKey) || (systemTheme.matches ? "dark" : "light"));
